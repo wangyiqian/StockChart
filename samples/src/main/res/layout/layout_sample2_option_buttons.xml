@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.google.android.flexbox.FlexboxLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:flexWrap="wrap">
+
+        <TextView
+            android:id="@+id/period_day"
+            style="@style/OptionButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="日K" />
+
+        <TextView
+            android:id="@+id/period_five_days"
+            style="@style/OptionButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="5日" />
+
+        <TextView
+            android:id="@+id/period_week"
+            style="@style/OptionButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="周K" />
+
+        <TextView
+            android:id="@+id/period_month"
+            style="@style/OptionButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="月K" />
+
+        <TextView
+            android:id="@+id/period_quarter"
+            style="@style/OptionButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="季K" />
+
+        <TextView
+            android:id="@+id/period_year"
+            style="@style/OptionButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="年K" />
+
+        <TextView
+            android:id="@+id/period_five_years"
+            style="@style/OptionButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="5年" />
+
+        <TextView
+            android:id="@+id/period_ytd"
+            style="@style/OptionButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="年初至今" />
+
+        <TextView
+            android:id="@+id/period_one_minute"
+            style="@style/OptionButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="1分" />
+
+        <TextView
+            android:id="@+id/period_five_minutes"
+            style="@style/OptionButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="5分" />
+
+        <TextView
+            android:id="@+id/period_sixty_minutes"
+            style="@style/OptionButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="60分" />
+
+    </com.google.android.flexbox.FlexboxLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_margin="3dp"
+        android:background="#AFAFAF" />
+
+    <com.google.android.flexbox.FlexboxLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:flexWrap="wrap">
+
+        <TextView
+            android:id="@+id/kchart_type_candle"
+            style="@style/OptionButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="实心蜡烛图" />
+
+        <TextView
+            android:id="@+id/kchart_type_hollow"
+            style="@style/OptionButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="空心蜡烛图" />
+
+        <TextView
+            android:id="@+id/kchart_type_line"
+            style="@style/OptionButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="折线图" />
+
+        <TextView
+            android:id="@+id/kchart_type_mountain"
+            style="@style/OptionButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="山峰图" />
+
+        <TextView
+            android:id="@+id/kchart_type_bar"
+            style="@style/OptionButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="竹节（美国线）图" />
+
+    </com.google.android.flexbox.FlexboxLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_margin="3dp"
+        android:background="#AFAFAF" />
+
+    <com.google.android.flexbox.FlexboxLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:flexWrap="wrap">
+
+        <TextView
+            android:id="@+id/index_ma"
+            style="@style/OptionButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="MA" />
+
+        <TextView
+            android:id="@+id/index_ema"
+            style="@style/OptionButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="EMA" />
+
+        <TextView
+            android:id="@+id/index_boll"
+            style="@style/OptionButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="BOLL" />
+
+        <TextView
+            android:id="@+id/index_macd"
+            style="@style/OptionButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="MACD" />
+
+        <TextView
+            android:id="@+id/index_kdj"
+            style="@style/OptionButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="KDJ" />
+
+        <TextView
+            android:id="@+id/custom"
+            style="@style/OptionButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="自定义子图示例" />
+
+    </com.google.android.flexbox.FlexboxLayout>
+
+</LinearLayout>

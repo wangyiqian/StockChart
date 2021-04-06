@@ -1,0 +1,3 @@
+include ':samples'
+include ':lib'
+rootProject.name = "StockChart"

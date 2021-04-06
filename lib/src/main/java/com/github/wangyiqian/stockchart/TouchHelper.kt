@@ -1,0 +1,172 @@
+package com.github.wangyiqian.stockchart
+
+import android.view.GestureDetector
+import android.view.MotionEvent
+import android.view.ScaleGestureDetector
+import android.view.View
+import kotlin.math.abs
+
+/**
+ * 统一处理触摸事件
+ *
+ * @author wangyiqian E-mail: wangyiqian9891@gmail.com
+ * @version 创建时间: 2021/1/29
+ */
+class TouchHelper(private val stockChart: IStockChart, private val callBack: CallBack) :
+    GestureDetector.SimpleOnGestureListener(),
+    ScaleGestureDetector.OnScaleGestureListener,
+    View.OnTouchListener {
+
+    private val gestureDetector: GestureDetector = GestureDetector(stockChart.getContext(), this)
+
+    private val scaleGestureDetector: ScaleGestureDetector =
+        ScaleGestureDetector(stockChart.getContext(), this)
+
+    // 是否正在缩放
+    private var isTouchScaling = false
+
+    // 开始缩放后手指是否离开屏幕
+    private var isTouchScalePointersLeave = true
+
+    // 是否正在长按
+    private var isLongPressing = false
+
+    // 触发长按的第一根手指
+    private var inLongPressingPointerId = 0
+
+    private var flingAble = false
+
+    override fun onTouch(v: View?, event: MotionEvent): Boolean {
+        when (event.actionMasked) {
+            MotionEvent.ACTION_DOWN -> {
+                if (!stockChart.getTouchArea().contains(event.x.toInt(), event.y.toInt())
+                    || stockChart.getChildCharts().isEmpty()
+                ) {
+                    // 不在允许的触摸范围
+                    return false
+                }
+            }
+            MotionEvent.ACTION_MOVE -> {
+                if (isLongPressing && event.getPointerId(event.actionIndex) == inLongPressingPointerId) {
+                    callBack.onLongPressMove(event.x, event.y)
+                }
+            }
+            MotionEvent.ACTION_UP -> {
+                isLongPressing = false
+                isTouchScalePointersLeave = true
+                callBack.onTouchLeave()
+            }
+            MotionEvent.ACTION_CANCEL -> {
+                isLongPressing = false
+                isTouchScalePointersLeave = true
+                callBack.onTouchLeave()
+            }
+            MotionEvent.ACTION_POINTER_UP -> {
+                if (isLongPressing && event.getPointerId(event.actionIndex) == inLongPressingPointerId) {
+                    isLongPressing = false
+                }
+            }
+        }
+
+        if (!isLongPressing) {
+            if (stockChart.getConfig().scaleAble) {
+                scaleGestureDetector.onTouchEvent(event)
+            }
+            if (!isTouchScaling && isTouchScalePointersLeave) {
+                gestureDetector.onTouchEvent(event)
+            }
+        }
+
+        return true
+    }
+
+    override fun onDown(e: MotionEvent?): Boolean {
+        return true
+    }
+
+    override fun onLongPress(e: MotionEvent) {
+        isLongPressing = true
+        inLongPressingPointerId = e.getPointerId(0)
+        callBack.onLongPressMove(e.x, e.y)
+        super.onLongPress(e)
+    }
+
+    override fun onScroll(
+        e1: MotionEvent?,
+        e2: MotionEvent?,
+        distanceX: Float,
+        distanceY: Float
+    ): Boolean {
+        if (abs(distanceX) > abs(distanceY)) {
+            flingAble = true
+            callBack.onHScroll(distanceX)
+        } else {
+            flingAble = false
+        }
+
+        return super.onScroll(e1, e2, distanceX, distanceY)
+    }
+
+    override fun onFling(
+        e1: MotionEvent,
+        e2: MotionEvent,
+        velocityX: Float,
+        velocityY: Float
+    ): Boolean {
+        if (flingAble) {
+            callBack.onTriggerFling(velocityX, velocityY)
+        }
+        return super.onFling(e1, e2, velocityX, velocityY)
+    }
+
+    override fun onScaleBegin(detector: ScaleGestureDetector): Boolean {
+        if (!isTouchScaling) {
+            isTouchScaling = true
+            isTouchScalePointersLeave = false
+            callBack.onTouchScaleBegin(detector.focusX)
+        }
+        return true
+    }
+
+    override fun onScaleEnd(detector: ScaleGestureDetector?) {
+        isTouchScaling = false
+    }
+
+    override fun onScale(detector: ScaleGestureDetector): Boolean {
+        callBack.onTouchScaling(detector.scaleFactor)
+        return true
+    }
+
+    interface CallBack {
+
+        /**
+         * 开始双指缩放
+         */
+        fun onTouchScaleBegin(focusX: Float)
+
+        /**
+         * 双指缩放中
+         */
+        fun onTouchScaling(scaleFactor: Float)
+
+        /**
+         * 手指左右滑动
+         */
+        fun onHScroll(distanceX: Float)
+
+        /**
+         * 触发惯性滑动
+         */
+        fun onTriggerFling(velocityX: Float, velocityY: Float)
+
+        /**
+         * 手指长按滑动
+         */
+        fun onLongPressMove(x: Float, y: Float)
+
+        /**
+         * 手指离开屏幕
+         */
+        fun onTouchLeave()
+    }
+}

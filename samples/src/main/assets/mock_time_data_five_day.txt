@@ -1,0 +1,2101 @@
+[{
+	"volume": 160736,
+	"price": 631.5,
+	"avgPrice": 630.974,
+	"time": 1616549400000
+}, {
+	"volume": 74820,
+	"price": 629.0,
+	"avgPrice": 631.057,
+	"time": 1616549640000
+}, {
+	"volume": 83010,
+	"price": 636.5,
+	"avgPrice": 631.748,
+	"time": 1616549880000
+}, {
+	"volume": 48604,
+	"price": 633.5,
+	"avgPrice": 632.293,
+	"time": 1616550120000
+}, {
+	"volume": 84300,
+	"price": 632.5,
+	"avgPrice": 632.212,
+	"time": 1616550360000
+}, {
+	"volume": 48800,
+	"price": 632.0,
+	"avgPrice": 632.195,
+	"time": 1616550600000
+}, {
+	"volume": 56203,
+	"price": 633.5,
+	"avgPrice": 632.27,
+	"time": 1616550840000
+}, {
+	"volume": 75803,
+	"price": 630.5,
+	"avgPrice": 632.247,
+	"time": 1616551080000
+}, {
+	"volume": 30450,
+	"price": 631.5,
+	"avgPrice": 632.132,
+	"time": 1616551320000
+}, {
+	"volume": 32800,
+	"price": 629.0,
+	"avgPrice": 632.039,
+	"time": 1616551560000
+}, {
+	"volume": 32930,
+	"price": 628.5,
+	"avgPrice": 631.8,
+	"time": 1616551800000
+}, {
+	"volume": 18500,
+	"price": 629.5,
+	"avgPrice": 631.693,
+	"time": 1616552040000
+}, {
+	"volume": 59600,
+	"price": 629.0,
+	"avgPrice": 631.607,
+	"time": 1616552280000
+}, {
+	"volume": 36117,
+	"price": 627.0,
+	"avgPrice": 631.458,
+	"time": 1616552520000
+}, {
+	"volume": 26400,
+	"price": 628.0,
+	"avgPrice": 631.323,
+	"time": 1616552760000
+}, {
+	"volume": 29863,
+	"price": 627.0,
+	"avgPrice": 631.187,
+	"time": 1616553000000
+}, {
+	"volume": 46868,
+	"price": 624.5,
+	"avgPrice": 630.586,
+	"time": 1616553240000
+}, {
+	"volume": 137501,
+	"price": 624.5,
+	"avgPrice": 630.162,
+	"time": 1616553480000
+}, {
+	"volume": 47900,
+	"price": 625.0,
+	"avgPrice": 629.898,
+	"time": 1616553720000
+}, {
+	"volume": 24800,
+	"price": 626.0,
+	"avgPrice": 629.767,
+	"time": 1616553960000
+}, {
+	"volume": 46503,
+	"price": 626.0,
+	"avgPrice": 629.637,
+	"time": 1616554200000
+}, {
+	"volume": 22000,
+	"price": 625.0,
+	"avgPrice": 629.492,
+	"time": 1616554440000
+}, {
+	"volume": 36800,
+	"price": 624.0,
+	"avgPrice": 629.396,
+	"time": 1616554680000
+}, {
+	"volume": 30900,
+	"price": 624.0,
+	"avgPrice": 629.324,
+	"time": 1616554920000
+}, {
+	"volume": 62295,
+	"price": 622.5,
+	"avgPrice": 629.169,
+	"time": 1616555160000
+}, {
+	"volume": 25810,
+	"price": 623.0,
+	"avgPrice": 629.017,
+	"time": 1616555400000
+}, {
+	"volume": 32809,
+	"price": 623.0,
+	"avgPrice": 628.911,
+	"time": 1616555640000
+}, {
+	"volume": 85200,
+	"price": 621.0,
+	"avgPrice": 628.757,
+	"time": 1616555880000
+}, {
+	"volume": 61502,
+	"price": 619.5,
+	"avgPrice": 627.535,
+	"time": 1616556120000
+}, {
+	"volume": 56100,
+	"price": 619.0,
+	"avgPrice": 627.295,
+	"time": 1616556360000
+}, {
+	"volume": 79658,
+	"price": 622.0,
+	"avgPrice": 627.037,
+	"time": 1616556600000
+}, {
+	"volume": 21306,
+	"price": 623.5,
+	"avgPrice": 626.941,
+	"time": 1616556840000
+}, {
+	"volume": 210800,
+	"price": 624.0,
+	"avgPrice": 626.838,
+	"time": 1616557080000
+}, {
+	"volume": 39882,
+	"price": 623.5,
+	"avgPrice": 626.783,
+	"time": 1616557320000
+}, {
+	"volume": 24300,
+	"price": 621.0,
+	"avgPrice": 626.745,
+	"time": 1616557560000
+}, {
+	"volume": 22200,
+	"price": 623.0,
+	"avgPrice": 626.692,
+	"time": 1616557800000
+}, {
+	"volume": 14700,
+	"price": 622.0,
+	"avgPrice": 626.663,
+	"time": 1616558040000
+}, {
+	"volume": 13206,
+	"price": 621.5,
+	"avgPrice": 626.643,
+	"time": 1616558280000
+}, {
+	"volume": 10200,
+	"price": 620.5,
+	"avgPrice": 626.557,
+	"time": 1616562120000
+}, {
+	"volume": 46500,
+	"price": 621.5,
+	"avgPrice": 626.428,
+	"time": 1616562360000
+}, {
+	"volume": 10900,
+	"price": 621.0,
+	"avgPrice": 626.406,
+	"time": 1616562600000
+}, {
+	"volume": 9600,
+	"price": 620.5,
+	"avgPrice": 626.329,
+	"time": 1616562840000
+}, {
+	"volume": 286293,
+	"price": 618.0,
+	"avgPrice": 625.789,
+	"time": 1616563080000
+}, {
+	"volume": 87405,
+	"price": 618.0,
+	"avgPrice": 625.642,
+	"time": 1616563320000
+}, {
+	"volume": 14500,
+	"price": 617.5,
+	"avgPrice": 625.374,
+	"time": 1616563560000
+}, {
+	"volume": 35200,
+	"price": 618.0,
+	"avgPrice": 625.305,
+	"time": 1616563800000
+}, {
+	"volume": 25031,
+	"price": 621.0,
+	"avgPrice": 625.211,
+	"time": 1616564040000
+}, {
+	"volume": 27000,
+	"price": 620.5,
+	"avgPrice": 625.127,
+	"time": 1616564280000
+}, {
+	"volume": 5200,
+	"price": 620.0,
+	"avgPrice": 625.095,
+	"time": 1616564520000
+}, {
+	"volume": 10300,
+	"price": 619.5,
+	"avgPrice": 625.071,
+	"time": 1616564760000
+}, {
+	"volume": 5600,
+	"price": 620.0,
+	"avgPrice": 625.053,
+	"time": 1616565000000
+}, {
+	"volume": 8000,
+	"price": 619.5,
+	"avgPrice": 625.014,
+	"time": 1616565240000
+}, {
+	"volume": 77100,
+	"price": 620.5,
+	"avgPrice": 624.963,
+	"time": 1616565480000
+}, {
+	"volume": 37236,
+	"price": 621.0,
+	"avgPrice": 624.923,
+	"time": 1616565720000
+}, {
+	"volume": 11500,
+	"price": 620.0,
+	"avgPrice": 624.901,
+	"time": 1616565960000
+}, {
+	"volume": 25200,
+	"price": 619.5,
+	"avgPrice": 624.834,
+	"time": 1616566200000
+}, {
+	"volume": 13700,
+	"price": 620.0,
+	"avgPrice": 624.802,
+	"time": 1616566440000
+}, {
+	"volume": 34700,
+	"price": 622.5,
+	"avgPrice": 624.772,
+	"time": 1616566680000
+}, {
+	"volume": 24700,
+	"price": 622.0,
+	"avgPrice": 624.754,
+	"time": 1616566920000
+}, {
+	"volume": 128400,
+	"price": 619.5,
+	"avgPrice": 624.607,
+	"time": 1616567160000
+}, {
+	"volume": 37400,
+	"price": 621.5,
+	"avgPrice": 624.572,
+	"time": 1616567400000
+}, {
+	"volume": 41100,
+	"price": 620.0,
+	"avgPrice": 624.464,
+	"time": 1616567640000
+}, {
+	"volume": 94400,
+	"price": 619.0,
+	"avgPrice": 624.407,
+	"time": 1616567880000
+}, {
+	"volume": 26900,
+	"price": 618.5,
+	"avgPrice": 624.355,
+	"time": 1616568120000
+}, {
+	"volume": 59567,
+	"price": 619.5,
+	"avgPrice": 624.273,
+	"time": 1616568360000
+}, {
+	"volume": 10700,
+	"price": 619.5,
+	"avgPrice": 624.245,
+	"time": 1616568600000
+}, {
+	"volume": 19900,
+	"price": 620.5,
+	"avgPrice": 624.205,
+	"time": 1616568840000
+}, {
+	"volume": 15700,
+	"price": 621.0,
+	"avgPrice": 624.178,
+	"time": 1616569080000
+}, {
+	"volume": 45800,
+	"price": 622.0,
+	"avgPrice": 624.153,
+	"time": 1616569320000
+}, {
+	"volume": 31600,
+	"price": 622.5,
+	"avgPrice": 624.135,
+	"time": 1616569560000
+}, {
+	"volume": 186907,
+	"price": 622.0,
+	"avgPrice": 624.114,
+	"time": 1616569800000
+}, {
+	"volume": 39400,
+	"price": 621.0,
+	"avgPrice": 624.097,
+	"time": 1616570040000
+}, {
+	"volume": 26900,
+	"price": 621.0,
+	"avgPrice": 624.075,
+	"time": 1616570280000
+}, {
+	"volume": 37440,
+	"price": 619.5,
+	"avgPrice": 624.03,
+	"time": 1616570520000
+}, {
+	"volume": 74800,
+	"price": 618.5,
+	"avgPrice": 623.932,
+	"time": 1616570760000
+}, {
+	"volume": 29700,
+	"price": 620.5,
+	"avgPrice": 623.869,
+	"time": 1616571000000
+}, {
+	"volume": 37824,
+	"price": 618.5,
+	"avgPrice": 623.791,
+	"time": 1616571240000
+}, {
+	"volume": 10300,
+	"price": 619.5,
+	"avgPrice": 623.725,
+	"time": 1616571480000
+}, {
+	"volume": 18700,
+	"price": 619.0,
+	"avgPrice": 623.651,
+	"time": 1616571720000
+}, {
+	"volume": 170400,
+	"price": 617.5,
+	"avgPrice": 623.532,
+	"time": 1616571960000
+}, {
+	"volume": 45200,
+	"price": 619.0,
+	"avgPrice": 623.441,
+	"time": 1616572200000
+}, {
+	"volume": 87700,
+	"price": 621.5,
+	"avgPrice": 623.359,
+	"time": 1616572440000
+}, {
+	"volume": 99000,
+	"price": 622.0,
+	"avgPrice": 623.326,
+	"time": 1616572680000
+}, {
+	"volume": 1694900,
+	"price": 623.5,
+	"avgPrice": 623.319,
+	"time": 1616572740000
+}, {
+	"volume": 1928837,
+	"price": 602.5,
+	"avgPrice": 600.294,
+	"time": 1616635800000
+}, {
+	"volume": 821564,
+	"price": 592.0,
+	"avgPrice": 598.733,
+	"time": 1616636040000
+}, {
+	"volume": 932339,
+	"price": 595.5,
+	"avgPrice": 596.516,
+	"time": 1616636280000
+}, {
+	"volume": 268120,
+	"price": 603.5,
+	"avgPrice": 596.698,
+	"time": 1616636520000
+}, {
+	"volume": 387570,
+	"price": 600.5,
+	"avgPrice": 597.343,
+	"time": 1616636760000
+}, {
+	"volume": 384129,
+	"price": 606.0,
+	"avgPrice": 597.746,
+	"time": 1616637000000
+}, {
+	"volume": 486944,
+	"price": 611.5,
+	"avgPrice": 598.509,
+	"time": 1616637240000
+}, {
+	"volume": 330961,
+	"price": 614.0,
+	"avgPrice": 599.477,
+	"time": 1616637480000
+}, {
+	"volume": 255035,
+	"price": 615.0,
+	"avgPrice": 600.144,
+	"time": 1616637720000
+}, {
+	"volume": 90701,
+	"price": 615.5,
+	"avgPrice": 600.459,
+	"time": 1616637960000
+}, {
+	"volume": 89010,
+	"price": 613.5,
+	"avgPrice": 600.883,
+	"time": 1616638200000
+}, {
+	"volume": 75600,
+	"price": 612.0,
+	"avgPrice": 601.062,
+	"time": 1616638440000
+}, {
+	"volume": 91356,
+	"price": 617.5,
+	"avgPrice": 601.322,
+	"time": 1616638680000
+}, {
+	"volume": 170057,
+	"price": 620.0,
+	"avgPrice": 601.826,
+	"time": 1616638920000
+}, {
+	"volume": 179510,
+	"price": 617.5,
+	"avgPrice": 602.34,
+	"time": 1616639160000
+}, {
+	"volume": 160700,
+	"price": 617.5,
+	"avgPrice": 602.717,
+	"time": 1616639400000
+}, {
+	"volume": 66000,
+	"price": 615.0,
+	"avgPrice": 602.949,
+	"time": 1616639640000
+}, {
+	"volume": 50945,
+	"price": 616.0,
+	"avgPrice": 603.114,
+	"time": 1616639880000
+}, {
+	"volume": 57700,
+	"price": 615.0,
+	"avgPrice": 603.246,
+	"time": 1616640120000
+}, {
+	"volume": 38957,
+	"price": 612.0,
+	"avgPrice": 603.36,
+	"time": 1616640360000
+}, {
+	"volume": 114500,
+	"price": 612.0,
+	"avgPrice": 603.495,
+	"time": 1616640600000
+}, {
+	"volume": 45300,
+	"price": 614.0,
+	"avgPrice": 603.559,
+	"time": 1616640840000
+}, {
+	"volume": 80639,
+	"price": 616.0,
+	"avgPrice": 603.659,
+	"time": 1616641080000
+}, {
+	"volume": 53750,
+	"price": 614.0,
+	"avgPrice": 603.738,
+	"time": 1616641320000
+}, {
+	"volume": 35500,
+	"price": 612.0,
+	"avgPrice": 603.824,
+	"time": 1616641560000
+}, {
+	"volume": 90510,
+	"price": 611.0,
+	"avgPrice": 603.893,
+	"time": 1616641800000
+}, {
+	"volume": 62302,
+	"price": 610.5,
+	"avgPrice": 603.958,
+	"time": 1616642040000
+}, {
+	"volume": 72811,
+	"price": 608.0,
+	"avgPrice": 604.038,
+	"time": 1616642280000
+}, {
+	"volume": 127500,
+	"price": 607.5,
+	"avgPrice": 604.073,
+	"time": 1616642520000
+}, {
+	"volume": 52603,
+	"price": 610.5,
+	"avgPrice": 604.136,
+	"time": 1616642760000
+}, {
+	"volume": 45900,
+	"price": 611.0,
+	"avgPrice": 604.181,
+	"time": 1616643000000
+}, {
+	"volume": 75930,
+	"price": 605.5,
+	"avgPrice": 604.245,
+	"time": 1616643240000
+}, {
+	"volume": 50200,
+	"price": 608.0,
+	"avgPrice": 604.266,
+	"time": 1616643480000
+}, {
+	"volume": 57400,
+	"price": 606.5,
+	"avgPrice": 604.283,
+	"time": 1616643720000
+}, {
+	"volume": 74500,
+	"price": 606.5,
+	"avgPrice": 604.298,
+	"time": 1616643960000
+}, {
+	"volume": 20600,
+	"price": 607.0,
+	"avgPrice": 604.309,
+	"time": 1616644200000
+}, {
+	"volume": 21600,
+	"price": 607.5,
+	"avgPrice": 604.32,
+	"time": 1616644440000
+}, {
+	"volume": 85700,
+	"price": 609.5,
+	"avgPrice": 604.349,
+	"time": 1616644680000
+}, {
+	"volume": 91340,
+	"price": 607.5,
+	"avgPrice": 604.431,
+	"time": 1616648520000
+}, {
+	"volume": 235795,
+	"price": 613.0,
+	"avgPrice": 604.56,
+	"time": 1616648760000
+}, {
+	"volume": 36700,
+	"price": 613.5,
+	"avgPrice": 604.722,
+	"time": 1616649000000
+}, {
+	"volume": 36000,
+	"price": 612.0,
+	"avgPrice": 604.779,
+	"time": 1616649240000
+}, {
+	"volume": 135905,
+	"price": 611.5,
+	"avgPrice": 604.844,
+	"time": 1616649480000
+}, {
+	"volume": 21600,
+	"price": 612.0,
+	"avgPrice": 604.884,
+	"time": 1616649720000
+}, {
+	"volume": 34000,
+	"price": 613.0,
+	"avgPrice": 604.945,
+	"time": 1616649960000
+}, {
+	"volume": 26700,
+	"price": 613.5,
+	"avgPrice": 604.999,
+	"time": 1616650200000
+}, {
+	"volume": 59400,
+	"price": 611.5,
+	"avgPrice": 605.06,
+	"time": 1616650440000
+}, {
+	"volume": 101301,
+	"price": 611.0,
+	"avgPrice": 605.104,
+	"time": 1616650680000
+}, {
+	"volume": 57833,
+	"price": 608.0,
+	"avgPrice": 605.137,
+	"time": 1616650920000
+}, {
+	"volume": 49900,
+	"price": 606.5,
+	"avgPrice": 605.163,
+	"time": 1616651160000
+}, {
+	"volume": 67120,
+	"price": 605.0,
+	"avgPrice": 605.165,
+	"time": 1616651400000
+}, {
+	"volume": 47200,
+	"price": 607.0,
+	"avgPrice": 605.171,
+	"time": 1616651640000
+}, {
+	"volume": 88600,
+	"price": 607.5,
+	"avgPrice": 605.192,
+	"time": 1616651880000
+}, {
+	"volume": 18900,
+	"price": 607.0,
+	"avgPrice": 605.2,
+	"time": 1616652120000
+}, {
+	"volume": 104800,
+	"price": 605.5,
+	"avgPrice": 605.206,
+	"time": 1616652360000
+}, {
+	"volume": 116870,
+	"price": 605.0,
+	"avgPrice": 605.196,
+	"time": 1616652600000
+}, {
+	"volume": 68282,
+	"price": 603.0,
+	"avgPrice": 605.188,
+	"time": 1616652840000
+}, {
+	"volume": 53100,
+	"price": 602.5,
+	"avgPrice": 605.143,
+	"time": 1616653080000
+}, {
+	"volume": 81700,
+	"price": 602.0,
+	"avgPrice": 605.115,
+	"time": 1616653320000
+}, {
+	"volume": 56479,
+	"price": 601.0,
+	"avgPrice": 605.073,
+	"time": 1616653560000
+}, {
+	"volume": 90420,
+	"price": 602.5,
+	"avgPrice": 605.042,
+	"time": 1616653800000
+}, {
+	"volume": 51740,
+	"price": 601.5,
+	"avgPrice": 605.021,
+	"time": 1616654040000
+}, {
+	"volume": 216000,
+	"price": 603.0,
+	"avgPrice": 605.004,
+	"time": 1616654280000
+}, {
+	"volume": 79001,
+	"price": 607.0,
+	"avgPrice": 605.008,
+	"time": 1616654520000
+}, {
+	"volume": 91600,
+	"price": 607.0,
+	"avgPrice": 605.018,
+	"time": 1616654760000
+}, {
+	"volume": 54800,
+	"price": 608.0,
+	"avgPrice": 605.037,
+	"time": 1616655000000
+}, {
+	"volume": 70200,
+	"price": 607.5,
+	"avgPrice": 605.046,
+	"time": 1616655240000
+}, {
+	"volume": 25601,
+	"price": 607.5,
+	"avgPrice": 605.066,
+	"time": 1616655480000
+}, {
+	"volume": 61830,
+	"price": 608.0,
+	"avgPrice": 605.08,
+	"time": 1616655720000
+}, {
+	"volume": 28000,
+	"price": 608.5,
+	"avgPrice": 605.096,
+	"time": 1616655960000
+}, {
+	"volume": 18280,
+	"price": 607.5,
+	"avgPrice": 605.106,
+	"time": 1616656200000
+}, {
+	"volume": 28700,
+	"price": 607.5,
+	"avgPrice": 605.113,
+	"time": 1616656440000
+}, {
+	"volume": 56088,
+	"price": 608.5,
+	"avgPrice": 605.123,
+	"time": 1616656680000
+}, {
+	"volume": 88311,
+	"price": 608.5,
+	"avgPrice": 605.149,
+	"time": 1616656920000
+}, {
+	"volume": 35200,
+	"price": 609.0,
+	"avgPrice": 605.166,
+	"time": 1616657160000
+}, {
+	"volume": 48100,
+	"price": 608.5,
+	"avgPrice": 605.181,
+	"time": 1616657400000
+}, {
+	"volume": 80900,
+	"price": 608.0,
+	"avgPrice": 605.195,
+	"time": 1616657640000
+}, {
+	"volume": 11001,
+	"price": 607.5,
+	"avgPrice": 605.209,
+	"time": 1616657880000
+}, {
+	"volume": 25900,
+	"price": 606.5,
+	"avgPrice": 605.221,
+	"time": 1616658120000
+}, {
+	"volume": 46252,
+	"price": 606.5,
+	"avgPrice": 605.225,
+	"time": 1616658360000
+}, {
+	"volume": 95200,
+	"price": 605.5,
+	"avgPrice": 605.231,
+	"time": 1616658600000
+}, {
+	"volume": 57900,
+	"price": 604.5,
+	"avgPrice": 605.229,
+	"time": 1616658840000
+}, {
+	"volume": 127000,
+	"price": 605.0,
+	"avgPrice": 605.225,
+	"time": 1616659080000
+}, {
+	"volume": 1818900,
+	"price": 606.0,
+	"avgPrice": 605.222,
+	"time": 1616659140000
+}, {
+	"volume": 615239,
+	"price": 612.0,
+	"avgPrice": 606.574,
+	"time": 1616722200000
+}, {
+	"volume": 114358,
+	"price": 612.5,
+	"avgPrice": 608.573,
+	"time": 1616722440000
+}, {
+	"volume": 188494,
+	"price": 614.5,
+	"avgPrice": 609.831,
+	"time": 1616722680000
+}, {
+	"volume": 212582,
+	"price": 616.5,
+	"avgPrice": 611.258,
+	"time": 1616722920000
+}, {
+	"volume": 120001,
+	"price": 620.0,
+	"avgPrice": 612.661,
+	"time": 1616723160000
+}, {
+	"volume": 121500,
+	"price": 615.0,
+	"avgPrice": 613.276,
+	"time": 1616723400000
+}, {
+	"volume": 106900,
+	"price": 614.0,
+	"avgPrice": 613.41,
+	"time": 1616723640000
+}, {
+	"volume": 122992,
+	"price": 616.5,
+	"avgPrice": 613.5,
+	"time": 1616723880000
+}, {
+	"volume": 26400,
+	"price": 615.0,
+	"avgPrice": 613.602,
+	"time": 1616724120000
+}, {
+	"volume": 76600,
+	"price": 615.5,
+	"avgPrice": 613.666,
+	"time": 1616724360000
+}, {
+	"volume": 38600,
+	"price": 617.0,
+	"avgPrice": 613.758,
+	"time": 1616724600000
+}, {
+	"volume": 49717,
+	"price": 616.5,
+	"avgPrice": 613.892,
+	"time": 1616724840000
+}, {
+	"volume": 77500,
+	"price": 616.0,
+	"avgPrice": 613.978,
+	"time": 1616725080000
+}, {
+	"volume": 30200,
+	"price": 614.5,
+	"avgPrice": 614.023,
+	"time": 1616725320000
+}, {
+	"volume": 191467,
+	"price": 612.5,
+	"avgPrice": 614.02,
+	"time": 1616725560000
+}, {
+	"volume": 77531,
+	"price": 612.5,
+	"avgPrice": 613.948,
+	"time": 1616725800000
+}, {
+	"volume": 9401,
+	"price": 614.0,
+	"avgPrice": 613.933,
+	"time": 1616726040000
+}, {
+	"volume": 25400,
+	"price": 615.0,
+	"avgPrice": 613.948,
+	"time": 1616726280000
+}, {
+	"volume": 86800,
+	"price": 616.5,
+	"avgPrice": 614.022,
+	"time": 1616726520000
+}, {
+	"volume": 82006,
+	"price": 616.5,
+	"avgPrice": 614.064,
+	"time": 1616726760000
+}, {
+	"volume": 37000,
+	"price": 616.5,
+	"avgPrice": 614.115,
+	"time": 1616727000000
+}, {
+	"volume": 63500,
+	"price": 617.0,
+	"avgPrice": 614.172,
+	"time": 1616727240000
+}, {
+	"volume": 16601,
+	"price": 618.5,
+	"avgPrice": 614.273,
+	"time": 1616727480000
+}, {
+	"volume": 14650,
+	"price": 619.5,
+	"avgPrice": 614.51,
+	"time": 1616727720000
+}, {
+	"volume": 88902,
+	"price": 619.0,
+	"avgPrice": 614.663,
+	"time": 1616727960000
+}, {
+	"volume": 105200,
+	"price": 621.0,
+	"avgPrice": 614.868,
+	"time": 1616728200000
+}, {
+	"volume": 45300,
+	"price": 621.0,
+	"avgPrice": 614.954,
+	"time": 1616728440000
+}, {
+	"volume": 42324,
+	"price": 621.0,
+	"avgPrice": 615.046,
+	"time": 1616728680000
+}, {
+	"volume": 176386,
+	"price": 622.0,
+	"avgPrice": 615.228,
+	"time": 1616728920000
+}, {
+	"volume": 50310,
+	"price": 623.0,
+	"avgPrice": 615.49,
+	"time": 1616729160000
+}, {
+	"volume": 39405,
+	"price": 623.0,
+	"avgPrice": 615.637,
+	"time": 1616729400000
+}, {
+	"volume": 65300,
+	"price": 620.5,
+	"avgPrice": 615.798,
+	"time": 1616729640000
+}, {
+	"volume": 62100,
+	"price": 621.0,
+	"avgPrice": 615.901,
+	"time": 1616729880000
+}, {
+	"volume": 6500,
+	"price": 622.0,
+	"avgPrice": 616.017,
+	"time": 1616730120000
+}, {
+	"volume": 35730,
+	"price": 620.5,
+	"avgPrice": 616.071,
+	"time": 1616730360000
+}, {
+	"volume": 37400,
+	"price": 621.0,
+	"avgPrice": 616.149,
+	"time": 1616730600000
+}, {
+	"volume": 17201,
+	"price": 619.0,
+	"avgPrice": 616.168,
+	"time": 1616730840000
+}, {
+	"volume": 28100,
+	"price": 620.0,
+	"avgPrice": 616.198,
+	"time": 1616731080000
+}, {
+	"volume": 45624,
+	"price": 621.5,
+	"avgPrice": 616.275,
+	"time": 1616734920000
+}, {
+	"volume": 31000,
+	"price": 623.0,
+	"avgPrice": 616.38,
+	"time": 1616735160000
+}, {
+	"volume": 60700,
+	"price": 624.0,
+	"avgPrice": 616.51,
+	"time": 1616735400000
+}, {
+	"volume": 29501,
+	"price": 625.0,
+	"avgPrice": 616.648,
+	"time": 1616735640000
+}, {
+	"volume": 80427,
+	"price": 626.0,
+	"avgPrice": 616.833,
+	"time": 1616735880000
+}, {
+	"volume": 14300,
+	"price": 625.5,
+	"avgPrice": 617.017,
+	"time": 1616736120000
+}, {
+	"volume": 55710,
+	"price": 624.5,
+	"avgPrice": 617.117,
+	"time": 1616736360000
+}, {
+	"volume": 29000,
+	"price": 624.5,
+	"avgPrice": 617.178,
+	"time": 1616736600000
+}, {
+	"volume": 59600,
+	"price": 626.5,
+	"avgPrice": 617.313,
+	"time": 1616736840000
+}, {
+	"volume": 74310,
+	"price": 629.0,
+	"avgPrice": 617.765,
+	"time": 1616737080000
+}, {
+	"volume": 131300,
+	"price": 627.5,
+	"avgPrice": 617.944,
+	"time": 1616737320000
+}, {
+	"volume": 51100,
+	"price": 628.5,
+	"avgPrice": 618.108,
+	"time": 1616737560000
+}, {
+	"volume": 27100,
+	"price": 629.0,
+	"avgPrice": 618.236,
+	"time": 1616737800000
+}, {
+	"volume": 22920,
+	"price": 629.0,
+	"avgPrice": 618.378,
+	"time": 1616738040000
+}, {
+	"volume": 49100,
+	"price": 629.5,
+	"avgPrice": 618.47,
+	"time": 1616738280000
+}, {
+	"volume": 113800,
+	"price": 631.5,
+	"avgPrice": 618.842,
+	"time": 1616738520000
+}, {
+	"volume": 160600,
+	"price": 631.0,
+	"avgPrice": 619.094,
+	"time": 1616738760000
+}, {
+	"volume": 55500,
+	"price": 628.5,
+	"avgPrice": 619.279,
+	"time": 1616739000000
+}, {
+	"volume": 82700,
+	"price": 629.0,
+	"avgPrice": 619.37,
+	"time": 1616739240000
+}, {
+	"volume": 55050,
+	"price": 627.5,
+	"avgPrice": 619.519,
+	"time": 1616739480000
+}, {
+	"volume": 84900,
+	"price": 628.5,
+	"avgPrice": 619.651,
+	"time": 1616739720000
+}, {
+	"volume": 47500,
+	"price": 629.5,
+	"avgPrice": 619.788,
+	"time": 1616739960000
+}, {
+	"volume": 22600,
+	"price": 627.5,
+	"avgPrice": 619.87,
+	"time": 1616740200000
+}, {
+	"volume": 34900,
+	"price": 626.0,
+	"avgPrice": 619.956,
+	"time": 1616740440000
+}, {
+	"volume": 20900,
+	"price": 627.0,
+	"avgPrice": 620.046,
+	"time": 1616740680000
+}, {
+	"volume": 17700,
+	"price": 626.5,
+	"avgPrice": 620.108,
+	"time": 1616740920000
+}, {
+	"volume": 23100,
+	"price": 627.0,
+	"avgPrice": 620.157,
+	"time": 1616741160000
+}, {
+	"volume": 141500,
+	"price": 626.5,
+	"avgPrice": 620.246,
+	"time": 1616741400000
+}, {
+	"volume": 9700,
+	"price": 627.0,
+	"avgPrice": 620.314,
+	"time": 1616741640000
+}, {
+	"volume": 26800,
+	"price": 625.0,
+	"avgPrice": 620.378,
+	"time": 1616741880000
+}, {
+	"volume": 153110,
+	"price": 623.5,
+	"avgPrice": 620.432,
+	"time": 1616742120000
+}, {
+	"volume": 72800,
+	"price": 625.0,
+	"avgPrice": 620.462,
+	"time": 1616742360000
+}, {
+	"volume": 27900,
+	"price": 624.5,
+	"avgPrice": 620.499,
+	"time": 1616742600000
+}, {
+	"volume": 13800,
+	"price": 624.0,
+	"avgPrice": 620.535,
+	"time": 1616742840000
+}, {
+	"volume": 23650,
+	"price": 623.0,
+	"avgPrice": 620.56,
+	"time": 1616743080000
+}, {
+	"volume": 68900,
+	"price": 624.5,
+	"avgPrice": 620.581,
+	"time": 1616743320000
+}, {
+	"volume": 17600,
+	"price": 623.0,
+	"avgPrice": 620.601,
+	"time": 1616743560000
+}, {
+	"volume": 39100,
+	"price": 622.0,
+	"avgPrice": 620.613,
+	"time": 1616743800000
+}, {
+	"volume": 55200,
+	"price": 622.0,
+	"avgPrice": 620.622,
+	"time": 1616744040000
+}, {
+	"volume": 55400,
+	"price": 621.0,
+	"avgPrice": 620.636,
+	"time": 1616744280000
+}, {
+	"volume": 16800,
+	"price": 622.0,
+	"avgPrice": 620.644,
+	"time": 1616744520000
+}, {
+	"volume": 43000,
+	"price": 621.0,
+	"avgPrice": 620.651,
+	"time": 1616744760000
+}, {
+	"volume": 164016,
+	"price": 619.5,
+	"avgPrice": 620.635,
+	"time": 1616745000000
+}, {
+	"volume": 103401,
+	"price": 619.0,
+	"avgPrice": 620.625,
+	"time": 1616745240000
+}, {
+	"volume": 139109,
+	"price": 619.5,
+	"avgPrice": 620.609,
+	"time": 1616745480000
+}, {
+	"volume": 1818459,
+	"price": 620.0,
+	"avgPrice": 620.604,
+	"time": 1616745540000
+}, {
+	"volume": 233817,
+	"price": 621.0,
+	"avgPrice": 620.096,
+	"time": 1616981400000
+}, {
+	"volume": 113277,
+	"price": 619.0,
+	"avgPrice": 619.868,
+	"time": 1616981640000
+}, {
+	"volume": 160178,
+	"price": 613.5,
+	"avgPrice": 618.364,
+	"time": 1616981880000
+}, {
+	"volume": 72114,
+	"price": 614.5,
+	"avgPrice": 617.566,
+	"time": 1616982120000
+}, {
+	"volume": 202000,
+	"price": 617.5,
+	"avgPrice": 617.395,
+	"time": 1616982360000
+}, {
+	"volume": 71145,
+	"price": 620.0,
+	"avgPrice": 617.573,
+	"time": 1616982600000
+}, {
+	"volume": 66600,
+	"price": 618.0,
+	"avgPrice": 617.609,
+	"time": 1616982840000
+}, {
+	"volume": 120800,
+	"price": 616.5,
+	"avgPrice": 617.626,
+	"time": 1616983080000
+}, {
+	"volume": 36830,
+	"price": 616.0,
+	"avgPrice": 617.579,
+	"time": 1616983320000
+}, {
+	"volume": 28848,
+	"price": 617.5,
+	"avgPrice": 617.549,
+	"time": 1616983560000
+}, {
+	"volume": 132615,
+	"price": 618.0,
+	"avgPrice": 617.598,
+	"time": 1616983800000
+}, {
+	"volume": 71902,
+	"price": 618.0,
+	"avgPrice": 617.624,
+	"time": 1616984040000
+}, {
+	"volume": 106400,
+	"price": 616.0,
+	"avgPrice": 617.587,
+	"time": 1616984280000
+}, {
+	"volume": 63018,
+	"price": 616.5,
+	"avgPrice": 617.44,
+	"time": 1616984520000
+}, {
+	"volume": 137700,
+	"price": 615.0,
+	"avgPrice": 617.296,
+	"time": 1616984760000
+}, {
+	"volume": 84300,
+	"price": 616.5,
+	"avgPrice": 617.247,
+	"time": 1616985000000
+}, {
+	"volume": 56800,
+	"price": 616.5,
+	"avgPrice": 617.252,
+	"time": 1616985240000
+}, {
+	"volume": 33400,
+	"price": 617.0,
+	"avgPrice": 617.241,
+	"time": 1616985480000
+}, {
+	"volume": 30300,
+	"price": 617.5,
+	"avgPrice": 617.242,
+	"time": 1616985720000
+}, {
+	"volume": 8600,
+	"price": 617.5,
+	"avgPrice": 617.242,
+	"time": 1616985960000
+}, {
+	"volume": 30900,
+	"price": 617.0,
+	"avgPrice": 617.23,
+	"time": 1616986200000
+}, {
+	"volume": 38700,
+	"price": 616.0,
+	"avgPrice": 617.201,
+	"time": 1616986440000
+}, {
+	"volume": 79100,
+	"price": 617.0,
+	"avgPrice": 617.18,
+	"time": 1616986680000
+}, {
+	"volume": 12900,
+	"price": 617.5,
+	"avgPrice": 617.18,
+	"time": 1616986920000
+}, {
+	"volume": 42018,
+	"price": 617.0,
+	"avgPrice": 617.179,
+	"time": 1616987160000
+}, {
+	"volume": 70000,
+	"price": 618.0,
+	"avgPrice": 617.181,
+	"time": 1616987400000
+}, {
+	"volume": 91200,
+	"price": 617.0,
+	"avgPrice": 617.19,
+	"time": 1616987640000
+}, {
+	"volume": 33600,
+	"price": 617.0,
+	"avgPrice": 617.191,
+	"time": 1616987880000
+}, {
+	"volume": 70201,
+	"price": 618.0,
+	"avgPrice": 617.197,
+	"time": 1616988120000
+}, {
+	"volume": 10800,
+	"price": 618.5,
+	"avgPrice": 617.201,
+	"time": 1616988360000
+}, {
+	"volume": 19400,
+	"price": 617.0,
+	"avgPrice": 617.21,
+	"time": 1616988600000
+}, {
+	"volume": 11600,
+	"price": 617.5,
+	"avgPrice": 617.211,
+	"time": 1616988840000
+}, {
+	"volume": 125000,
+	"price": 616.5,
+	"avgPrice": 617.21,
+	"time": 1616989080000
+}, {
+	"volume": 74300,
+	"price": 617.5,
+	"avgPrice": 617.207,
+	"time": 1616989320000
+}, {
+	"volume": 32000,
+	"price": 617.0,
+	"avgPrice": 617.206,
+	"time": 1616989560000
+}, {
+	"volume": 16500,
+	"price": 617.0,
+	"avgPrice": 617.207,
+	"time": 1616989800000
+}, {
+	"volume": 15500,
+	"price": 617.0,
+	"avgPrice": 617.207,
+	"time": 1616990040000
+}, {
+	"volume": 24000,
+	"price": 616.0,
+	"avgPrice": 617.187,
+	"time": 1616990280000
+}, {
+	"volume": 560670,
+	"price": 607.5,
+	"avgPrice": 616.512,
+	"time": 1616994120000
+}, {
+	"volume": 80500,
+	"price": 611.0,
+	"avgPrice": 616.29,
+	"time": 1616994360000
+}, {
+	"volume": 98236,
+	"price": 606.0,
+	"avgPrice": 616.017,
+	"time": 1616994600000
+}, {
+	"volume": 66500,
+	"price": 607.5,
+	"avgPrice": 615.662,
+	"time": 1616994840000
+}, {
+	"volume": 179901,
+	"price": 603.5,
+	"avgPrice": 614.755,
+	"time": 1616995080000
+}, {
+	"volume": 149200,
+	"price": 603.0,
+	"avgPrice": 614.204,
+	"time": 1616995320000
+}, {
+	"volume": 235200,
+	"price": 604.5,
+	"avgPrice": 613.865,
+	"time": 1616995560000
+}, {
+	"volume": 53731,
+	"price": 606.5,
+	"avgPrice": 613.656,
+	"time": 1616995800000
+}, {
+	"volume": 60810,
+	"price": 607.5,
+	"avgPrice": 613.571,
+	"time": 1616996040000
+}, {
+	"volume": 39205,
+	"price": 606.0,
+	"avgPrice": 613.435,
+	"time": 1616996280000
+}, {
+	"volume": 223300,
+	"price": 601.5,
+	"avgPrice": 613.155,
+	"time": 1616996520000
+}, {
+	"volume": 123500,
+	"price": 603.0,
+	"avgPrice": 612.885,
+	"time": 1616996760000
+}, {
+	"volume": 147701,
+	"price": 605.5,
+	"avgPrice": 612.783,
+	"time": 1616997000000
+}, {
+	"volume": 43600,
+	"price": 608.0,
+	"avgPrice": 612.68,
+	"time": 1616997240000
+}, {
+	"volume": 228993,
+	"price": 606.5,
+	"avgPrice": 612.559,
+	"time": 1616997480000
+}, {
+	"volume": 70600,
+	"price": 607.5,
+	"avgPrice": 612.497,
+	"time": 1616997720000
+}, {
+	"volume": 58400,
+	"price": 605.5,
+	"avgPrice": 612.444,
+	"time": 1616997960000
+}, {
+	"volume": 38410,
+	"price": 605.5,
+	"avgPrice": 612.362,
+	"time": 1616998200000
+}, {
+	"volume": 377299,
+	"price": 603.5,
+	"avgPrice": 612.182,
+	"time": 1616998440000
+}, {
+	"volume": 38561,
+	"price": 605.5,
+	"avgPrice": 612.106,
+	"time": 1616998680000
+}, {
+	"volume": 35000,
+	"price": 606.5,
+	"avgPrice": 612.07,
+	"time": 1616998920000
+}, {
+	"volume": 126995,
+	"price": 608.0,
+	"avgPrice": 612.007,
+	"time": 1616999160000
+}, {
+	"volume": 103735,
+	"price": 609.0,
+	"avgPrice": 611.961,
+	"time": 1616999400000
+}, {
+	"volume": 16200,
+	"price": 608.5,
+	"avgPrice": 611.915,
+	"time": 1616999640000
+}, {
+	"volume": 83601,
+	"price": 606.5,
+	"avgPrice": 611.869,
+	"time": 1616999880000
+}, {
+	"volume": 7600,
+	"price": 608.0,
+	"avgPrice": 611.834,
+	"time": 1617000120000
+}, {
+	"volume": 15100,
+	"price": 608.0,
+	"avgPrice": 611.824,
+	"time": 1617000360000
+}, {
+	"volume": 30700,
+	"price": 608.5,
+	"avgPrice": 611.798,
+	"time": 1617000600000
+}, {
+	"volume": 40761,
+	"price": 607.5,
+	"avgPrice": 611.763,
+	"time": 1617000840000
+}, {
+	"volume": 37400,
+	"price": 607.5,
+	"avgPrice": 611.744,
+	"time": 1617001080000
+}, {
+	"volume": 33600,
+	"price": 608.0,
+	"avgPrice": 611.698,
+	"time": 1617001320000
+}, {
+	"volume": 19800,
+	"price": 609.0,
+	"avgPrice": 611.678,
+	"time": 1617001560000
+}, {
+	"volume": 22032,
+	"price": 608.0,
+	"avgPrice": 611.662,
+	"time": 1617001800000
+}, {
+	"volume": 26200,
+	"price": 609.0,
+	"avgPrice": 611.652,
+	"time": 1617002040000
+}, {
+	"volume": 106100,
+	"price": 609.5,
+	"avgPrice": 611.636,
+	"time": 1617002280000
+}, {
+	"volume": 30200,
+	"price": 609.0,
+	"avgPrice": 611.61,
+	"time": 1617002520000
+}, {
+	"volume": 105000,
+	"price": 606.5,
+	"avgPrice": 611.571,
+	"time": 1617002760000
+}, {
+	"volume": 68200,
+	"price": 607.5,
+	"avgPrice": 611.51,
+	"time": 1617003000000
+}, {
+	"volume": 243700,
+	"price": 607.5,
+	"avgPrice": 611.455,
+	"time": 1617003240000
+}, {
+	"volume": 50200,
+	"price": 608.0,
+	"avgPrice": 611.416,
+	"time": 1617003480000
+}, {
+	"volume": 10500,
+	"price": 609.0,
+	"avgPrice": 611.401,
+	"time": 1617003720000
+}, {
+	"volume": 23290,
+	"price": 608.0,
+	"avgPrice": 611.372,
+	"time": 1617003960000
+}, {
+	"volume": 68054,
+	"price": 610.0,
+	"avgPrice": 611.348,
+	"time": 1617004200000
+}, {
+	"volume": 51300,
+	"price": 611.5,
+	"avgPrice": 611.342,
+	"time": 1617004440000
+}, {
+	"volume": 52250,
+	"price": 611.5,
+	"avgPrice": 611.352,
+	"time": 1617004680000
+}, {
+	"volume": 1567550,
+	"price": 612.0,
+	"avgPrice": 611.352,
+	"time": 1617004740000
+}, {
+	"volume": 322736,
+	"price": 612.0,
+	"avgPrice": 613.635,
+	"time": 1617067800000
+}, {
+	"volume": 89198,
+	"price": 613.5,
+	"avgPrice": 613.643,
+	"time": 1617068040000
+}, {
+	"volume": 84708,
+	"price": 614.5,
+	"avgPrice": 613.971,
+	"time": 1617068280000
+}, {
+	"volume": 345706,
+	"price": 609.5,
+	"avgPrice": 613.323,
+	"time": 1617068520000
+}, {
+	"volume": 36700,
+	"price": 610.5,
+	"avgPrice": 613.027,
+	"time": 1617068760000
+}, {
+	"volume": 143000,
+	"price": 610.0,
+	"avgPrice": 612.616,
+	"time": 1617069000000
+}, {
+	"volume": 110200,
+	"price": 609.0,
+	"avgPrice": 612.188,
+	"time": 1617069240000
+}, {
+	"volume": 137200,
+	"price": 608.0,
+	"avgPrice": 611.9,
+	"time": 1617069480000
+}, {
+	"volume": 85408,
+	"price": 607.0,
+	"avgPrice": 611.485,
+	"time": 1617069720000
+}, {
+	"volume": 80954,
+	"price": 608.0,
+	"avgPrice": 611.298,
+	"time": 1617069960000
+}, {
+	"volume": 67304,
+	"price": 608.0,
+	"avgPrice": 611.093,
+	"time": 1617070200000
+}, {
+	"volume": 101800,
+	"price": 608.0,
+	"avgPrice": 610.929,
+	"time": 1617070440000
+}, {
+	"volume": 130402,
+	"price": 610.5,
+	"avgPrice": 610.822,
+	"time": 1617070680000
+}, {
+	"volume": 53300,
+	"price": 612.0,
+	"avgPrice": 610.869,
+	"time": 1617070920000
+}, {
+	"volume": 147850,
+	"price": 614.5,
+	"avgPrice": 611.201,
+	"time": 1617071160000
+}, {
+	"volume": 53200,
+	"price": 615.0,
+	"avgPrice": 611.419,
+	"time": 1617071400000
+}, {
+	"volume": 58802,
+	"price": 617.5,
+	"avgPrice": 611.685,
+	"time": 1617071640000
+}, {
+	"volume": 81200,
+	"price": 617.0,
+	"avgPrice": 611.919,
+	"time": 1617071880000
+}, {
+	"volume": 47045,
+	"price": 618.0,
+	"avgPrice": 612.053,
+	"time": 1617072120000
+}, {
+	"volume": 126922,
+	"price": 619.0,
+	"avgPrice": 612.319,
+	"time": 1617072360000
+}, {
+	"volume": 57600,
+	"price": 617.5,
+	"avgPrice": 612.473,
+	"time": 1617072600000
+}, {
+	"volume": 8200,
+	"price": 617.0,
+	"avgPrice": 612.51,
+	"time": 1617072840000
+}, {
+	"volume": 59100,
+	"price": 616.0,
+	"avgPrice": 612.582,
+	"time": 1617073080000
+}, {
+	"volume": 33600,
+	"price": 615.5,
+	"avgPrice": 612.625,
+	"time": 1617073320000
+}, {
+	"volume": 39800,
+	"price": 619.0,
+	"avgPrice": 612.792,
+	"time": 1617073560000
+}, {
+	"volume": 66000,
+	"price": 618.5,
+	"avgPrice": 612.963,
+	"time": 1617073800000
+}, {
+	"volume": 37300,
+	"price": 619.0,
+	"avgPrice": 613.037,
+	"time": 1617074040000
+}, {
+	"volume": 175800,
+	"price": 620.0,
+	"avgPrice": 613.28,
+	"time": 1617074280000
+}, {
+	"volume": 29001,
+	"price": 620.0,
+	"avgPrice": 613.441,
+	"time": 1617074520000
+}, {
+	"volume": 19400,
+	"price": 619.0,
+	"avgPrice": 613.602,
+	"time": 1617074760000
+}, {
+	"volume": 25300,
+	"price": 618.5,
+	"avgPrice": 613.668,
+	"time": 1617075000000
+}, {
+	"volume": 46500,
+	"price": 618.0,
+	"avgPrice": 613.705,
+	"time": 1617075240000
+}, {
+	"volume": 49000,
+	"price": 618.0,
+	"avgPrice": 613.742,
+	"time": 1617075480000
+}, {
+	"volume": 17100,
+	"price": 617.0,
+	"avgPrice": 613.757,
+	"time": 1617075720000
+}, {
+	"volume": 3606,
+	"price": 618.0,
+	"avgPrice": 613.775,
+	"time": 1617075960000
+}, {
+	"volume": 73600,
+	"price": 618.0,
+	"avgPrice": 613.813,
+	"time": 1617076200000
+}, {
+	"volume": 3200,
+	"price": 619.0,
+	"avgPrice": 613.837,
+	"time": 1617076440000
+}, {
+	"volume": 4450,
+	"price": 619.0,
+	"avgPrice": 613.865,
+	"time": 1617076680000
+}, {
+	"volume": 63911,
+	"price": 616.0,
+	"avgPrice": 614.0,
+	"time": 1617080520000
+}, {
+	"volume": 61093,
+	"price": 617.5,
+	"avgPrice": 614.047,
+	"time": 1617080760000
+}, {
+	"volume": 18800,
+	"price": 618.5,
+	"avgPrice": 614.084,
+	"time": 1617081000000
+}, {
+	"volume": 9900,
+	"price": 617.5,
+	"avgPrice": 614.135,
+	"time": 1617081240000
+}, {
+	"volume": 38100,
+	"price": 618.5,
+	"avgPrice": 614.204,
+	"time": 1617081480000
+}, {
+	"volume": 30300,
+	"price": 618.0,
+	"avgPrice": 614.23,
+	"time": 1617081720000
+}, {
+	"volume": 37900,
+	"price": 618.0,
+	"avgPrice": 614.278,
+	"time": 1617081960000
+}, {
+	"volume": 9300,
+	"price": 617.5,
+	"avgPrice": 614.303,
+	"time": 1617082200000
+}, {
+	"volume": 28700,
+	"price": 617.0,
+	"avgPrice": 614.326,
+	"time": 1617082440000
+}, {
+	"volume": 34800,
+	"price": 617.0,
+	"avgPrice": 614.351,
+	"time": 1617082680000
+}, {
+	"volume": 10900,
+	"price": 617.0,
+	"avgPrice": 614.359,
+	"time": 1617082920000
+}, {
+	"volume": 21600,
+	"price": 616.5,
+	"avgPrice": 614.373,
+	"time": 1617083160000
+}, {
+	"volume": 40600,
+	"price": 617.0,
+	"avgPrice": 614.387,
+	"time": 1617083400000
+}, {
+	"volume": 24500,
+	"price": 617.0,
+	"avgPrice": 614.399,
+	"time": 1617083640000
+}, {
+	"volume": 30000,
+	"price": 616.0,
+	"avgPrice": 614.411,
+	"time": 1617083880000
+}, {
+	"volume": 6000,
+	"price": 616.0,
+	"avgPrice": 614.415,
+	"time": 1617084120000
+}, {
+	"volume": 4500,
+	"price": 616.5,
+	"avgPrice": 614.429,
+	"time": 1617084360000
+}, {
+	"volume": 18113,
+	"price": 615.5,
+	"avgPrice": 614.443,
+	"time": 1617084600000
+}, {
+	"volume": 7200,
+	"price": 616.5,
+	"avgPrice": 614.457,
+	"time": 1617084840000
+}, {
+	"volume": 8000,
+	"price": 616.0,
+	"avgPrice": 614.477,
+	"time": 1617085080000
+}, {
+	"volume": 49335,
+	"price": 616.0,
+	"avgPrice": 614.484,
+	"time": 1617085320000
+}, {
+	"volume": 15000,
+	"price": 614.5,
+	"avgPrice": 614.489,
+	"time": 1617085560000
+}, {
+	"volume": 50800,
+	"price": 613.0,
+	"avgPrice": 614.481,
+	"time": 1617085800000
+}, {
+	"volume": 23210,
+	"price": 611.5,
+	"avgPrice": 614.387,
+	"time": 1617086040000
+}, {
+	"volume": 24500,
+	"price": 612.5,
+	"avgPrice": 614.362,
+	"time": 1617086280000
+}, {
+	"volume": 11202,
+	"price": 612.0,
+	"avgPrice": 614.348,
+	"time": 1617086520000
+}, {
+	"volume": 39600,
+	"price": 612.5,
+	"avgPrice": 614.334,
+	"time": 1617086760000
+}, {
+	"volume": 14700,
+	"price": 612.5,
+	"avgPrice": 614.324,
+	"time": 1617087000000
+}, {
+	"volume": 126800,
+	"price": 611.0,
+	"avgPrice": 614.277,
+	"time": 1617087240000
+}, {
+	"volume": 24000,
+	"price": 610.0,
+	"avgPrice": 614.142,
+	"time": 1617087480000
+}, {
+	"volume": 16900,
+	"price": 609.5,
+	"avgPrice": 614.081,
+	"time": 1617087720000
+}, {
+	"volume": 41366,
+	"price": 610.5,
+	"avgPrice": 614.042,
+	"time": 1617087960000
+}, {
+	"volume": 11900,
+	"price": 610.0,
+	"avgPrice": 614.025,
+	"time": 1617088200000
+}, {
+	"volume": 27419,
+	"price": 611.0,
+	"avgPrice": 613.993,
+	"time": 1617088440000
+}, {
+	"volume": 19700,
+	"price": 611.0,
+	"avgPrice": 613.968,
+	"time": 1617088680000
+}, {
+	"volume": 13800,
+	"price": 611.0,
+	"avgPrice": 613.953,
+	"time": 1617088920000
+}, {
+	"volume": 14400,
+	"price": 610.5,
+	"avgPrice": 613.928,
+	"time": 1617089160000
+}, {
+	"volume": 69300,
+	"price": 610.5,
+	"avgPrice": 613.891,
+	"time": 1617089400000
+}, {
+	"volume": 118127,
+	"price": 611.0,
+	"avgPrice": 613.852,
+	"time": 1617089640000
+}, {
+	"volume": 90602,
+	"price": 610.5,
+	"avgPrice": 613.815,
+	"time": 1617089880000
+}, {
+	"volume": 21256,
+	"price": 609.5,
+	"avgPrice": 613.756,
+	"time": 1617090120000
+}, {
+	"volume": 36550,
+	"price": 609.5,
+	"avgPrice": 613.716,
+	"time": 1617090360000
+}, {
+	"volume": 43100,
+	"price": 609.5,
+	"avgPrice": 613.678,
+	"time": 1617090600000
+}, {
+	"volume": 135800,
+	"price": 610.0,
+	"avgPrice": 613.563,
+	"time": 1617090840000
+}, {
+	"volume": 101000,
+	"price": 610.0,
+	"avgPrice": 613.492,
+	"time": 1617091080000
+}, {
+	"volume": 1745380,
+	"price": 609.5,
+	"avgPrice": 613.467,
+	"time": 1617091140000
+}]

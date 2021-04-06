@@ -1,0 +1,61 @@
+package com.github.wangyiqian.stockchart.index
+
+import com.github.wangyiqian.stockchart.entities.EmptyKEntity
+import com.github.wangyiqian.stockchart.entities.IKEntity
+
+/**
+ * 指数平滑异同移动平均线（Moving Average Convergence and Divergence）
+ * @author wangyiqian E-mail: wangyiqian9891@gmail.com
+ * @version 创建时间: 2021/2/18
+ */
+object MACDCalculator : ICalculator {
+
+    override fun calculate(param: String, input: List<IKEntity>): List<List<Float?>> {
+        val paramList = param.split(",")
+        val shortPeriod = paramList[0].toInt()
+        val longPeriod = paramList[1].toInt()
+        val avgPeriod = paramList[2].toInt()
+
+        val result = MutableList(3) { MutableList<Float?>(input.size) { 0f } }
+        val difIdx = 0
+        val deaIdx = 1
+        val macdIdx = 2
+
+        var preEmaShort = 0f
+        var preEmaLong = 0f
+        input.forEachIndexed { kEntityIdx, kEntity ->
+            if (kEntity is EmptyKEntity) {
+                result[difIdx][kEntityIdx] = null
+                result[deaIdx][kEntityIdx] = null
+                result[macdIdx][kEntityIdx] = null
+                return@forEachIndexed
+            }
+
+            if (kEntityIdx == 0 || input[kEntityIdx - 1] is EmptyKEntity) {
+                result[difIdx][kEntityIdx] = 0f
+                result[deaIdx][kEntityIdx] = 0f
+                result[macdIdx][kEntityIdx] = 0f
+                preEmaShort = kEntity.getClosePrice()
+                preEmaLong = kEntity.getClosePrice()
+            } else {
+                val emaShort =
+                    2f / (shortPeriod + 1) * kEntity.getClosePrice() + (shortPeriod - 1f) / (shortPeriod + 1f) * preEmaShort
+                val emaLong =
+                    2f / (longPeriod + 1) * kEntity.getClosePrice() + (longPeriod - 1f) / (longPeriod + 1f) * preEmaLong
+                val dif = emaShort - emaLong
+                val dea =
+                    2f / (avgPeriod + 1) * dif + (avgPeriod - 1f) / (avgPeriod + 1f) * result[deaIdx][kEntityIdx - 1]!!
+                val macd = (dif - dea) * 2
+
+                result[difIdx][kEntityIdx] = dif
+                result[deaIdx][kEntityIdx] = dea
+                result[macdIdx][kEntityIdx] = macd
+
+                preEmaShort = emaShort
+                preEmaLong = emaLong
+            }
+        }
+        return result
+    }
+
+}

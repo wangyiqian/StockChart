@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:hardwareAccelerated="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <!-- 各种选项按钮 -->
+        <include layout="@layout/layout_sample2_option_buttons" />
+
+        <!-- 长按时显示信息 -->
+        <TextView
+            android:id="@+id/tv_highlight_info"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:gravity="left|center_vertical"
+            android:textColor="#7A7A7A"
+            android:textSize="8sp"
+            android:lines="1"/>
+
+        <com.github.wangyiqian.stockchart.StockChart
+            android:id="@+id/stock_chart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+</ScrollView>
