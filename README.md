@@ -19,8 +19,10 @@
         - [示例](#%E7%A4%BA%E4%BE%8B)
 - [示例APK下载](#%E7%A4%BA%E4%BE%8Bapk%E4%B8%8B%E8%BD%BD)
 - [反馈](#%E5%8F%8D%E9%A6%88)
-- [请我喝杯咖啡呗](#%E8%AF%B7%E6%88%91%E5%96%9D%E6%9D%AF%E5%92%96%E5%95%A1%E5%91%97)
+- [请作者喝杯咖啡呗](#%E8%AF%B7%E4%BD%9C%E8%80%85%E5%96%9D%E6%9D%AF%E5%92%96%E5%95%A1%E5%91%97)
 - [Licenses](#licenses)
+
+[![](https://jitpack.io/v/wangyiqian/StockChart.svg)](https://jitpack.io/#wangyiqian/StockChart)
 
 # 介绍
 StockChart是一款高扩展性、高性能的股票图开发库，轻松完成各种子图的组合，还能灵活的定制自己的子图满足复杂的业务需求。
@@ -38,6 +40,18 @@ StockChart是一款高扩展性、高性能的股票图开发库，轻松完成�
 2. 任何变化（如K线数据增加）都是通过修改配置去更新。全局配置：`StockChartConfig`，每个子图也有自己的配置如：`KChartConfig`、`KDJChartConfig`。
 ### 基本使用
 1. 集成
+```
+allprojects {
+    repositories {
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
+```
+dependencies {
+    implementation 'com.github.wangyiqian:StockChart:1.0.1'
+}
+```
 2. 布局文件加入StockChart布局
 ```
 <com.github.wangyiqian.stockchart.StockChart
