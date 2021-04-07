@@ -4,6 +4,11 @@
 - [用法](#%E7%94%A8%E6%B3%95)
     - [先明白几个概念](#%E5%85%88%E6%98%8E%E7%99%BD%E5%87%A0%E4%B8%AA%E6%A6%82%E5%BF%B5)
     - [基本使用](#%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8)
+      - [1. 集成](#1-%E9%9B%86%E6%88%90)
+      - [2. 布局文件加入StockChart布局](#2-%E5%B8%83%E5%B1%80%E6%96%87%E4%BB%B6%E5%8A%A0%E5%85%A5stockchart%E5%B8%83%E5%B1%80)
+      - [3. 设置`StockChart`的配置](#3-%E8%AE%BE%E7%BD%AEstockchart%E7%9A%84%E9%85%8D%E7%BD%AE)
+      - [4. 添加子图：将需要的子图的工厂添加给全局配置即可，如以下将添加三个子图：K线图、时间条、MACD指标图](#4-%E6%B7%BB%E5%8A%A0%E5%AD%90%E5%9B%BE%E5%B0%86%E9%9C%80%E8%A6%81%E7%9A%84%E5%AD%90%E5%9B%BE%E7%9A%84%E5%B7%A5%E5%8E%82%E6%B7%BB%E5%8A%A0%E7%BB%99%E5%85%A8%E5%B1%80%E9%85%8D%E7%BD%AE%E5%8D%B3%E5%8F%AF%E5%A6%82%E4%BB%A5%E4%B8%8B%E5%B0%86%E6%B7%BB%E5%8A%A0%E4%B8%89%E4%B8%AA%E5%AD%90%E5%9B%BEk%E7%BA%BF%E5%9B%BE%E6%97%B6%E9%97%B4%E6%9D%A1macd%E6%8C%87%E6%A0%87%E5%9B%BE)
+      - [5. 将K线数据传给全局配置](#5-%E5%B0%86k%E7%BA%BF%E6%95%B0%E6%8D%AE%E4%BC%A0%E7%BB%99%E5%85%A8%E5%B1%80%E9%85%8D%E7%BD%AE)
     - [使用进阶](#%E4%BD%BF%E7%94%A8%E8%BF%9B%E9%98%B6)
     - [所有配置](#%E6%89%80%E6%9C%89%E9%85%8D%E7%BD%AE)
         - [全局配置`StockChartConfig`](#%E5%85%A8%E5%B1%80%E9%85%8D%E7%BD%AEstockchartconfig)
@@ -22,8 +27,6 @@
 - [请作者喝杯咖啡呗](#%E8%AF%B7%E4%BD%9C%E8%80%85%E5%96%9D%E6%9D%AF%E5%92%96%E5%95%A1%E5%91%97)
 - [Licenses](#licenses)
 
-[![](https://jitpack.io/v/wangyiqian/StockChart.svg)](https://jitpack.io/#wangyiqian/StockChart)
-
 # 介绍
 StockChart是一款高扩展性、高性能的股票图开发库，轻松完成各种子图的组合，还能灵活的定制自己的子图满足复杂的业务需求。
 ### 特点
@@ -39,33 +42,33 @@ StockChart是一款高扩展性、高性能的股票图开发库，轻松完成�
 1. 所有要显示的图（内置的子图与自定义的子图）都是`StockChart`的子图。内置的子图：`KChart`（K线图）、`TimeBarChart`（时间条图）、`VolumeChart`（成交量图）、`MacdChart`（MACD指标图）、`KdjChart`（KDJ指标图）
 2. 任何变化（如K线数据增加）都是通过修改配置去更新。全局配置：`StockChartConfig`，每个子图也有自己的配置如：`KChartConfig`、`KDJChartConfig`。
 ### 基本使用
-1. 集成
-```
+#### 1. 集成
+```groovy
 allprojects {
     repositories {
         maven { url 'https://jitpack.io' }
     }
 }
 ```
-```
+```groovy
 dependencies {
     implementation 'com.github.wangyiqian:StockChart:1.0.1'
 }
 ```
-2. 布局文件加入StockChart布局
-```
+#### 2. 布局文件加入StockChart布局
+```xml
 <com.github.wangyiqian.stockchart.StockChart
     android:id="@+id/stock_chart"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"/>
 ```
-3. 设置`StockChart`的配置
-```
+#### 3. 设置`StockChart`的配置
+```kotlin
 val stockChartConfig = StockChartConfig()
 stock_chart.setConfig(stockChartConfig)
 ```
-4. 添加子图：将需要的子图的工厂添加给全局配置即可，如以下将添加三个子图：K线图、时间条、MACD指标图
-```
+#### 4. 添加子图：将需要的子图的工厂添加给全局配置即可，如以下将添加三个子图：K线图、时间条、MACD指标图
+```kotlin
 // K线图的配置与工厂
 val kChartConfig = KChartConfig()
 val kChartFactory = KChartFactory(stockChart = stock_chart, childChartConfig = kChartConfig)
@@ -81,8 +84,8 @@ val macdChartFactory = MacdChartFactory(stockChart = stock_chart, childChartConf
 // 将需要显示的子图的工厂加入全局配置
 stockChartConfig.addChildCharts(kChartFactory, timeBarFactory, macdChartFactory)
 ```
-5. 将K线数据传给全局配置
-```
+#### 5. 将K线数据传给全局配置
+```kotlin
 // 加载模拟数据
 Data.loadDayData(this, 0) { kEntities: List<IKEntity> ->
     
@@ -258,11 +261,11 @@ Data.loadDayData(this, 0) { kEntities: List<IKEntity> ->
 
 ### 如何自定义子图
 ##### 三步走
-1. 提供子图的配置配，继承自`BaseChildChartConfig`
-2. 提供子图配，实现UI绘制细节，继承自`BaseChildChart`
-3. 提供子图的生产工厂类，用于实例化子图，继承子`AbsChildChartFactory`
+1. 提供子图的配置类，用于定义子图的各种配置，需要继承`BaseChildChartConfig`
+2. 提供子图的UI类，用于绘制UI细节，需要继承`BaseChildChart`
+3. 提供子图的工厂类，用于实例化子图，需要继承`AbsChildChartFactory`
 ##### 示例
-```
+```kotlin
 class CustomChartConfig(  
     height: Int = DEFAULT_CHILD_CHART_HEIGHT,  
   marginTop: Int = DEFAULT_CHILD_CHART_MARGIN_TOP,  
@@ -280,62 +283,56 @@ class CustomChartConfig(
   chartMainDisplayAreaPaddingBottom  
 )
 ```
-```
-class CustomChart(  
-    stockChart: IStockChart,  
-  chartConfig: CustomChartConfig  
-) : BaseChildChart<CustomChartConfig>(stockChart, chartConfig) {  
-    override fun onKEntitiesChanged() {  
+```kotlin
+class CustomChart(
+    stockChart: IStockChart,
+    chartConfig: CustomChartConfig
+) : BaseChildChart<CustomChartConfig>(stockChart, chartConfig) {
+    
+    override fun onKEntitiesChanged() {
         // 如果需要的话，在这里处理K先数据变化后要做的事  
-  }  
-  
-    override fun getYValueRange(startIndex: Int, endIndex: Int, result: FloatArray) {  
-        // ...  
- // 提供指定下标范围内[startIndex ~ endIndex]，y轴逻辑坐标的范围值  }  
-  
-    override fun preDrawBackground(canvas: Canvas) {  
-        // ...   
-        // 绘制细节  
-  }  
-  
-    override fun drawBackground(canvas: Canvas) {  
-        // ...   
-        // 绘制细节  
-  }  
-  
-    override fun preDrawData(canvas: Canvas) {  
-        // ...   
-        // 绘制细节  
-  }  
-  
-    override fun drawData(canvas: Canvas) {  
-        // ...   
-        // 绘制细节  
-  }  
-  
-    override fun preDrawHighlight(canvas: Canvas) {  
-        // ...   
-        // 绘制细节  
-  }  
-  
-    override fun drawHighlight(canvas: Canvas) {  
-        // ...   
-        // 绘制细节  
-  }  
-  
-    override fun drawAddition(canvas: Canvas) {  
-        // ...   
-        // 绘制细节  
-  }  
+    }
+
+    override fun getYValueRange(startIndex: Int, endIndex: Int, result: FloatArray) {
+        // 提供指定下标范围内[startIndex ~ endIndex]，y轴逻辑坐标的范围值  
+    }  
+
+    override fun preDrawBackground(canvas: Canvas) {
+        // ... 绘制细节 
+    }
+
+    override fun drawBackground(canvas: Canvas) {
+        // ... 绘制细节  
+    }
+
+    override fun preDrawData(canvas: Canvas) {
+        // ... 绘制细节
+    }
+
+    override fun drawData(canvas: Canvas) {
+        // ... 绘制细节
+    }
+
+    override fun preDrawHighlight(canvas: Canvas) {
+        // ... 绘制细节 
+    }
+
+    override fun drawHighlight(canvas: Canvas) {
+        // ... 绘制细节 
+    }
+
+    override fun drawAddition(canvas: Canvas) {
+        // ... 绘制细节 
+    }
 }
 ```
-```
+```kotlin
 class CustomChartFactory(stockChart: IStockChart, childChartConfig: CustomChartConfig) :  
     AbsChildChartFactory<CustomChartConfig>(stockChart, childChartConfig) {  
     override fun createChart() = CustomChart(stockChart, childChartConfig)  
 }
 ```
-```
+```kotlin
 // 自定义子图的使用
 
 // 自定义子图的配置与工厂
@@ -362,7 +359,7 @@ http://yiqian.wang:8081/stock_chart.apk
 
 # 请作者喝杯咖啡呗
 您的支持是我最大的动力！
-<img src=img/donate.jpg/>
+![donate.jpg](img/donate.jpg)
 
 # Licenses
 Copyright 2020 wangyiqian
