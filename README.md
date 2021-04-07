@@ -39,8 +39,13 @@ StockChart是一款高扩展性、高性能的股票图开发库，轻松完成�
 
 # 用法
 ### 先明白几个概念
-1. 所有要显示的图（内置的子图与自定义的子图）都是`StockChart`的子图。内置的子图：`KChart`（K线图）、`TimeBarChart`（时间条图）、`VolumeChart`（成交量图）、`MacdChart`（MACD指标图）、`KdjChart`（KDJ指标图）
-2. 任何变化（如K线数据增加）都是通过修改配置去更新。全局配置：`StockChartConfig`，每个子图也有自己的配置如：`KChartConfig`、`KDJChartConfig`。
+* 所有要显示的图（内置的子图与自定义的子图）都是`StockChart`的子图。内置的子图：`KChart`（K线图）、`TimeBarChart`（时间条图）、`VolumeChart`（成交量图）、`MacdChart`（MACD指标图）、`KdjChart`（KDJ指标图）
+* 任何变化（如K线数据增加）都是通过修改配置去更新。全局配置：`StockChartConfig`，每个子图也有自己的配置如：`KChartConfig`、`KDJChartConfig`。
+* 逻辑坐标：原点是左下角，x轴从左到右变大，y轴从下到上变大。是最接近普通人理解股票图的坐标。
+    * 逻辑坐标的x轴：固定规则，是这个数据集的下标，即从0开始，刻度为1。最小最大值范围是[0, kEntities.size - 1]。
+    * 逻辑坐标的y轴：由子类各自根据实际情况提供。比如成交量图每个数据对应y轴上的值应该是成交量，比如K线图每个数据对应y轴上的值应该是价格。
+* 实际坐标：就是Android View的坐标体系，即最终绘制时View认识的坐标，原点是左上角，x轴从左到右变大，y轴从上到下变大。
+
 ### 基本使用
 #### 1. 集成
 ```groovy
