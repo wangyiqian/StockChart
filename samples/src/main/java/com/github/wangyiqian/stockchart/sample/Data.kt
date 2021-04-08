@@ -14,6 +14,7 @@
 package com.github.wangyiqian.stockchart.sample
 
 import android.content.Context
+import android.util.JsonReader
 import android.util.Log
 import com.github.wangyiqian.stockchart.entities.EmptyKEntity
 import com.github.wangyiqian.stockchart.entities.IKEntity
@@ -156,10 +157,8 @@ object Data {
     }
 
     private fun loadDataFromAsserts(context: Context, fileName: String): MutableList<IKEntity> {
-        var inputStream: InputStream? = null
         val result = mutableListOf<IKEntity>()
-        try {
-            inputStream = context.resources.assets.open(fileName)
+        context.assets.open(fileName).use { inputStream ->
             var buffer = ByteArray(inputStream.available())
             inputStream.read(buffer)
             val jsonStr = String(buffer)
@@ -176,10 +175,6 @@ object Data {
                 )
                 result.add(kEntity)
             }
-        } catch (tr: Throwable) {
-            Log.e("", "", tr)
-        } finally {
-            inputStream?.close()
         }
         return result
     }
@@ -188,10 +183,8 @@ object Data {
         context: Context,
         fileName: String
     ): MutableList<IKEntity> {
-        var inputStream: InputStream? = null
         val result = mutableListOf<IKEntity>()
-        try {
-            inputStream = context.resources.assets.open(fileName)
+        context.assets.open(fileName).use { inputStream ->
             var buffer = ByteArray(inputStream.available())
             inputStream.read(buffer)
             val jsonStr = String(buffer)
@@ -208,10 +201,6 @@ object Data {
                 )
                 result.add(kEntity)
             }
-        } catch (tr: Throwable) {
-            Log.e("", "", tr)
-        } finally {
-            inputStream?.close()
         }
         return result
     }
