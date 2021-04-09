@@ -18,7 +18,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.github.wangyiqian.stockchart.IStockChart
 import com.github.wangyiqian.stockchart.StockChart
-import com.github.wangyiqian.stockchart.entities.EmptyKEntity
 import com.github.wangyiqian.stockchart.listener.OnKEntitiesChangedListener
 
 /**

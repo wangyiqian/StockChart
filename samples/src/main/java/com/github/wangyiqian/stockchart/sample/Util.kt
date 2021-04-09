@@ -13,7 +13,6 @@
 
 package com.github.wangyiqian.stockchart.sample
 
-import com.github.wangyiqian.stockchart.util.NumberFormatUtil
 import java.text.DecimalFormat
 
 /**

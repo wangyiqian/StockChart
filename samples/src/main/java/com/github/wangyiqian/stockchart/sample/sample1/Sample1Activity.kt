@@ -18,12 +18,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.github.wangyiqian.stockchart.StockChartConfig
 import com.github.wangyiqian.stockchart.childchart.kchart.KChartConfig
 import com.github.wangyiqian.stockchart.childchart.kchart.KChartFactory
-import com.github.wangyiqian.stockchart.childchart.macdchart.MacdChartConfig
-import com.github.wangyiqian.stockchart.childchart.macdchart.MacdChartFactory
 import com.github.wangyiqian.stockchart.childchart.timebar.TimeBarConfig
 import com.github.wangyiqian.stockchart.childchart.timebar.TimeBarFactory
-import com.github.wangyiqian.stockchart.childchart.volumechart.VolumeChartConfig
-import com.github.wangyiqian.stockchart.childchart.volumechart.VolumeChartFactory
 import com.github.wangyiqian.stockchart.entities.IKEntity
 import com.github.wangyiqian.stockchart.sample.Data
 import com.github.wangyiqian.stockchart.sample.R

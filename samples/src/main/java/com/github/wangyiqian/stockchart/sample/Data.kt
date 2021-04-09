@@ -14,15 +14,12 @@
 package com.github.wangyiqian.stockchart.sample
 
 import android.content.Context
-import android.util.JsonReader
-import android.util.Log
 import com.github.wangyiqian.stockchart.entities.EmptyKEntity
 import com.github.wangyiqian.stockchart.entities.IKEntity
 import com.github.wangyiqian.stockchart.entities.KEntity
 import com.github.wangyiqian.stockchart.entities.KEntityOfLineStarter
 import kotlinx.coroutines.*
 import org.json.JSONArray
-import java.io.InputStream
 import java.text.SimpleDateFormat
 import java.util.*
 

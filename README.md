@@ -31,7 +31,7 @@
 [![](https://jitpack.io/v/wangyiqian/StockChart.svg)](https://jitpack.io/#wangyiqian/StockChart)
 
 # 介绍
-StockChart是一款高扩展性、高性能的股票图开发库，轻松完成各种子图的组合，还能灵活的定制自己的子图满足复杂的业务需求。
+StockChart是一款适用于Android的高扩展性、高性能股票图开发库，轻松完成各种子图的组合，还能灵活的定制自己的子图满足复杂的业务需求。
 ### 特点
 * 内置子图：K线图、时间条图、成交量图、MACD指标图、KDJ指标图
 * 内置指标：MA（移动平均线）、EMA（指数移动平均值）、BOLL（布林线）、MACD（指数平滑异同移动平均线）、KDJ（随机指标）
