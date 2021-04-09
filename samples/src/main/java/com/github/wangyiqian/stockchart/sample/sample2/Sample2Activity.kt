@@ -15,7 +15,6 @@ package com.github.wangyiqian.stockchart.sample.sample2
 
 import android.graphics.Color
 import android.os.Bundle
-import android.text.style.ForegroundColorSpan
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -64,7 +63,8 @@ class Sample2Activity : AppCompatActivity() {
         YTD,                // 年初至今
         ONE_MINUTE,         // 一分
         FIVE_MINUTES,       // 5分
-        SIXTY_MINUTES       // 60分
+        SIXTY_MINUTES,      // 60分
+        DAY_TIME,           // 分时
     }
 
     private var periodOptionButtons = mutableMapOf<View, Period>()
@@ -437,12 +437,18 @@ class Sample2Activity : AppCompatActivity() {
                     doAfterLoad(list, 60, TimeBarConfig.Type.SixtyMinutes())
                 }
             }
+            Period.DAY_TIME -> {
+                Data.loadDayTimeData(this) { list ->
+                    doAfterLoad(list, null, TimeBarConfig.Type.DayTime())
+                }
+            }
         }
     }
 
     private fun changePeriod(period: Period) {
         when (period) {
-            Period.FIVE_DAYS -> {
+            Period.DAY_TIME, Period.FIVE_DAYS -> {
+                kChartConfig.showAvgLine = true // 显示分时均线
                 stockChartConfig.scaleAble = false
                 stockChartConfig.scrollAble = false
                 stockChartConfig.overScrollAble = false
@@ -450,6 +456,7 @@ class Sample2Activity : AppCompatActivity() {
                 kChartConfig.kChartType = KChartConfig.KChartType.LINE()
             }
             Period.YEAR, Period.QUARTER, Period.FIVE_YEARS -> {
+                kChartConfig.showAvgLine = false
                 stockChartConfig.scaleAble = true
                 stockChartConfig.scrollAble = true
                 stockChartConfig.overScrollAble = false
@@ -457,13 +464,16 @@ class Sample2Activity : AppCompatActivity() {
                 kChartConfig.kChartType = kChartType
             }
             Period.YTD -> {
+                kChartConfig.showAvgLine = false
                 stockChartConfig.scaleAble = false
                 stockChartConfig.scrollAble = false
                 stockChartConfig.overScrollAble = false
                 kChartConfig.index = kChartIndex
                 kChartConfig.kChartType = kChartType
+
             }
             else -> {
+                kChartConfig.showAvgLine = false
                 stockChartConfig.scaleAble = true
                 stockChartConfig.scrollAble = true
                 stockChartConfig.overScrollAble = true
@@ -478,8 +488,7 @@ class Sample2Activity : AppCompatActivity() {
 
     private fun changeKChartType(kChartType: KChartConfig.KChartType) {
 
-        if (period == Period.FIVE_DAYS && kChartType !is KChartConfig.KChartType.LINE) {
-            // 这个period只支持折线图
+        if (period == Period.DAY_TIME || period == Period.FIVE_DAYS) {
             return
         }
 
@@ -502,7 +511,8 @@ class Sample2Activity : AppCompatActivity() {
                 Pair(period_ytd, Period.YTD),
                 Pair(period_one_minute, Period.ONE_MINUTE),
                 Pair(period_five_minutes, Period.FIVE_MINUTES),
-                Pair(period_sixty_minutes, Period.SIXTY_MINUTES)
+                Pair(period_sixty_minutes, Period.SIXTY_MINUTES),
+                Pair(period_day_time, Period.DAY_TIME)
             )
         )
 
@@ -541,6 +551,9 @@ class Sample2Activity : AppCompatActivity() {
             button.setOnClickListener {
                 when (index::class) {
                     Index.MA::class, Index.EMA::class, Index.BOLL::class -> { // 这三个是K线图中的指标
+
+                        if (period == Period.DAY_TIME || period == Period.FIVE_DAYS) return@setOnClickListener
+
                         kChartIndex =
                             if (kChartIndex != null && kChartIndex!!::class == index::class) {
                                 null

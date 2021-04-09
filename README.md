@@ -180,6 +180,9 @@ Data.loadDayData(this, 0) { kEntities: List<IKEntity> ->
 |indexColors|指标线的颜色|
 |leftLabelConfig|左侧标签配置|
 |rightLabelConfig|右侧标签配置|
+|showAvgLine|是否显示分时均线。若需要显示，K线数据需带有分时均线价格。|
+|avgLineColor|分时均线颜色|
+|avgLineStrokeWidth|分时均线宽度|
 
 ##### 时间条图配置`TimeBarConfig`
 |字段|描述|

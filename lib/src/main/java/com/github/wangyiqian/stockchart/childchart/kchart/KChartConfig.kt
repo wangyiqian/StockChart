@@ -13,6 +13,7 @@
 
 package com.github.wangyiqian.stockchart.childchart.kchart
 
+import androidx.annotation.ColorInt
 import com.github.wangyiqian.stockchart.*
 import com.github.wangyiqian.stockchart.childchart.base.*
 import com.github.wangyiqian.stockchart.index.Index
@@ -74,7 +75,13 @@ open class KChartConfig(
     // 左侧标签配置
     var leftLabelConfig: LabelConfig? = DEFAULT_K_CHART_LEFT_LABEL_CONFIG,
     // 右侧标签配置
-    var rightLabelConfig: LabelConfig? = null
+    var rightLabelConfig: LabelConfig? = null,
+    // 是否显示分时均线。若需要显示，K线数据需带有分时均线价格。
+    var showAvgLine: Boolean = false,
+    // 分时均线颜色
+    var avgLineColor: Int = DEFAULT_AVG_LINE_COLOR,
+    // 分时均线宽度
+    var avgLineStrokeWidth: Float = DEFAULT_AVG_LINE_WIDTH
 ) : BaseChildChartConfig(
     height,
     marginTop,

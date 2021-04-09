@@ -100,6 +100,13 @@
             android:layout_height="match_parent"
             android:text="60分" />
 
+        <TextView
+            android:id="@+id/period_day_time"
+            style="@style/OptionButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="分时" />
+
     </com.google.android.flexbox.FlexboxLayout>
 
     <View

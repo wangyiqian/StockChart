@@ -33,6 +33,16 @@ object Data {
 
     private const val MOCK_DELAY = 0L // 模拟耗时
 
+    fun loadDayTimeData(context: Context, callback: (List<IKEntity>) -> Unit) {
+        MainScope().launch {
+            val deferred = async {
+                delay(MOCK_DELAY)
+                loadDataFromTimeDataAsserts(context, "mock_time_data_day.txt")
+            }
+            callback.invoke(deferred.await())
+        }
+    }
+
     fun loadDayData(context: Context, page: Int, callback: (List<IKEntity>) -> Unit) {
 
         if (page > 2 || page < 0) {
@@ -194,7 +204,8 @@ object Data {
                     item.getString("price").toFloat(),
                     item.getString("price").toFloat(),
                     item.getLong("volume"),
-                    item.getLong("time")
+                    item.getLong("time"),
+                    item.getString("avgPrice").toFloat()
                 )
                 result.add(kEntity)
             }

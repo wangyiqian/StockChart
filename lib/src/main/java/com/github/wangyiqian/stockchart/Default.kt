@@ -86,6 +86,8 @@ val DEFAULT_K_CHART_LEFT_LABEL_CONFIG =
         15f
     )
 val DEFAULT_K_CHART_HIGHLIGHT_LABEL_LEFT = HighlightLabelConfig()
+const val DEFAULT_AVG_LINE_WIDTH = 2f
+val DEFAULT_AVG_LINE_COLOR = Color.parseColor("#FF7B11")
 
 
 // Volume图

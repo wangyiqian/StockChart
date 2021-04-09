@@ -69,6 +69,7 @@ class TimeBar(stockChart: IStockChart, chartConfig: TimeBarConfig) :
             is TimeBarConfig.Type.OneMinute -> drawLabelOfOneMinuteType(canvas)
             is TimeBarConfig.Type.FiveMinutes -> drawLabelOfFiveMinutesType(canvas)
             is TimeBarConfig.Type.SixtyMinutes -> drawLabelOfSixtyMinutesType(canvas)
+            is TimeBarConfig.Type.DayTime -> drawLabelOfDayTimeType(canvas)
         }
     }
 
@@ -562,6 +563,42 @@ class TimeBar(stockChart: IStockChart, chartConfig: TimeBarConfig) :
 
             lastDrawLabel = label
             lastDrawRight = x + labelWidth
+        }
+    }
+
+    private fun drawLabelOfDayTimeType(canvas: Canvas) {
+        val labelMinSpace = DimensionUtil.dp2px(context, 5f)
+
+        fun drawLabel(idx: Int) {
+            val kEntity = getKEntities()[idx]
+            val time = kEntity.getTime()
+            tmpDate.time = time
+            val label = chartConfig.type.labelDateFormat.format(tmpDate)
+
+            val labelWidth = labelPaint.measureText(label)
+            val labelHalfWidth = labelWidth / 2
+
+            tmp2FloatArray[0] = idx + 0.5f
+            tmp2FloatArray[1] = 0f
+            mapPointsValue2Real(tmp2FloatArray)
+            val centerRealX = tmp2FloatArray[0]
+
+            var x = centerRealX - labelHalfWidth
+            if (x + labelWidth > getChartDisplayArea().right - labelMinSpace) x =
+                getChartDisplayArea().right - labelMinSpace - labelWidth
+            if (x < getChartDisplayArea().left + labelMinSpace) x =
+                getChartDisplayArea().left + labelMinSpace
+            val y =
+                getChartDisplayArea().top + getChartDisplayArea().height() / 2 + (tmpFontMetrics.bottom - tmpFontMetrics.top) / 2 - tmpFontMetrics.bottom
+            canvas.drawText(label, x, y, labelPaint)
+        }
+
+        stockChart.findFirstNotEmptyKEntityIdxInDisplayArea()?.let { idx ->
+            drawLabel(idx)
+        }
+
+        stockChart.findLastNotEmptyKEntityIdxInDisplayArea()?.let { idx ->
+            drawLabel(idx)
         }
     }
 

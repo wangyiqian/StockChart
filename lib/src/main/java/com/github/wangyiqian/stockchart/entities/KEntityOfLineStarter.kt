@@ -19,7 +19,7 @@ package com.github.wangyiqian.stockchart.entities
  * @author wangyiqian E-mail: wangyiqian9891@gmail.com
  * @version 创建时间: 2021/2/22
  */
-class KEntityOfLineStarter(val kEntity: IKEntity) : IKEntity {
+class KEntityOfLineStarter(private val kEntity: IKEntity) : IKEntity {
 
     override fun getHighPrice() = kEntity.getHighPrice()
 
@@ -32,4 +32,6 @@ class KEntityOfLineStarter(val kEntity: IKEntity) : IKEntity {
     override fun getVolume() = kEntity.getVolume()
 
     override fun getTime() = kEntity.getTime()
+
+    override fun getAvgPrice() = kEntity.getAvgPrice()
 }

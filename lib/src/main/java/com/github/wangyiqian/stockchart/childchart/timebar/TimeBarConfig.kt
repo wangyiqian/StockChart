@@ -110,6 +110,11 @@ class TimeBarConfig(
             labelDateFormat: DateFormat = SimpleDateFormat("HH:mm"),
             highlightLabelDateFormat: DateFormat = SimpleDateFormat("yyyy/MM/dd HH:mm")
         ) : Type(labelDateFormat, highlightLabelDateFormat)
+
+        class DayTime(
+            labelDateFormat: DateFormat = SimpleDateFormat("HH:mm"),
+            highlightLabelDateFormat: DateFormat = SimpleDateFormat("HH:mm")
+        ) : Type(labelDateFormat, highlightLabelDateFormat)
     }
 
 }

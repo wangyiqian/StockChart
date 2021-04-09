@@ -25,7 +25,8 @@ open class KEntity(
     private val openPrice: Float,
     private val closePrice: Float,
     private val volume: Long,
-    private val time: Long
+    private val time: Long,
+    private val avgPrice: Float? = null
 ) : IKEntity {
 
     override fun getHighPrice() = highPrice
@@ -39,4 +40,6 @@ open class KEntity(
     override fun getVolume() = volume
 
     override fun getTime() = time
+
+    override fun getAvgPrice() = avgPrice
 }

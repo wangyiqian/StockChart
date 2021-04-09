@@ -60,6 +60,9 @@ open class KChart(
     private val indexTextPaint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val highestAndLowestLabelPaint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val labelPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val avgPriceLinePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        strokeCap = Paint.Cap.ROUND
+    }
 
     private var indexList: List<List<Float?>>? = null
     private var lastCalculateIndexType: Index? = null
@@ -119,8 +122,21 @@ open class KChart(
                         yMax = maxBy { it.getHighPrice() }?.getHighPrice() ?: 0f
                     }
                     else -> {
-                        yMin = minBy { it.getClosePrice() }?.getClosePrice() ?: 0f
-                        yMax = maxBy { it.getClosePrice() }?.getClosePrice() ?: 0f
+                        forEachIndexed { index, kEntity ->
+                            if (index == 0) {
+                                yMin = kEntity.getClosePrice()
+                                yMax = kEntity.getClosePrice()
+                            } else {
+                                yMin = min(yMin, kEntity.getClosePrice())
+                                yMax = max(yMax, kEntity.getClosePrice())
+                            }
+                            kEntity.getAvgPrice()?.let { avgPrice ->
+                                if (chartConfig.showAvgLine) {
+                                    yMin = min(yMin, avgPrice)
+                                    yMax = max(yMax, avgPrice)
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -528,7 +544,8 @@ open class KChart(
         chartConfig.index?.let { index ->
             indexList?.let { indexList ->
                 val highlight = getHighlight()
-                var indexIdx = highlight?.getIdx() ?: stockChart.findLastNotEmptyKEntityIdxInDisplayArea()
+                var indexIdx =
+                    highlight?.getIdx() ?: stockChart.findLastNotEmptyKEntityIdxInDisplayArea()
                 indexTextPaint.textSize = index.textSize
                 var left = index.textMarginLeft
                 val top = index.textMarginTop
@@ -785,6 +802,36 @@ open class KChart(
                 lineKChartLinePaint
             )
             preIdx = idx
+        }
+        if (chartConfig.showAvgLine) {
+            avgPriceLinePaint.strokeWidth = chartConfig.avgLineStrokeWidth
+            avgPriceLinePaint.color = chartConfig.avgLineColor
+            var preAvgIdx = -1
+            for (idx in getKEntities().indices) {
+                if (getKEntities()[idx] is EmptyKEntity || getKEntities()[idx].getAvgPrice() == null) {
+                    preAvgIdx = -1
+                    continue
+                }
+
+                if (preAvgIdx == -1 || getKEntities()[idx] is KEntityOfLineStarter) {
+                    preAvgIdx = idx
+                    continue
+                }
+
+                tmp4FloatArray[0] = preAvgIdx + 0.5f
+                tmp4FloatArray[1] = getKEntities()[preAvgIdx].getAvgPrice()!!
+                tmp4FloatArray[2] = idx + 0.5f
+                tmp4FloatArray[3] = getKEntities()[idx].getAvgPrice()!!
+                mapPointsValue2Real(tmp4FloatArray)
+                canvas.drawLine(
+                    tmp4FloatArray[0],
+                    tmp4FloatArray[1],
+                    tmp4FloatArray[2],
+                    tmp4FloatArray[3],
+                    avgPriceLinePaint
+                )
+                preAvgIdx = idx
+            }
         }
     }
 

@@ -24,4 +24,9 @@ interface IKEntity {
     fun getClosePrice(): Float
     fun getVolume(): Long
     fun getTime(): Long
+
+    /**
+     * 分时均线价格
+     */
+    fun getAvgPrice(): Float?
 }
