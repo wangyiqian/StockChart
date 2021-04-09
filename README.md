@@ -42,7 +42,7 @@ StockChart是一款适用于Android的高扩展性、高性能股票图开发库
 (若图片未显示，可能需要科学上网。)
 
 # 插一条内推广告
-**阿里巴巴** 、**老虎集团（老虎证券）** 2021各岗位内推可发简历到我邮箱:wangyiqian9891@gmail.com
+**阿里巴巴** 、**老虎集团（老虎证券）** 2021各岗位内推，可发简历到我邮箱:wangyiqian9891@gmail.com。
 
 # 用法
 ### 先明白几个概念
@@ -79,7 +79,7 @@ dependencies {
 val stockChartConfig = StockChartConfig()
 stock_chart.setConfig(stockChartConfig)
 ```
-#### 4. 添加子图：将需要的子图的工厂添加给全局配置即可，如以下将添加三个子图：K线图、时间条、MACD指标图
+#### 4. 添加子图，将需要的子图的工厂添加给全局配置即可，如以下将添加三个子图：K线图、时间条、MACD指标图
 ```kotlin
 // K线图的配置与工厂
 val kChartConfig = KChartConfig()
@@ -370,7 +370,7 @@ http://yiqian.wang:8081/stock_chart.apk
 我的邮箱：wangyiqian9891@gmail.com
 
 # 请作者喝杯咖啡呗
-您的支持是我最大的动力！
+**好心人，行行好，给我点动力呗，呜呜呜~~**
 ![donate.jpg](img/donate.jpg)
 
 # Licenses
