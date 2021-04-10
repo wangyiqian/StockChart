@@ -47,6 +47,7 @@ object Data {
 
         if (page > 2 || page < 0) {
             callback.invoke(listOf())
+            return
         }
 
         loadData(context, "mock_data_day_page_$page.txt", callback)
@@ -78,6 +79,7 @@ object Data {
     fun loadWeekData(context: Context, page: Int, callback: (List<IKEntity>) -> Unit) {
         if (page > 1 || page < 0) {
             callback.invoke(listOf())
+            return
         }
 
         loadData(context, "mock_data_week_page_$page.txt", callback)
@@ -86,6 +88,7 @@ object Data {
     fun loadMonthData(context: Context, page: Int, callback: (List<IKEntity>) -> Unit) {
         if (page > 0 || page < 0) {
             callback.invoke(listOf())
+            return
         }
 
         loadData(context, "mock_data_month_page_$page.txt", callback)
@@ -128,6 +131,7 @@ object Data {
     fun loadOneMinuteData(context: Context, page: Int, callback: (List<IKEntity>) -> Unit) {
         if (page > 4 || page < 0) {
             callback.invoke(listOf())
+            return
         }
 
         loadData(context, "mock_data_one_minute_page_$page.txt", callback)
@@ -136,6 +140,7 @@ object Data {
     fun loadFiveMinutesData(context: Context, page: Int, callback: (List<IKEntity>) -> Unit) {
         if (page > 3 || page < 0) {
             callback.invoke(listOf())
+            return
         }
 
         loadData(context, "mock_data_five_minutes_page_$page.txt", callback)
@@ -144,6 +149,7 @@ object Data {
     fun loadSixtyMinutesData(context: Context, page: Int, callback: (List<IKEntity>) -> Unit) {
         if (page > 3 || page < 0) {
             callback.invoke(listOf())
+            return
         }
 
         loadData(context, "mock_data_sixty_minutes_page_$page.txt", callback)
