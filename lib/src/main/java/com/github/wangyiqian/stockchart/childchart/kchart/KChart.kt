@@ -107,7 +107,7 @@ open class KChart(
 
     override fun getYValueRange(startIndex: Int, endIndex: Int, result: FloatArray) {
 
-        if (chartConfig.index != null && chartConfig.index != lastCalculateIndexType) {
+        if (chartConfig.index == null ||  chartConfig.index != lastCalculateIndexType) {
             calculateIndexList()
         }
 
