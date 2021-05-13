@@ -17,7 +17,6 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import com.github.wangyiqian.stockchart.IStockChart
 import com.github.wangyiqian.stockchart.childchart.base.BaseChildChart
-import kotlin.math.round
 
 /**
  * @author wangyiqian E-mail: wangyiqian9891@gmail.com
@@ -118,7 +117,8 @@ class KdjChart(stockChart: IStockChart, chartConfig: KdjChartConfig) :
         chartConfig.index?.let { index ->
             indexList?.let { indexList ->
                 val highlight = getHighlight()
-                var indexIdx = highlight?.getIdx() ?: stockChart.findLastNotEmptyKEntityIdxInDisplayArea()
+                var indexIdx =
+                    highlight?.getIdx() ?: stockChart.findLastNotEmptyKEntityIdxInDisplayArea()
                 indexTextPaint.textSize = index.textSize
                 var left = index.textMarginLeft
                 val top = index.textMarginTop

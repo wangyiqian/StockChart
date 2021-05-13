@@ -18,6 +18,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.github.wangyiqian.stockchart.IStockChart
 import com.github.wangyiqian.stockchart.StockChart
+import com.github.wangyiqian.stockchart.entities.GestureEvent
 import com.github.wangyiqian.stockchart.listener.OnKEntitiesChangedListener
 
 /**
@@ -242,4 +243,5 @@ abstract class BaseChildChart<C : BaseChildChartConfig> @JvmOverloads constructo
 
     override fun getConfig() = chartConfig
 
+    override fun onTap(event: GestureEvent) {}
 }

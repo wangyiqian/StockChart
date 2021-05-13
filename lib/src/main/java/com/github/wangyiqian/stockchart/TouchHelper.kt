@@ -150,6 +150,11 @@ class TouchHelper(private val stockChart: IStockChart, private val callBack: Cal
         return true
     }
 
+    override fun onSingleTapConfirmed(e: MotionEvent): Boolean {
+        callBack.onTap(e.x, e.y)
+        return super.onSingleTapConfirmed(e)
+    }
+
     interface CallBack {
 
         /**
@@ -181,5 +186,10 @@ class TouchHelper(private val stockChart: IStockChart, private val callBack: Cal
          * 手指离开屏幕
          */
         fun onTouchLeave()
+
+        /**
+         * 点击
+         */
+        fun onTap(x: Float, y: Float)
     }
 }

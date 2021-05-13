@@ -17,6 +17,7 @@ import android.graphics.Matrix
 import android.graphics.Path
 import android.graphics.RectF
 import android.view.View
+import com.github.wangyiqian.stockchart.entities.GestureEvent
 import com.github.wangyiqian.stockchart.entities.Highlight
 import com.github.wangyiqian.stockchart.entities.IKEntity
 
@@ -85,4 +86,9 @@ interface IChildChart {
      * 获取对应配置
      */
     fun getConfig(): BaseChildChartConfig
+
+    /**
+     * 点击
+     */
+    fun onTap(event: GestureEvent)
 }

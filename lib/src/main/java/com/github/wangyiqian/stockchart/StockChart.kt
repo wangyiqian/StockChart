@@ -23,6 +23,7 @@ import android.view.ViewGroup
 import androidx.annotation.UiThread
 import com.github.wangyiqian.stockchart.childchart.base.IChildChart
 import com.github.wangyiqian.stockchart.entities.EmptyKEntity
+import com.github.wangyiqian.stockchart.entities.GestureEvent
 import com.github.wangyiqian.stockchart.entities.Highlight
 import com.github.wangyiqian.stockchart.listener.OnKEntitiesChangedListener
 import com.github.wangyiqian.stockchart.util.checkMainThread
@@ -123,7 +124,7 @@ class StockChart @JvmOverloads constructor(context: Context, attrs: AttributeSet
     }
 
     override fun findLastNotEmptyKEntityIdxInDisplayArea(): Int? {
-        if(childCharts.isEmpty()) return null
+        if (childCharts.isEmpty()) return null
         val chartDisplayArea = childCharts[0].getChartDisplayArea()
         tmp4FloatArray[0] = chartDisplayArea.left
         tmp4FloatArray[1] = 0f
@@ -143,7 +144,7 @@ class StockChart @JvmOverloads constructor(context: Context, attrs: AttributeSet
     }
 
     override fun findFirstNotEmptyKEntityIdxInDisplayArea(): Int? {
-        if(childCharts.isEmpty()) return null
+        if (childCharts.isEmpty()) return null
         val chartDisplayArea = childCharts[0].getChartDisplayArea()
         tmp4FloatArray[0] = chartDisplayArea.left
         tmp4FloatArray[1] = 0f
@@ -353,6 +354,21 @@ class StockChart @JvmOverloads constructor(context: Context, attrs: AttributeSet
             notifyChanged()
             matrixHelper.checkScrollBack()
         }
+
+        override fun onTap(x: Float, y: Float) {
+            childCharts.forEach { childChart ->
+                val childChartX = x - childChart.view().left
+                val childChartY = y - childChart.view().top
+                tmp2FloatArray[0] = childChartX
+                tmp2FloatArray[1] = childChartY
+                childChart.mapPointsReal2Value(tmp2FloatArray)
+                val valueX = tmp2FloatArray[0]
+                val valueY = tmp2FloatArray[1]
+                val gestureEvent = GestureEvent(childChartX, childChartY, valueX, valueY)
+                childChart.onTap(gestureEvent)
+            }
+        }
+
     }
 
     override fun computeScroll() {
