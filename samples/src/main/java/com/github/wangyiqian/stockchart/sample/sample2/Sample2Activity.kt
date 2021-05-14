@@ -36,11 +36,11 @@ import com.github.wangyiqian.stockchart.entities.IKEntity
 import com.github.wangyiqian.stockchart.index.Index
 import com.github.wangyiqian.stockchart.listener.OnHighlightListener
 import com.github.wangyiqian.stockchart.listener.OnLoadMoreListener
-import com.github.wangyiqian.stockchart.sample.Data
+import com.github.wangyiqian.stockchart.sample.DataMock
 import com.github.wangyiqian.stockchart.sample.Util
 import com.github.wangyiqian.stockchart.sample.R
-import com.github.wangyiqian.stockchart.sample.custom.CustomChartConfig
-import com.github.wangyiqian.stockchart.sample.custom.CustomChartFactory
+import com.github.wangyiqian.stockchart.sample.sample2.custom.CustomChartConfig
+import com.github.wangyiqian.stockchart.sample.sample2.custom.CustomChartFactory
 import com.github.wangyiqian.stockchart.util.DimensionUtil
 import com.github.wangyiqian.stockchart.util.NumberFormatUtil
 import kotlinx.android.synthetic.main.activity_sample2.*
@@ -383,62 +383,62 @@ class Sample2Activity : AppCompatActivity() {
 
         when (period) {
             Period.DAY -> {
-                Data.loadDayData(this, page) { list ->
+                DataMock.loadDayData(this, page) { list ->
                     doAfterLoad(list, 60, TimeBarConfig.Type.Day())
                 }
             }
             Period.FIVE_DAYS -> {
-                Data.loadFiveDayData(this) { list ->
+                DataMock.loadFiveDayData(this) { list ->
                     doAfterLoad(list, null, TimeBarConfig.Type.FiveDays())
                 }
             }
             Period.WEEK -> {
-                Data.loadWeekData(this, page) { list ->
+                DataMock.loadWeekData(this, page) { list ->
                     doAfterLoad(list, 60, TimeBarConfig.Type.Week())
                 }
             }
             Period.MONTH -> {
-                Data.loadMonthData(this, page) { list ->
+                DataMock.loadMonthData(this, page) { list ->
                     doAfterLoad(list, 60, TimeBarConfig.Type.Month())
                 }
             }
             Period.QUARTER -> {
-                Data.loadQuarterData(this) { list ->
+                DataMock.loadQuarterData(this) { list ->
                     doAfterLoad(list, null, TimeBarConfig.Type.Quarter())
                 }
             }
             Period.YEAR -> {
-                Data.loadYearData(this) { list ->
+                DataMock.loadYearData(this) { list ->
                     doAfterLoad(list, null, TimeBarConfig.Type.Year())
                 }
             }
             Period.FIVE_YEARS -> {
-                Data.loadFiveYearData(this) { list ->
+                DataMock.loadFiveYearData(this) { list ->
                     doAfterLoad(list, null, TimeBarConfig.Type.FiveYears())
                 }
             }
             Period.YTD -> {
-                Data.loadYTDData(this) { list ->
+                DataMock.loadYTDData(this) { list ->
                     doAfterLoad(list, null, TimeBarConfig.Type.YTD())
                 }
             }
             Period.ONE_MINUTE -> {
-                Data.loadOneMinuteData(this, page) { list ->
+                DataMock.loadOneMinuteData(this, page) { list ->
                     doAfterLoad(list, 60, TimeBarConfig.Type.OneMinute())
                 }
             }
             Period.FIVE_MINUTES -> {
-                Data.loadFiveMinutesData(this, page) { list ->
+                DataMock.loadFiveMinutesData(this, page) { list ->
                     doAfterLoad(list, 60, TimeBarConfig.Type.FiveMinutes())
                 }
             }
             Period.SIXTY_MINUTES -> {
-                Data.loadSixtyMinutesData(this, page) { list ->
+                DataMock.loadSixtyMinutesData(this, page) { list ->
                     doAfterLoad(list, 60, TimeBarConfig.Type.SixtyMinutes())
                 }
             }
             Period.DAY_TIME -> {
-                Data.loadDayTimeData(this) { list ->
+                DataMock.loadDayTimeData(this) { list ->
                     doAfterLoad(list, null, TimeBarConfig.Type.DayTime())
                 }
             }

@@ -38,7 +38,7 @@ StockChart是一款适用于Android的高扩展性、高性能股票图开发库
 * **支持自定义子图（以StockChart为内核，UI完全自己定制）**：若内置的子图样式（如K线图）无法满足您的需求或者您需要更多类型的指标图时，您可以通过自定义子图的方式来实现自己的子图。您甚至可以把内置的所有子图都当做你实现自定义子图的参考示例。如果您的项目是一个商业项目，可能更需要此功能来绘制自己需要的UI。**这种设计可以避免基于源码修改，满足开闭原则**。
 
 # 效果图
-<img src=img/sample.gif width=40% />
+<img src=img/sample.gif width=40% /><img src=img/active_chart_screen_shot.jpeg width=40% />
 (若图片未显示，可能需要科学上网。)
 
 # 插一条内推广告
@@ -367,9 +367,7 @@ http://yiqian.wang:8081/stock_chart.apk
 
 # 反馈
 感觉好用就点个Star呗~感激万分。
-
-任何问题欢迎在Issues区提问，或者直接联系我。
-
+任何问题欢迎在Issues区提问，或者有更多需求请联系我。
 我的邮箱：wangyiqian9891@gmail.com
 
 # 请作者喝杯咖啡呗

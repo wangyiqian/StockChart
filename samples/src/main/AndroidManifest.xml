@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright 2021 WangYiqian
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -29,10 +28,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".sample1.Sample1Activity"/>
-
-        <activity android:name=".sample2.Sample2Activity"/>
+        <activity android:name=".sample1.Sample1Activity" />
+        <activity android:name=".sample2.Sample2Activity" />
+        <activity android:name=".sample3.Sample3Activity" />
     </application>
 
 </manifest>

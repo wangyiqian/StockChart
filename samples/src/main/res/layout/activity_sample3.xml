@@ -15,24 +15,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/darker_gray"
     android:orientation="vertical">
 
-    <Button
+    <com.github.wangyiqian.stockchart.StockChart
+        android:id="@+id/stockChart"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="sample1"
-        android:text="示例一：入门" />
+        android:layout_height="wrap_content" />
 
-    <Button
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="sample2"
-        android:text="示例二：进阶" />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="sample3"
-        android:text="示例三：自定义子图-大盘异动" />
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:text="正在模拟10秒轮询加载数据..." />
 
 </LinearLayout>

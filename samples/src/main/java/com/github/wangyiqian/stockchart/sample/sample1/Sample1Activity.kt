@@ -21,7 +21,7 @@ import com.github.wangyiqian.stockchart.childchart.kchart.KChartFactory
 import com.github.wangyiqian.stockchart.childchart.timebar.TimeBarConfig
 import com.github.wangyiqian.stockchart.childchart.timebar.TimeBarFactory
 import com.github.wangyiqian.stockchart.entities.IKEntity
-import com.github.wangyiqian.stockchart.sample.Data
+import com.github.wangyiqian.stockchart.sample.DataMock
 import com.github.wangyiqian.stockchart.sample.R
 import kotlinx.android.synthetic.main.activity_sample1.*
 
@@ -52,7 +52,7 @@ class Sample1Activity : AppCompatActivity() {
         stockChartConfig.addChildCharts(kChartFactory, timeBarFactory)
 
         // 加载模拟数据
-        Data.loadDayData(this, 0) { kEntities: List<IKEntity> ->
+        DataMock.loadDayData(this, 0) { kEntities: List<IKEntity> ->
 
             // 初始显示最后50条数据
             val pageSize = 50

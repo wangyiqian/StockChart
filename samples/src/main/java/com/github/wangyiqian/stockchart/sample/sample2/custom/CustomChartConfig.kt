@@ -11,7 +11,7 @@
  *
  */
 
-package com.github.wangyiqian.stockchart.sample.custom
+package com.github.wangyiqian.stockchart.sample.sample2.custom
 
 import com.github.wangyiqian.stockchart.*
 import com.github.wangyiqian.stockchart.childchart.base.*
