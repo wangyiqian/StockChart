@@ -18,9 +18,6 @@ import com.github.wangyiqian.stockchart.entities.EmptyKEntity
 import com.github.wangyiqian.stockchart.entities.IKEntity
 import com.github.wangyiqian.stockchart.entities.KEntity
 import com.github.wangyiqian.stockchart.entities.KEntityOfLineStarter
-import com.github.wangyiqian.stockchart.sample.sample3.data.ActiveChartKEntity
-import com.github.wangyiqian.stockchart.sample.sample3.data.ActiveInfo
-import com.github.wangyiqian.stockchart.sample.sample3.data.ActiveResponse
 import kotlinx.coroutines.*
 import org.json.JSONArray
 import org.json.JSONObject
@@ -221,46 +218,6 @@ object DataMock {
             }
         }
         return result
-    }
-
-
-    fun loadActiveChartData(context: Context, fileIdx: Int, callback: (ActiveResponse) -> Unit) {
-        MainScope().launch {
-            val deferred = async {
-                loadDataFromActiveDataAsserts(context, "mock_active_data_${fileIdx}.txt")
-            }
-            callback.invoke(deferred.await())
-        }
-    }
-
-    private fun loadDataFromActiveDataAsserts(context: Context, fileName: String): ActiveResponse {
-        var dataList = mutableListOf<IKEntity>()
-        var preClosePrice = 0f
-        context.assets.open(fileName).use { inputStream ->
-            var buffer = ByteArray(inputStream.available())
-            inputStream.read(buffer)
-            val jsonStr = String(buffer)
-            val json = JSONObject(jsonStr)
-            preClosePrice = json.getString("preClosePrice").toFloat()
-            var data = json.getJSONArray("data")
-            for (i in 0 until data.length()) {
-                val item = data.getJSONObject(i)
-
-                var activeInfo: ActiveInfo? = null
-                item.optJSONObject("active")?.let {
-                    activeInfo = ActiveInfo(it.getString("industry"), it.getBoolean("red"))
-                }
-                val activeChartEntity = ActiveChartKEntity(
-                    item.getString("price").toFloat(),
-                    item.getString("avgPrice").toFloat(),
-                    item.getLong("time"),
-                    item.getLong("volume"),
-                    activeInfo
-                )
-                dataList.add(activeChartEntity)
-            }
-        }
-        return ActiveResponse(preClosePrice, dataList)
     }
 
 }

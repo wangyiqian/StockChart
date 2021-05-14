@@ -20,7 +20,6 @@ import android.view.View
 import com.github.wangyiqian.stockchart.sample.R.*
 import com.github.wangyiqian.stockchart.sample.sample1.Sample1Activity
 import com.github.wangyiqian.stockchart.sample.sample2.Sample2Activity
-import com.github.wangyiqian.stockchart.sample.sample3.Sample3Activity
 
 /**
  * @author wangyiqian E-mail: wangyiqian9891@gmail.com
@@ -39,9 +38,5 @@ class MainActivity : AppCompatActivity() {
 
     fun sample2(view: View) {
         startActivity(Intent(this, Sample2Activity::class.java))
-    }
-
-    fun sample3(view: View) {
-        startActivity(Intent(this, Sample3Activity::class.java))
     }
 }
