@@ -366,6 +366,8 @@ stock_chart.notifyChanged()
 
 http://yiqian.wang:8081/stock_chart.apk
 
+[下载](stock_chart.apk)
+
 # 反馈
 感觉好用就点个Star呗~感激万分。
 任何问题欢迎在Issues区提问，或者有更多需求请联系我。
