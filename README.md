@@ -362,11 +362,7 @@ stock_chart.notifyChanged()
 * 详细请参考samples模块，里面有自定义子图的示例。
 
 # 示例APK下载
-![StockChartApk.png](img/StockChartApk.png)
-
-http://yiqian.wang:8081/stock_chart.apk
-
-[下载](stock_chart.apk)
+[点击下载](https://github.com/wangyiqian/StockChart/raw/master/stock_chart.apk)
 
 # 反馈
 感觉好用就点个Star呗~感激万分。
