@@ -363,10 +363,8 @@ stock_chart.notifyChanged()
 
 # 示例APK下载
 ![stock_chart_apk](img/stock_chart_apk_download.png)
-[点击下载](http://yiqian.wang:8081/stock_chart.apk)
-[点击下载](https://github.com/wangyiqian/StockChart/raw/master/stock_chart.apk)
 
-http://yiqian.wang:8081/stock_chart.apk
+[点击下载](https://github.com/wangyiqian/StockChart/raw/master/stock_chart.apk)
 
 # 反馈
 感觉好用就点个Star呗~感激万分。
