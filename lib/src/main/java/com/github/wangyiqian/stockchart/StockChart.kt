@@ -301,18 +301,24 @@ class StockChart @JvmOverloads constructor(context: Context, attrs: AttributeSet
         TouchHelper.CallBack {
 
         override fun onTouchScaleBegin(focusX: Float) {
-            requestDisallowInterceptTouchEvent(true)
-            matrixHelper.handleTouchScaleBegin(focusX)
+            if (getConfig().scaleAble) {
+                requestDisallowInterceptTouchEvent(true)
+                matrixHelper.handleTouchScaleBegin(focusX)
+            }
         }
 
         override fun onTouchScaling(scaleFactor: Float) {
-            requestDisallowInterceptTouchEvent(true)
-            matrixHelper.handleTouchScale(scaleFactor)
+            if (getConfig().scaleAble) {
+                requestDisallowInterceptTouchEvent(true)
+                matrixHelper.handleTouchScale(scaleFactor)
+            }
         }
 
         override fun onHScroll(distanceX: Float) {
-            requestDisallowInterceptTouchEvent(true)
-            matrixHelper.handleTouchScroll(distanceX)
+            if (getConfig().scrollAble) {
+                requestDisallowInterceptTouchEvent(true)
+                matrixHelper.handleTouchScroll(distanceX)
+            }
         }
 
         override fun onTriggerFling(velocityX: Float, velocityY: Float) {
@@ -320,30 +326,36 @@ class StockChart @JvmOverloads constructor(context: Context, attrs: AttributeSet
         }
 
         override fun onLongPressMove(x: Float, y: Float) {
-            requestDisallowInterceptTouchEvent(true)
-            childCharts.forEach { childChart ->
-                val childChartX = x - childChart.view().left
-                val childChartY = y - childChart.view().top
-                tmp2FloatArray[0] = childChartX
-                tmp2FloatArray[1] = childChartY
-                childChart.mapPointsReal2Value(tmp2FloatArray)
-                val valueX = tmp2FloatArray[0]
-                val valueY = tmp2FloatArray[1]
-                var highlight = highlightMap[childChart]
-                if (highlight == null) {
-                    highlight = Highlight(childChartX, childChartY, valueX, valueY)
-                    highlightMap[childChart] = highlight
-                    childChart.getConfig().onHighlightListener?.onHighlightBegin()
 
-                } else {
-                    highlight.x = childChartX
-                    highlight.y = childChartY
-                    highlight.valueX = valueX
-                    highlight.valueY = valueY
+            if (getConfig().showHighlightHorizontalLine
+                || getConfig().showHighlightVerticalLine
+                || childCharts.find { it.getConfig().onHighlightListener != null } != null
+            ) {
+                requestDisallowInterceptTouchEvent(true)
+                childCharts.forEach { childChart ->
+                    val childChartX = x - childChart.view().left
+                    val childChartY = y - childChart.view().top
+                    tmp2FloatArray[0] = childChartX
+                    tmp2FloatArray[1] = childChartY
+                    childChart.mapPointsReal2Value(tmp2FloatArray)
+                    val valueX = tmp2FloatArray[0]
+                    val valueY = tmp2FloatArray[1]
+                    var highlight = highlightMap[childChart]
+                    if (highlight == null) {
+                        highlight = Highlight(childChartX, childChartY, valueX, valueY)
+                        highlightMap[childChart] = highlight
+                        childChart.getConfig().onHighlightListener?.onHighlightBegin()
+
+                    } else {
+                        highlight.x = childChartX
+                        highlight.y = childChartY
+                        highlight.valueX = valueX
+                        highlight.valueY = valueY
+                    }
+                    highlight?.apply { childChart.getConfig().onHighlightListener?.onHighlight(this) }
                 }
-                highlight?.apply { childChart.getConfig().onHighlightListener?.onHighlight(this) }
+                notifyChanged()
             }
-            notifyChanged()
         }
 
         override fun onTouchLeave() {
