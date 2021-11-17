@@ -19,4 +19,4 @@ package com.github.wangyiqian.stockchart.entities
  * @author wangyiqian E-mail: wangyiqian9891@gmail.com
  * @version 创建时间: 2021/1/29
  */
-class EmptyKEntity : KEntity(0f, 0f, 0f, 0f, 0, 0)
+open class EmptyKEntity : KEntity(0f, 0f, 0f, 0f, 0, 0)
