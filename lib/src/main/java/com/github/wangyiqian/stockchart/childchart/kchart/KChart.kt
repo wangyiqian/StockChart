@@ -649,6 +649,43 @@ open class KChart(
             )
             preIdx = idx
         }
+
+        drawAvgPriceLine(canvas)
+    }
+
+    private fun drawAvgPriceLine(canvas: Canvas){
+        if (chartConfig.showAvgLine) {
+
+            avgPriceLinePaint.strokeWidth = chartConfig.avgLineStrokeWidth
+            avgPriceLinePaint.color = chartConfig.avgLineColor
+            var preAvgIdx = -1
+            for (idx in getKEntities().indices) {
+
+                if (getKEntities()[idx] is EmptyKEntity || getKEntities()[idx].getAvgPrice() == null) {
+                    preAvgIdx = -1
+                    continue
+                }
+
+                if (preAvgIdx == -1 || getKEntities()[idx] is KEntityOfLineStarter) {
+                    preAvgIdx = idx
+                    continue
+                }
+
+                tmp4FloatArray[0] = preAvgIdx + 0.5f
+                tmp4FloatArray[1] = getKEntities()[preAvgIdx].getAvgPrice()!!
+                tmp4FloatArray[2] = idx + 0.5f
+                tmp4FloatArray[3] = getKEntities()[idx].getAvgPrice()!!
+                mapPointsValue2Real(tmp4FloatArray)
+                canvas.drawLine(
+                    tmp4FloatArray[0],
+                    tmp4FloatArray[1],
+                    tmp4FloatArray[2],
+                    tmp4FloatArray[3],
+                    avgPriceLinePaint
+                )
+                preAvgIdx = idx
+            }
+        }
     }
 
     private fun drawBarKChart(canvas: Canvas) {
@@ -803,36 +840,8 @@ open class KChart(
             )
             preIdx = idx
         }
-        if (chartConfig.showAvgLine) {
-            avgPriceLinePaint.strokeWidth = chartConfig.avgLineStrokeWidth
-            avgPriceLinePaint.color = chartConfig.avgLineColor
-            var preAvgIdx = -1
-            for (idx in getKEntities().indices) {
-                if (getKEntities()[idx] is EmptyKEntity || getKEntities()[idx].getAvgPrice() == null) {
-                    preAvgIdx = -1
-                    continue
-                }
 
-                if (preAvgIdx == -1 || getKEntities()[idx] is KEntityOfLineStarter) {
-                    preAvgIdx = idx
-                    continue
-                }
-
-                tmp4FloatArray[0] = preAvgIdx + 0.5f
-                tmp4FloatArray[1] = getKEntities()[preAvgIdx].getAvgPrice()!!
-                tmp4FloatArray[2] = idx + 0.5f
-                tmp4FloatArray[3] = getKEntities()[idx].getAvgPrice()!!
-                mapPointsValue2Real(tmp4FloatArray)
-                canvas.drawLine(
-                    tmp4FloatArray[0],
-                    tmp4FloatArray[1],
-                    tmp4FloatArray[2],
-                    tmp4FloatArray[3],
-                    avgPriceLinePaint
-                )
-                preAvgIdx = idx
-            }
-        }
+        drawAvgPriceLine(canvas)
     }
 
     private fun drawLabels(canvas: Canvas) {
