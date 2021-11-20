@@ -129,6 +129,11 @@ abstract class BaseChildChart<C : BaseChildChartConfig> @JvmOverloads constructo
         prepare()
     }
 
+    override fun onModifyKEntities() {
+        onKEntitiesChanged()
+        prepare()
+    }
+
     override fun onAppendKEntities() {
         onKEntitiesChanged()
         prepare()

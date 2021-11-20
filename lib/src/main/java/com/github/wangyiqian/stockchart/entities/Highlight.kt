@@ -17,6 +17,6 @@ package com.github.wangyiqian.stockchart.entities
  * @author wangyiqian E-mail: wangyiqian9891@gmail.com
  * @version 创建时间: 2021/2/6
  */
-class Highlight(
+open class Highlight(
     x: Float = 0f, y: Float = 0f, valueX: Float = 0f, valueY: Float = 0f
 ) : GestureEvent(x, y, valueX, valueY)

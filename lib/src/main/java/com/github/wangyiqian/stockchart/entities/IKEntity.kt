@@ -19,14 +19,21 @@ package com.github.wangyiqian.stockchart.entities
  */
 interface IKEntity {
     fun getHighPrice(): Float
+    fun setHighPrice(price: Float)
     fun getLowPrice(): Float
+    fun setLowPrice(price: Float)
     fun getOpenPrice(): Float
+    fun setOpenPrice(price: Float)
     fun getClosePrice(): Float
+    fun setClosePrice(price: Float)
     fun getVolume(): Long
+    fun setVolume(volume: Long)
     fun getTime(): Long
+    fun setTime(time: Long)
 
     /**
      * 分时均线价格
      */
     fun getAvgPrice(): Float?
+    fun setAvgPrice(price: Float?)
 }

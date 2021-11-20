@@ -32,9 +32,11 @@ class StockChartConfig {
             setKEntities(value, 0, kEntities.size - 1)
         }
 
-    var setKEntitiesFlag = false
+    internal var setKEntitiesFlag = false
 
-    var appendKEntitiesFlag = false
+    internal var modifyKEntitiesFlag = false
+
+    internal var appendKEntitiesFlag = false
 
     // 初始显示区域的起始坐标
     var showStartIndex = 0
@@ -155,13 +157,11 @@ class StockChartConfig {
      * @param showStartIndex    显示区域起点对应数据集合的下标
      * @param showEndIndex      显示区域终点对应数据集合的下标
      */
-    @UiThread
     fun setKEntities(
         kEntities: List<IKEntity>,
         showStartIndex: Int = 0,
         showEndIndex: Int = if (kEntities.isEmpty()) 0 else kEntities.size - 1
     ) {
-        checkMainThread()
         check(showStartIndex <= showEndIndex) { "The value of showStartIndex must be less than showEndIndex." }
         if (kEntities.isNotEmpty()) {
             check(showStartIndex in kEntities.indices && showEndIndex in kEntities.indices) { "The value of showStartIndex and showEndIndex must be in the range of kEntities indexes." }
@@ -174,11 +174,20 @@ class StockChartConfig {
     }
 
     /**
+     * 修改K线数据
+     * @param index 对应下标
+     * @param kEntity 新数据
+     */
+    fun modifyKEntity(index: Int, kEntity: IKEntity) {
+        check(index in 0 until kEntities.size) { "Index $index out of bounds for length ${kEntities.size}" }
+        kEntities[index] = kEntity
+        modifyKEntitiesFlag = true
+    }
+
+    /**
      * 追加K线数据
      */
-    @UiThread
     fun appendRightKEntities(kEntities: List<IKEntity>) {
-        checkMainThread()
         if (this.kEntities.isEmpty()) {
             setKEntities(kEntities)
         } else {
@@ -190,9 +199,7 @@ class StockChartConfig {
     /**
      * 追加K线数据
      */
-    @UiThread
     fun appendLeftKEntities(kEntities: List<IKEntity>) {
-        checkMainThread()
         if (this.kEntities.isEmpty()) {
             setKEntities(kEntities)
         } else {

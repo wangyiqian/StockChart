@@ -96,6 +96,13 @@ class StockChart @JvmOverloads constructor(context: Context, attrs: AttributeSet
             }
         }
 
+        if (config.modifyKEntitiesFlag) {
+            config.modifyKEntitiesFlag = false
+            onKEntitiesChangedListeners.forEach {
+                it.onModifyKEntities()
+            }
+        }
+
         if (config.appendKEntitiesFlag) {
             config.appendKEntitiesFlag = false
             onKEntitiesChangedListeners.forEach {

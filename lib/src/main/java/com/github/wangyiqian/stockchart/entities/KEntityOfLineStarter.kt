@@ -19,19 +19,47 @@ package com.github.wangyiqian.stockchart.entities
  * @author wangyiqian E-mail: wangyiqian9891@gmail.com
  * @version 创建时间: 2021/2/22
  */
-class KEntityOfLineStarter(private val kEntity: IKEntity) : IKEntity {
+open class KEntityOfLineStarter(private val kEntity: IKEntity) : IKEntity {
 
     override fun getHighPrice() = kEntity.getHighPrice()
 
+    override fun setHighPrice(price: Float) {
+        kEntity.setHighPrice(price)
+    }
+
     override fun getLowPrice() = kEntity.getLowPrice()
+
+    override fun setLowPrice(price: Float) {
+        kEntity.setLowPrice(price)
+    }
 
     override fun getOpenPrice() = kEntity.getOpenPrice()
 
+    override fun setOpenPrice(price: Float) {
+        kEntity.setOpenPrice(price)
+    }
+
     override fun getClosePrice() = kEntity.getClosePrice()
+
+    override fun setClosePrice(price: Float) {
+        kEntity.setClosePrice(price)
+    }
 
     override fun getVolume() = kEntity.getVolume()
 
+    override fun setVolume(volume: Long) {
+        kEntity.setVolume(volume)
+    }
+
     override fun getTime() = kEntity.getTime()
 
+    override fun setTime(time: Long) {
+        kEntity.setTime(time)
+    }
+
     override fun getAvgPrice() = kEntity.getAvgPrice()
+
+    override fun setAvgPrice(price: Float?) {
+        kEntity.setAvgPrice(price)
+    }
 }

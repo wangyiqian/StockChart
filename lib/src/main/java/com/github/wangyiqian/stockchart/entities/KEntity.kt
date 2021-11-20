@@ -20,26 +20,54 @@ package com.github.wangyiqian.stockchart.entities
  * @version 创建时间: 2021/1/28
  */
 open class KEntity(
-    private val highPrice: Float,
-    private val lowPrice: Float,
-    private val openPrice: Float,
-    private val closePrice: Float,
-    private val volume: Long,
-    private val time: Long,
-    private val avgPrice: Float? = null
+    private var highPrice: Float,
+    private var lowPrice: Float,
+    private var openPrice: Float,
+    private var closePrice: Float,
+    private var volume: Long,
+    private var time: Long,
+    private var avgPrice: Float? = null
 ) : IKEntity {
 
     override fun getHighPrice() = highPrice
 
+    override fun setHighPrice(price: Float) {
+        this.highPrice = price
+    }
+
     override fun getLowPrice() = lowPrice
+
+    override fun setLowPrice(price: Float) {
+        this.lowPrice = price
+    }
 
     override fun getOpenPrice() = openPrice
 
+    override fun setOpenPrice(price: Float) {
+        this.openPrice = price
+    }
+
     override fun getClosePrice() = closePrice
+
+    override fun setClosePrice(price: Float) {
+        this.closePrice = price
+    }
 
     override fun getVolume() = volume
 
+    override fun setVolume(volume: Long) {
+        this.volume = volume
+    }
+
     override fun getTime() = time
 
+    override fun setTime(time: Long) {
+        this.time = time
+    }
+
     override fun getAvgPrice() = avgPrice
+
+    override fun setAvgPrice(price: Float?) {
+        this.avgPrice = price
+    }
 }
