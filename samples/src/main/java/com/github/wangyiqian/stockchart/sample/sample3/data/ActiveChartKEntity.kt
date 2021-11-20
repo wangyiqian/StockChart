@@ -20,25 +20,53 @@ import com.github.wangyiqian.stockchart.entities.IKEntity
  * @version 创建时间: 2021/5/14
  */
 class ActiveChartKEntity(
-    private val price: Float,
-    private val avgPrice: Float,
-    private val time: Long,
-    private val volume: Long,
-    private val active: ActiveInfo?
+    private var price: Float,
+    private var avgPrice: Float?,
+    private var time: Long,
+    private var volume: Long,
+    private var active: ActiveInfo?
 ) : IKEntity, IActiveChartKEntity {
     override fun getAvgPrice() = avgPrice
 
+    override fun setAvgPrice(price: Float?) {
+        this.avgPrice = price
+    }
+
     override fun getClosePrice() = price
+
+    override fun setClosePrice(price: Float) {
+        this.price = price
+    }
 
     override fun getHighPrice() = price
 
+    override fun setHighPrice(price: Float) {
+        this.price = price
+    }
+
     override fun getLowPrice() = price
+
+    override fun setLowPrice(price: Float) {
+        this.price = price
+    }
 
     override fun getOpenPrice() = price
 
+    override fun setOpenPrice(price: Float) {
+        this.price = price
+    }
+
     override fun getTime() = time
 
+    override fun setTime(time: Long) {
+        this.time = time
+    }
+
     override fun getVolume() = volume
+
+    override fun setVolume(volume: Long) {
+        this.volume = volume
+    }
 
     override fun getActiveInfo() = active
 }
