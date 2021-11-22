@@ -98,18 +98,20 @@ abstract class BaseChildChart<C : BaseChildChartConfig> @JvmOverloads constructo
     private fun setDisplayArea() {
 
         // x轴显示区域固定死 子类不可各自实现
-        chartDisplayArea.left = 0f
-        chartDisplayArea.right = width.toFloat()
+        chartDisplayArea.apply {
+            left = 0f
+            right = width.toFloat()
+            top = getDisplayAreaYRangeMin()
+            bottom = getDisplayAreaYRangeMax()
+        }
 
-        chartDisplayArea.top = getDisplayAreaYRangeMin()
-        chartDisplayArea.bottom = getDisplayAreaYRangeMax()
+        chartMainDisplayArea.apply {
+            left = chartDisplayArea.left
+            right = chartDisplayArea.right
+            top = chartDisplayArea.top + chartConfig.chartMainDisplayAreaPaddingTop
+            bottom = chartDisplayArea.bottom - chartConfig.chartMainDisplayAreaPaddingBottom
+        }
 
-        chartMainDisplayArea.left = chartDisplayArea.left
-        chartMainDisplayArea.right = chartDisplayArea.right
-        chartMainDisplayArea.top =
-            chartDisplayArea.top + chartConfig.chartMainDisplayAreaPaddingTop
-        chartMainDisplayArea.bottom =
-            chartDisplayArea.bottom - chartConfig.chartMainDisplayAreaPaddingBottom
     }
 
     /**
@@ -135,6 +137,11 @@ abstract class BaseChildChart<C : BaseChildChartConfig> @JvmOverloads constructo
     }
 
     override fun onAppendKEntities() {
+        onKEntitiesChanged()
+        prepare()
+    }
+
+    override fun onInsertKEntities() {
         onKEntitiesChanged()
         prepare()
     }

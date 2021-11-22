@@ -110,6 +110,13 @@ class StockChart @JvmOverloads constructor(context: Context, attrs: AttributeSet
             }
         }
 
+        if(config.insertKEntitiesFlag){
+            config.insertKEntitiesFlag = false
+            onKEntitiesChangedListeners.forEach {
+                it.onInsertKEntities()
+            }
+        }
+
         checkChildViews()
 
         invalidate()
@@ -188,21 +195,21 @@ class StockChart @JvmOverloads constructor(context: Context, attrs: AttributeSet
                     if (childChartConfig.setSizeFlag) {
                         childChartConfig.setSizeFlag = false
                         needRequestLayout = true
-                        val layoutParams =
-                            childCharts[index].view().layoutParams as LayoutParams
-                        layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
-                        layoutParams.height = childChartConfig.height
+                        (childCharts[index].view().layoutParams as LayoutParams).apply {
+                            width = ViewGroup.LayoutParams.MATCH_PARENT
+                            height = childChartConfig.height
+                        }
                     }
 
                     if (childChartConfig.setMarginFlag) {
                         childChartConfig.setMarginFlag = false
                         needRequestLayout = true
-                        val layoutParams =
-                            childCharts[index].view().layoutParams as LayoutParams
-                        layoutParams.leftMargin = 0
-                        layoutParams.topMargin = childChartConfig.marginTop
-                        layoutParams.rightMargin = 0
-                        layoutParams.bottomMargin = childChartConfig.marginBottom
+                        (childCharts[index].view().layoutParams as LayoutParams).apply {
+                            leftMargin = 0
+                            topMargin = childChartConfig.marginTop
+                            rightMargin = 0
+                            bottomMargin = childChartConfig.marginBottom
+                        }
                     }
                 }
             }
@@ -213,7 +220,7 @@ class StockChart @JvmOverloads constructor(context: Context, attrs: AttributeSet
             removeAllViews()
             config.childChartFactories.forEach {
                 val childChart = it.createChart()
-                childCharts.add(childChart)
+                childCharts += childChart
                 addView(childChart.view())
             }
         }

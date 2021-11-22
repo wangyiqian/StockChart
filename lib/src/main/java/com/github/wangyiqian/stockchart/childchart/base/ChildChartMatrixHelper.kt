@@ -133,16 +133,19 @@ class ChildChartMatrixHelper<O : BaseChildChartConfig>(
 
             val chartDisplayArea = chart.getChartMainDisplayArea()
 
-            // 反算出会被移动到显示区域的第一个逻辑坐标值（数据下标）
-            tmpMatrix.reset()
-            tmpMatrix.postConcat(coordinateMatrix)
-            tmpMatrix.postConcat(stockChart.getXScaleMatrix())
-            tmpMatrix.postConcat(stockChart.getFixXScaleMatrix())
-            tmpMatrix.postConcat(stockChart.getScrollMatrix())
-            tmpMatrix.invert(tmpMatrix)
+
             tmp2FloatArray[0] = chartDisplayArea.left
             tmp2FloatArray[1] = 0f
-            tmpMatrix.mapPoints(tmp2FloatArray)
+            // 反算出会被移动到显示区域的第一个逻辑坐标值（数据下标）
+            tmpMatrix.apply {
+                reset()
+                postConcat(coordinateMatrix)
+                postConcat(stockChart.getXScaleMatrix())
+                postConcat(stockChart.getFixXScaleMatrix())
+                postConcat(stockChart.getScrollMatrix())
+                invert(tmpMatrix)
+                mapPoints(tmp2FloatArray)
+            }
             var indexFrom = (round(tmp2FloatArray[0])).toInt()
             if (indexFrom !in 0 until stockChart.getConfig().getKEntitiesSize()) {
                 indexFrom = 0
@@ -153,12 +156,14 @@ class ChildChartMatrixHelper<O : BaseChildChartConfig>(
             tmp4FloatArray[1] = 0f
             tmp4FloatArray[2] = (indexFrom + 1).toFloat()
             tmp4FloatArray[3] = 0f
-            tmpMatrix.reset()
-            tmpMatrix.postConcat(coordinateMatrix)
-            tmpMatrix.postConcat(stockChart.getXScaleMatrix())
-            tmpMatrix.postConcat(stockChart.getFixXScaleMatrix())
-            tmpMatrix.postConcat(stockChart.getScrollMatrix())
-            tmpMatrix.mapPoints(tmp4FloatArray)
+            tmpMatrix.apply {
+                reset()
+                postConcat(coordinateMatrix)
+                postConcat(stockChart.getXScaleMatrix())
+                postConcat(stockChart.getFixXScaleMatrix())
+                postConcat(stockChart.getScrollMatrix())
+                mapPoints(tmp4FloatArray)
+            }
             val first = tmp4FloatArray[0]
             val second = tmp4FloatArray[2]
             val lengthOfOneIndex = second - first
@@ -201,19 +206,21 @@ class ChildChartMatrixHelper<O : BaseChildChartConfig>(
 
         val chartDisplayArea = chart.getChartMainDisplayArea()
 
-        // 反算出哪个下标（逻辑坐标）范围会被移动到显示区域
-        tmpMatrix.reset()
-        tmpMatrix.postConcat(coordinateMatrix)
-        tmpMatrix.postConcat(stockChart.getXScaleMatrix())
-        tmpMatrix.postConcat(stockChart.getFixXScaleMatrix())
-        tmpMatrix.postConcat(stockChart.getScrollMatrix())
-        tmpMatrix.postConcat(fixXMatrix)
-        tmpMatrix.invert(tmpMatrix)
         tmp4FloatArray[0] = chartDisplayArea.left
         tmp4FloatArray[1] = 0f
         tmp4FloatArray[2] = chartDisplayArea.right
         tmp4FloatArray[3] = 0f
-        tmpMatrix.mapPoints(tmp4FloatArray)
+        // 反算出哪个下标（逻辑坐标）范围会被移动到显示区域
+        tmpMatrix.apply {
+            reset()
+            postConcat(coordinateMatrix)
+            postConcat(stockChart.getXScaleMatrix())
+            postConcat(stockChart.getFixXScaleMatrix())
+            postConcat(stockChart.getScrollMatrix())
+            postConcat(fixXMatrix)
+            invert(tmpMatrix)
+            mapPoints(tmp4FloatArray)
+        }
         var indexFrom = (round(tmp4FloatArray[0])).toInt()
         if (indexFrom !in 0 until stockChart.getConfig().getKEntitiesSize()) {
             indexFrom = 0
@@ -227,17 +234,19 @@ class ChildChartMatrixHelper<O : BaseChildChartConfig>(
         chart.getYValueRange(indexFrom, indexEnd, tmp2FloatArray)
         val yValueRangeFrom = tmp2FloatArray[0]
         val yValueRangeEnd = tmp2FloatArray[1]
-        tmpMatrix.reset()
-        tmpMatrix.postConcat(coordinateMatrix)
-        tmpMatrix.postConcat(stockChart.getXScaleMatrix())
-        concatMatrix.postConcat(stockChart.getFixXScaleMatrix())
-        tmpMatrix.postConcat(stockChart.getScrollMatrix())
-        tmpMatrix.postConcat(fixXMatrix)
         tmp4FloatArray[0] = 0f
         tmp4FloatArray[1] = yValueRangeFrom
         tmp4FloatArray[2] = 0f
         tmp4FloatArray[3] = yValueRangeEnd
-        tmpMatrix.mapPoints(tmp4FloatArray)
+        tmpMatrix.apply {
+            reset()
+            postConcat(coordinateMatrix)
+            postConcat(stockChart.getXScaleMatrix())
+            postConcat(stockChart.getFixXScaleMatrix())
+            postConcat(stockChart.getScrollMatrix())
+            postConcat(fixXMatrix)
+            mapPoints(tmp4FloatArray)
+        }
         val yMin: Float
         val yMax: Float
         if (tmp4FloatArray[3] > tmp4FloatArray[1]) {
@@ -258,13 +267,15 @@ class ChildChartMatrixHelper<O : BaseChildChartConfig>(
     }
 
     private fun setConcatMatrix() {
-        concatMatrix.reset()
-        concatMatrix.postConcat(coordinateMatrix)
-        concatMatrix.postConcat(stockChart.getXScaleMatrix())
-        concatMatrix.postConcat(stockChart.getFixXScaleMatrix())
-        concatMatrix.postConcat(stockChart.getScrollMatrix())
-        concatMatrix.postConcat(fixXMatrix)
-        concatMatrix.postConcat(fixYMatrix)
+        concatMatrix.apply {
+            reset()
+            postConcat(coordinateMatrix)
+            postConcat(stockChart.getXScaleMatrix())
+            postConcat(stockChart.getFixXScaleMatrix())
+            postConcat(stockChart.getScrollMatrix())
+            postConcat(fixXMatrix)
+            postConcat(fixYMatrix)
+        }
     }
 
     fun mapPointsValue2Real(pts: FloatArray) {

@@ -135,43 +135,48 @@ class Sample2Activity : AppCompatActivity() {
         initKdjChart()
         initCustomChart()
 
-        // 将需要显示的子图的工厂添加进StockChart配置
-        stockChartConfig.addChildCharts(
-            kChartFactory!!,
-            volumeChartFactory!!,
-            timeBarFactory!!,
-            macdChartFactory!!,
-            kdjChartFactory!!,
-            customChartFactory!!
-        )
+        stockChartConfig.apply {
+            // 将需要显示的子图的工厂添加进StockChart配置
+            addChildCharts(
+                kChartFactory!!,
+                volumeChartFactory!!,
+                timeBarFactory!!,
+                macdChartFactory!!,
+                kdjChartFactory!!,
+                customChartFactory!!
+            )
 
-        // 最大缩放比例
-        stockChartConfig.scaleFactorMax = 2f
+            // 最大缩放比例
+            scaleFactorMax = 2f
 
-        // 最小缩放比例
-        stockChartConfig.scaleFactorMin = 0.5f
+            scrollSmoothly = false
 
-        // 网格线设置
-        stockChartConfig.gridVerticalLineCount = 3
-        stockChartConfig.gridHorizontalLineCount = 4
+            // 最小缩放比例
+            scaleFactorMin = 0.5f
 
-        // 设置滑动到左边界加载更多
-        stockChartConfig.addOnLoadMoreListener(object : OnLoadMoreListener {
-            override fun onLeftLoadMore() {
-                if (!isLoading) {
-                    if (period != Period.FIVE_DAYS
-                        && period != Period.QUARTER
-                        && period != Period.YEAR
-                        && period != Period.FIVE_YEARS
-                        && period != Period.YTD
-                    ) {
-                        loadData(page = currentPage + 1, period = period)
+            // 网格线设置
+            gridVerticalLineCount = 3
+            gridHorizontalLineCount = 4
+
+            // 设置滑动到左边界加载更多
+            addOnLoadMoreListener(object : OnLoadMoreListener {
+                override fun onLeftLoadMore() {
+                    if (!isLoading) {
+                        if (period != Period.FIVE_DAYS
+                            && period != Period.QUARTER
+                            && period != Period.YEAR
+                            && period != Period.FIVE_YEARS
+                            && period != Period.YTD
+                        ) {
+                            loadData(page = currentPage + 1, period = period)
+                        }
                     }
                 }
-            }
 
-            override fun onRightLoadMore() {}
-        })
+                override fun onRightLoadMore() {}
+            })
+        }
+
 
         // 绑定配置
         stock_chart.setConfig(stockChartConfig)
@@ -183,87 +188,94 @@ class Sample2Activity : AppCompatActivity() {
     private fun initKChart() {
         kChartFactory = KChartFactory(stock_chart, kChartConfig)
 
-        // 指标线宽度
-        kChartConfig.indexStrokeWidth = DimensionUtil.dp2px(this, 0.5f).toFloat()
+        kChartConfig.apply {
 
-        // 监听长按信息
-        kChartConfig.onHighlightListener = object : OnHighlightListener {
-            override fun onHighlightBegin() {}
+            // 指标线宽度
+            indexStrokeWidth = DimensionUtil.dp2px(this@Sample2Activity, 0.5f).toFloat()
 
-            override fun onHighlightEnd() {
-                tv_highlight_info.text = ""
-            }
+            // 监听长按信息
+            onHighlightListener = object : OnHighlightListener {
+                override fun onHighlightBegin() {}
 
-            override fun onHighlight(highlight: Highlight) {
-                val idx = highlight.getIdx()
-                val kEntities = stockChartConfig.kEntities
-                var showContent = ""
-
-                if (idx in kEntities.indices) {
-                    val kEntity = kEntities[idx]
-                    if (kEntity is EmptyKEntity) {
-                        showContent = ""
-                    } else if (kChartConfig.kChartType is KChartConfig.KChartType.LINE
-                        || kChartConfig.kChartType is KChartConfig.KChartType.MOUNTAIN
-                    ) {
-                        val firstIdx = stock_chart.findFirstNotEmptyKEntityIdxInDisplayArea()
-                        val price = "最新价:${NumberFormatUtil.formatPrice(kEntity.getClosePrice())}"
-                        var changeRatio = "涨跌幅:——"
-                        firstIdx?.let {
-                            changeRatio = "涨跌幅:${Util.formatChangeRatio(
-                                kEntity.getClosePrice(),
-                                kEntities[it].getClosePrice()
-                            )}"
-                        }
-                        val volume = "成交量:${Util.formatVolume(kEntity.getVolume())}"
-
-                        showContent = "$price，$changeRatio，$volume"
-                    } else {
-                        val open = "开盘价:${NumberFormatUtil.formatPrice(kEntity.getOpenPrice())}"
-                        val close = "收盘价:${NumberFormatUtil.formatPrice(kEntity.getClosePrice())}"
-                        val high = "最高价:${NumberFormatUtil.formatPrice(kEntity.getHighPrice())}"
-                        val low = "最低价${NumberFormatUtil.formatPrice(kEntity.getLowPrice())}"
-                        val changeRatio =
-                            "涨跌幅:${Util.formatChangeRatio(
-                                kEntity.getClosePrice(),
-                                kEntity.getOpenPrice()
-                            )}"
-                        val volume = "成交量:${Util.formatVolume(kEntity.getVolume())}"
-
-                        showContent = "$open，$close，$high，$low，$changeRatio，$volume"
-                    }
-
+                override fun onHighlightEnd() {
+                    tv_highlight_info.text = ""
                 }
 
-                // 长按信息显示到界面
-                tv_highlight_info.text = showContent
+                override fun onHighlight(highlight: Highlight) {
+                    val idx = highlight.getIdx()
+                    val kEntities = stockChartConfig.kEntities
+                    var showContent = ""
+
+                    if (idx in kEntities.indices) {
+                        val kEntity = kEntities[idx]
+                        if (kEntity is EmptyKEntity) {
+                            showContent = ""
+                        } else if (kChartType is KChartConfig.KChartType.LINE || kChartType is KChartConfig.KChartType.MOUNTAIN) {
+                            val firstIdx = stock_chart.findFirstNotEmptyKEntityIdxInDisplayArea()
+                            val price =
+                                "最新价:${NumberFormatUtil.formatPrice(kEntity.getClosePrice())}"
+                            var changeRatio = "涨跌幅:——"
+                            firstIdx?.let {
+                                changeRatio = "涨跌幅:${
+                                    Util.formatChangeRatio(
+                                        kEntity.getClosePrice(),
+                                        kEntities[it].getClosePrice()
+                                    )
+                                }"
+                            }
+                            val volume = "成交量:${Util.formatVolume(kEntity.getVolume())}"
+
+                            showContent = "$price，$changeRatio，$volume"
+                        } else {
+                            val open = "开盘价:${NumberFormatUtil.formatPrice(kEntity.getOpenPrice())}"
+                            val close =
+                                "收盘价:${NumberFormatUtil.formatPrice(kEntity.getClosePrice())}"
+                            val high = "最高价:${NumberFormatUtil.formatPrice(kEntity.getHighPrice())}"
+                            val low = "最低价${NumberFormatUtil.formatPrice(kEntity.getLowPrice())}"
+                            val changeRatio =
+                                "涨跌幅:${
+                                    Util.formatChangeRatio(
+                                        kEntity.getClosePrice(),
+                                        kEntity.getOpenPrice()
+                                    )
+                                }"
+                            val volume = "成交量:${Util.formatVolume(kEntity.getVolume())}"
+
+                            showContent = "$open，$close，$high，$low，$changeRatio，$volume"
+                        }
+
+                    }
+
+                    // 长按信息显示到界面
+                    tv_highlight_info.text = showContent
+                }
             }
-        }
 
-        // 图高度
-        kChartConfig.height = DimensionUtil.dp2px(this, 250f)
+            // 图高度
+            height = DimensionUtil.dp2px(this@Sample2Activity, 250f)
 
-        // 左侧标签设置
-        kChartConfig.leftLabelConfig = KChartConfig.LabelConfig(
-            5,
-            { "${NumberFormatUtil.formatPrice(it)}" },
-            DimensionUtil.sp2px(this, 8f).toFloat(),
-            Color.parseColor("#E4E4E4"),
-            DimensionUtil.dp2px(this, 10f).toFloat(),
-            DimensionUtil.dp2px(this, 30f).toFloat(),
-            DimensionUtil.dp2px(this, 30f).toFloat()
-        )
-
-        // 长按左侧标签配置
-        kChartConfig.highlightLabelLeft =
-            HighlightLabelConfig(
-                textSize = DimensionUtil.sp2px(this, 10f).toFloat(),
-                bgColor = Color.parseColor("#A3A3A3"),
-                padding = DimensionUtil.dp2px(this, 5f).toFloat()
+            // 左侧标签设置
+            leftLabelConfig = KChartConfig.LabelConfig(
+                5,
+                { "${NumberFormatUtil.formatPrice(it)}" },
+                DimensionUtil.sp2px(this@Sample2Activity, 8f).toFloat(),
+                Color.parseColor("#E4E4E4"),
+                DimensionUtil.dp2px(this@Sample2Activity, 10f).toFloat(),
+                DimensionUtil.dp2px(this@Sample2Activity, 30f).toFloat(),
+                DimensionUtil.dp2px(this@Sample2Activity, 30f).toFloat()
             )
 
-        // 空心蜡烛边框宽度
-        kChartConfig.hollowChartLineStrokeWidth = DimensionUtil.dp2px(this, 1f).toFloat()
+            // 长按左侧标签配置
+            highlightLabelLeft =
+                HighlightLabelConfig(
+                    textSize = DimensionUtil.sp2px(this@Sample2Activity, 10f).toFloat(),
+                    bgColor = Color.parseColor("#A3A3A3"),
+                    padding = DimensionUtil.dp2px(this@Sample2Activity, 5f).toFloat()
+                )
+
+            // 空心蜡烛边框宽度
+            hollowChartLineStrokeWidth = DimensionUtil.dp2px(this@Sample2Activity, 1f).toFloat()
+        }
     }
 
     /**
@@ -272,19 +284,22 @@ class Sample2Activity : AppCompatActivity() {
     private fun initVolumeChart() {
         volumeChartFactory = VolumeChartFactory(stock_chart, volumeChartConfig)
 
-        // 图高度
-        volumeChartConfig.height = DimensionUtil.dp2px(this, 60f)
+        volumeChartConfig.apply {
+            // 图高度
+            height = DimensionUtil.dp2px(this@Sample2Activity, 60f)
 
 
-        // 长按左侧标签配置
-        volumeChartConfig.highlightLabelLeft = HighlightLabelConfig(
-            textSize = DimensionUtil.sp2px(this, 10f).toFloat(),
-            bgColor = Color.parseColor("#A3A3A3"),
-            padding = DimensionUtil.dp2px(this, 5f).toFloat(),
-            textFormat = { volume ->
-                Util.formatVolume(volume = volume.toLong())
-            }
-        )
+            // 长按左侧标签配置
+            highlightLabelLeft = HighlightLabelConfig(
+                textSize = DimensionUtil.sp2px(this@Sample2Activity, 10f).toFloat(),
+                bgColor = Color.parseColor("#A3A3A3"),
+                padding = DimensionUtil.dp2px(this@Sample2Activity, 5f).toFloat(),
+                textFormat = { volume ->
+                    Util.formatVolume(volume = volume.toLong())
+                }
+            )
+        }
+
     }
 
     /**
@@ -293,11 +308,14 @@ class Sample2Activity : AppCompatActivity() {
     private fun initTimeBar() {
         timeBarFactory = TimeBarFactory(stock_chart, timeBarConfig)
 
-        // 背景色（时间条这里不像显示网格线，加个背景色覆盖掉）
-        timeBarConfig.backGroundColor = stockChartConfig.backgroundColor
+        timeBarConfig.apply {
+            // 背景色（时间条这里不像显示网格线，加个背景色覆盖掉）
+            backGroundColor = stockChartConfig.backgroundColor
 
-        // 长按标签背景色
-        timeBarConfig.highlightLabelBgColor = Color.parseColor("#A3A3A3")
+            // 长按标签背景色
+            highlightLabelBgColor = Color.parseColor("#A3A3A3")
+        }
+
     }
 
     /**
@@ -306,15 +324,17 @@ class Sample2Activity : AppCompatActivity() {
     private fun initMacdChart() {
         macdChartFactory = MacdChartFactory(stock_chart, macdChartConfig)
 
-        // 图高度
-        macdChartConfig.height = DimensionUtil.dp2px(this, 90f)
+        macdChartConfig.apply {
+            // 图高度
+            height = DimensionUtil.dp2px(this@Sample2Activity, 90f)
 
-        // 长按左侧标签配置
-        macdChartConfig.highlightLabelLeft = HighlightLabelConfig(
-            textSize = DimensionUtil.sp2px(this, 10f).toFloat(),
-            bgColor = Color.parseColor("#A3A3A3"),
-            padding = DimensionUtil.dp2px(this, 5f).toFloat()
-        )
+            // 长按左侧标签配置
+            highlightLabelLeft = HighlightLabelConfig(
+                textSize = DimensionUtil.sp2px(this@Sample2Activity, 10f).toFloat(),
+                bgColor = Color.parseColor("#A3A3A3"),
+                padding = DimensionUtil.dp2px(this@Sample2Activity, 5f).toFloat()
+            )
+        }
     }
 
     /**
@@ -323,15 +343,18 @@ class Sample2Activity : AppCompatActivity() {
     private fun initKdjChart() {
         kdjChartFactory = KdjChartFactory(stock_chart, kdjChartConfig)
 
-        // 图高度
-        kdjChartConfig.height = DimensionUtil.dp2px(this, 90f)
+        kdjChartConfig.apply {
+            // 图高度
+            height = DimensionUtil.dp2px(this@Sample2Activity, 90f)
 
-        // 长按左侧标签配置
-        kdjChartConfig.highlightLabelLeft = HighlightLabelConfig(
-            textSize = DimensionUtil.sp2px(this, 10f).toFloat(),
-            bgColor = Color.parseColor("#A3A3A3"),
-            padding = DimensionUtil.dp2px(this, 5f).toFloat()
-        )
+            // 长按左侧标签配置
+            highlightLabelLeft = HighlightLabelConfig(
+                textSize = DimensionUtil.sp2px(this@Sample2Activity, 10f).toFloat(),
+                bgColor = Color.parseColor("#A3A3A3"),
+                padding = DimensionUtil.dp2px(this@Sample2Activity, 5f).toFloat()
+            )
+        }
+
     }
 
     /**
@@ -339,8 +362,10 @@ class Sample2Activity : AppCompatActivity() {
      */
     private fun initCustomChart() {
         customChartFactory = CustomChartFactory(stock_chart, customChartConfig)
-        customChartConfig.height = DimensionUtil.dp2px(this, 70f)
-        customChartConfig.bigLabel = "这是自定义子图示例"
+        customChartConfig.apply {
+            height = DimensionUtil.dp2px(this@Sample2Activity, 70f)
+            bigLabel = "这是自定义子图示例"
+        }
     }
 
     // 加载模拟数据
@@ -448,37 +473,52 @@ class Sample2Activity : AppCompatActivity() {
     private fun changePeriod(period: Period) {
         when (period) {
             Period.DAY_TIME, Period.FIVE_DAYS -> {
-                kChartConfig.showAvgLine = true // 显示分时均线
-                stockChartConfig.scaleAble = false
-                stockChartConfig.scrollAble = false
-                stockChartConfig.overScrollAble = false
-                kChartConfig.index = null
-                kChartConfig.kChartType = KChartConfig.KChartType.LINE()
+                stockChartConfig.apply {
+                    scaleAble = false
+                    scrollAble = false
+                    overScrollAble = false
+                }
+                kChartConfig.apply {
+                    showAvgLine = true // 显示分时均线
+                    index = null
+                    kChartType = KChartConfig.KChartType.LINE()
+                }
             }
             Period.YEAR, Period.QUARTER, Period.FIVE_YEARS -> {
-                kChartConfig.showAvgLine = false
-                stockChartConfig.scaleAble = true
-                stockChartConfig.scrollAble = true
-                stockChartConfig.overScrollAble = false
-                kChartConfig.index = kChartIndex
-                kChartConfig.kChartType = kChartType
+                stockChartConfig.apply {
+                    scaleAble = true
+                    scrollAble = true
+                    overScrollAble = false
+                }
+                kChartConfig.apply {
+                    showAvgLine = false
+                    index = kChartIndex
+                    kChartType = kChartType
+                }
             }
             Period.YTD -> {
-                kChartConfig.showAvgLine = false
-                stockChartConfig.scaleAble = false
-                stockChartConfig.scrollAble = false
-                stockChartConfig.overScrollAble = false
-                kChartConfig.index = kChartIndex
-                kChartConfig.kChartType = kChartType
-
+                stockChartConfig.apply {
+                    scaleAble = false
+                    scrollAble = false
+                    overScrollAble = false
+                }
+                kChartConfig.apply {
+                    showAvgLine = false
+                    index = kChartIndex
+                    kChartType = kChartType
+                }
             }
             else -> {
-                kChartConfig.showAvgLine = false
-                stockChartConfig.scaleAble = true
-                stockChartConfig.scrollAble = true
-                stockChartConfig.overScrollAble = true
-                kChartConfig.index = kChartIndex
-                kChartConfig.kChartType = kChartType
+                stockChartConfig.apply {
+                    scaleAble = true
+                    scrollAble = true
+                    overScrollAble = true
+                }
+                kChartConfig.apply {
+                    showAvgLine = false
+                    index = kChartIndex
+                    kChartType = kChartType
+                }
             }
         }
         this.period = period

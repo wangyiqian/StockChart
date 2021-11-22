@@ -38,6 +38,8 @@ class StockChartConfig {
 
     internal var appendKEntitiesFlag = false
 
+    internal var insertKEntitiesFlag = false
+
     // 初始显示区域的起始坐标
     var showStartIndex = 0
 
@@ -179,7 +181,7 @@ class StockChartConfig {
      * @param kEntity 新数据
      */
     fun modifyKEntity(index: Int, kEntity: IKEntity) {
-        check(index in 0 until kEntities.size) { "Index $index out of bounds for length ${kEntities.size}" }
+        check(index in this.kEntities.indices) { "Index $index out of bounds for length ${kEntities.size}" }
         kEntities[index] = kEntity
         modifyKEntitiesFlag = true
     }
@@ -208,6 +210,23 @@ class StockChartConfig {
             this.kEntities.addAll(0, kEntities)
             appendKEntitiesFlag = true
 
+        }
+    }
+
+    /**
+     * 插入K线数据
+     */
+    fun insertKEntities(index: Int, kEntities: List<IKEntity>) {
+        check(index in this.kEntities.indices) { "Index $index out of bounds for length ${kEntities.size}" }
+        if (this.kEntities.isEmpty()) {
+            setKEntities(kEntities)
+        } else {
+            if(index < showEndIndex) {
+                showEndIndex += kEntities.size
+                showStartIndex += kEntities.size
+            }
+            this.kEntities.addAll(index, kEntities)
+            insertKEntitiesFlag = true
         }
     }
 

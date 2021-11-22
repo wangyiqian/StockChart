@@ -24,11 +24,11 @@ object NumberFormatUtil {
     private val decimalFormat = DecimalFormat()
 
     @Synchronized
-    fun formatPrice(price: Float): String {
-        decimalFormat.maximumFractionDigits = 2
-        decimalFormat.minimumFractionDigits = 2
-        decimalFormat.groupingSize = 3
-        return decimalFormat.format(price)
+    fun formatPrice(price: Float): String = decimalFormat.run {
+        maximumFractionDigits = 2
+        minimumFractionDigits = 2
+        groupingSize = 3
+        format(price)
     }
 
 }

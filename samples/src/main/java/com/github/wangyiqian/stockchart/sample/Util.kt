@@ -30,7 +30,7 @@ object Util {
      * 格式化成交量
      */
     fun formatVolume(volume: Long): String {
-        var magnitude = 1f
+        var magnitude: Float
         var unit = ""
         when {
             volume > 1_0000_0000_0000f -> {

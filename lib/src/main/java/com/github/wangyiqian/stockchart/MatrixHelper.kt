@@ -66,11 +66,13 @@ class MatrixHelper(private val stockChart: IStockChart) {
         // 计算缩放阶段真正的缩放中心
         tmp2FloatArray[0] = scaleFocusXValue
         tmp2FloatArray[1] = 0f
-        tmpMatrix.reset()
-        tmpMatrix.postConcat(stockChart.getChildCharts()[0].getCoordinateMatrix())
-        tmpMatrix.postConcat(xScaleMatrix)
-        tmpMatrix.postConcat(fixXScaleMatrix)
-        tmpMatrix.mapPoints(tmp2FloatArray)
+        tmpMatrix.apply {
+            reset()
+            postConcat(stockChart.getChildCharts()[0].getCoordinateMatrix())
+            postConcat(xScaleMatrix)
+            postConcat(fixXScaleMatrix)
+            mapPoints(tmp2FloatArray)
+        }
         scalePx = tmp2FloatArray[0]
     }
 
@@ -101,10 +103,12 @@ class MatrixHelper(private val stockChart: IStockChart) {
         tmp4FloatArray[1] = 0f
         tmp4FloatArray[2] = 1f
         tmp4FloatArray[3] = 0f
-        tmpMatrix.reset()
-        tmpMatrix.postConcat(stockChart.getChildCharts()[0].getCoordinateMatrix())
-        tmpMatrix.postConcat(xScaleMatrix)
-        tmpMatrix.mapPoints(tmp4FloatArray)
+        tmpMatrix.apply {
+            reset()
+            postConcat(stockChart.getChildCharts()[0].getCoordinateMatrix())
+            postConcat(xScaleMatrix)
+            mapPoints(tmp4FloatArray)
+        }
         val lengthOfOneIndex = tmp4FloatArray[2] - tmp4FloatArray[0]
 
         val kEntitiesSize = stockChart.getConfig().getKEntitiesSize()
@@ -120,10 +124,12 @@ class MatrixHelper(private val stockChart: IStockChart) {
             tmp4FloatArray[1] = 0f
             tmp4FloatArray[2] = 1f
             tmp4FloatArray[3] = 0f
-            tmpMatrix.reset()
-            tmpMatrix.postConcat(stockChart.getChildCharts()[0].getCoordinateMatrix())
-            tmpMatrix.postConcat(xScaleMatrix)
-            tmpMatrix.mapPoints(tmp4FloatArray)
+            tmpMatrix.apply {
+                reset()
+                postConcat(stockChart.getChildCharts()[0].getCoordinateMatrix())
+                postConcat(xScaleMatrix)
+                mapPoints(tmp4FloatArray)
+            }
             // 重新计算"一格"长度
             val lengthOfOneIndex = tmp4FloatArray[2] - tmp4FloatArray[0]
             val xRange =
@@ -153,12 +159,14 @@ class MatrixHelper(private val stockChart: IStockChart) {
             tmp4FloatArray[1] = 0f
             tmp4FloatArray[2] = kEntitiesSize.toFloat() // 多一个是因为边界要在最后一个点的右侧，要多加一个宽度
             tmp4FloatArray[3] = 0f
-            tmpMatrix.reset()
-            tmpMatrix.postConcat(stockChart.getChildCharts()[0].getCoordinateMatrix())
-            tmpMatrix.postConcat(xScaleMatrix)
-            tmpMatrix.postConcat(fixXScaleMatrix)
-            tmpMatrix.postConcat(scrollMatrix)
-            tmpMatrix.mapPoints(tmp4FloatArray)
+            tmpMatrix.apply {
+                reset()
+                postConcat(stockChart.getChildCharts()[0].getCoordinateMatrix())
+                postConcat(xScaleMatrix)
+                postConcat(fixXScaleMatrix)
+                postConcat(scrollMatrix)
+                mapPoints(tmp4FloatArray)
+            }
             val limitLeft = tmp4FloatArray[0]
             val limitRight = tmp4FloatArray[2]
 
@@ -266,12 +274,14 @@ class MatrixHelper(private val stockChart: IStockChart) {
             tmp4FloatArray[1] = 0f
             tmp4FloatArray[2] = kEntitiesSize.toFloat() // 多一个是因为边界要在最后一个点的右侧，要多加一个宽度
             tmp4FloatArray[3] = 0f
-            tmpMatrix.reset()
-            tmpMatrix.postConcat(stockChart.getChildCharts()[0].getCoordinateMatrix())
-            tmpMatrix.postConcat(xScaleMatrix)
-            tmpMatrix.postConcat(fixXScaleMatrix)
-            tmpMatrix.postConcat(scrollMatrix)
-            tmpMatrix.mapPoints(tmp4FloatArray)
+            tmpMatrix.apply {
+                reset()
+                postConcat(stockChart.getChildCharts()[0].getCoordinateMatrix())
+                postConcat(xScaleMatrix)
+                postConcat(fixXScaleMatrix)
+                postConcat(scrollMatrix)
+                mapPoints(tmp4FloatArray)
+            }
             val limitLeft = tmp4FloatArray[0]
             val limitRight = tmp4FloatArray[2]
 
