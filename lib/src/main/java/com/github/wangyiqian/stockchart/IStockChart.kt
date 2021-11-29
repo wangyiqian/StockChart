@@ -79,4 +79,10 @@ interface IStockChart {
      * 获取显示区域最后一个不为空的K线数据点下标
      */
     fun findFirstNotEmptyKEntityIdxInDisplayArea(): Int?
+
+    /**
+     * 获取缩放比例
+     */
+    fun getTotalScaleX(): Float
+
 }

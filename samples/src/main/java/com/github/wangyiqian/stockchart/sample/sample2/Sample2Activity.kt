@@ -15,6 +15,7 @@ package com.github.wangyiqian.stockchart.sample.sample2
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -34,6 +35,7 @@ import com.github.wangyiqian.stockchart.entities.EmptyKEntity
 import com.github.wangyiqian.stockchart.entities.Highlight
 import com.github.wangyiqian.stockchart.entities.IKEntity
 import com.github.wangyiqian.stockchart.index.Index
+import com.github.wangyiqian.stockchart.listener.OnGestureListener
 import com.github.wangyiqian.stockchart.listener.OnHighlightListener
 import com.github.wangyiqian.stockchart.listener.OnLoadMoreListener
 import com.github.wangyiqian.stockchart.sample.DataMock
@@ -44,6 +46,7 @@ import com.github.wangyiqian.stockchart.sample.sample2.custom.CustomChartFactory
 import com.github.wangyiqian.stockchart.util.DimensionUtil
 import com.github.wangyiqian.stockchart.util.NumberFormatUtil
 import kotlinx.android.synthetic.main.activity_sample2.*
+import kotlinx.android.synthetic.main.activity_sample3.*
 import kotlinx.android.synthetic.main.layout_sample2_option_buttons.*
 
 /**
@@ -159,7 +162,7 @@ class Sample2Activity : AppCompatActivity() {
             gridHorizontalLineCount = 4
 
             // 设置滑动到左边界加载更多
-            addOnLoadMoreListener(object : OnLoadMoreListener {
+            onLoadMoreListener = object : OnLoadMoreListener {
                 override fun onLeftLoadMore() {
                     if (!isLoading) {
                         if (period != Period.FIVE_DAYS
@@ -174,7 +177,7 @@ class Sample2Activity : AppCompatActivity() {
                 }
 
                 override fun onRightLoadMore() {}
-            })
+            }
         }
 
 

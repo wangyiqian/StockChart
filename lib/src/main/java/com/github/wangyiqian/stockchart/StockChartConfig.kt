@@ -17,6 +17,7 @@ import androidx.annotation.ColorInt
 import androidx.annotation.UiThread
 import com.github.wangyiqian.stockchart.childchart.base.*
 import com.github.wangyiqian.stockchart.entities.IKEntity
+import com.github.wangyiqian.stockchart.listener.OnGestureListener
 import com.github.wangyiqian.stockchart.listener.OnLoadMoreListener
 import com.github.wangyiqian.stockchart.util.checkMainThread
 
@@ -139,9 +140,28 @@ class StockChartConfig {
     // 背景网格线条宽度
     var gridLineStrokeWidth = DEFAULT_GRID_LINE_STROKE_WIDTH
 
+    // 加载更多监听
+    var onLoadMoreListener: OnLoadMoreListener? = null
+    set(value) {
+        field?.apply { removeOnLoadMoreListener(this) }
+        value?.apply { addOnLoadMoreListener(this)}
+        field = value
+
+    }
+
+    // 手势监听
+    var onGestureListener: OnGestureListener? = null
+    set(value) {
+        field?.apply { removeOnGestureListener(this) }
+        value?.apply { addOnGestureListener(this) }
+        field = value
+    }
+
     val childChartFactories = mutableListOf<AbsChildChartFactory<*>>()
 
     private var onLoadMoreListeners = mutableSetOf<OnLoadMoreListener>()
+
+    private var onGestureListeners = mutableSetOf<OnGestureListener>()
 
     fun addChildCharts(vararg childChartFactories: AbsChildChartFactory<*>) {
         this.childChartFactories.addAll(childChartFactories.toList())
@@ -250,5 +270,21 @@ class StockChartConfig {
     }
 
     fun getOnLoadMoreListeners() = onLoadMoreListeners
+
+    /**
+     * 添加手势监听
+     */
+    fun addOnGestureListener(listener: OnGestureListener){
+        onGestureListeners.add(listener)
+    }
+
+    /**
+     * 移除手势监听
+     */
+    fun removeOnGestureListener(listener: OnGestureListener){
+        onGestureListeners.remove(listener)
+    }
+
+    fun getOnGestureListeners() = onGestureListeners
 
 }

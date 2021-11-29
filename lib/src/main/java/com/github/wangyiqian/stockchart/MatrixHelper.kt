@@ -76,15 +76,19 @@ class MatrixHelper(private val stockChart: IStockChart) {
         scalePx = tmp2FloatArray[0]
     }
 
+    // 目前总共缩放了多少
+    fun getTotalScaleX(): Float{
+        xScaleMatrix.getValues(tmp9FloatArray)
+        return tmp9FloatArray[Matrix.MSCALE_X]
+    }
+
     /**
      * 处理双指缩放
      */
     fun handleTouchScale(scaleFactor: Float) {
         fixXScaleMatrix.reset()
 
-        // 计算目前总共缩放了多少
-        xScaleMatrix.getValues(tmp9FloatArray)
-        val totalScaleX = tmp9FloatArray[Matrix.MSCALE_X]
+        val totalScaleX = getTotalScaleX()
 
         // 计算在限制范围内要缩放多少
         var targetScaleFactor = when {

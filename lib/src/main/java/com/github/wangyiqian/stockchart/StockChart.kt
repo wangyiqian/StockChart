@@ -177,6 +177,8 @@ class StockChart @JvmOverloads constructor(context: Context, attrs: AttributeSet
         return result
     }
 
+    override fun getTotalScaleX() = matrixHelper.getTotalScaleX()
+
     private fun checkChildViews() {
         var needReAddViews = false      // 是否需要重新添加view
         var needRequestLayout = false   // 是否需要重新requestLayout
@@ -325,6 +327,7 @@ class StockChart @JvmOverloads constructor(context: Context, attrs: AttributeSet
             if (getConfig().scaleAble) {
                 requestDisallowInterceptTouchEvent(true)
                 matrixHelper.handleTouchScale(scaleFactor)
+                getConfig().getOnGestureListeners().forEach { it.onScaling(getTotalScaleX()) }
             }
         }
 
