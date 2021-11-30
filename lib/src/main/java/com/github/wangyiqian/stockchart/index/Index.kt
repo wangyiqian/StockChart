@@ -21,7 +21,7 @@ import com.github.wangyiqian.stockchart.entities.IKEntity
  * @version 创建时间: 2021/2/18
  */
 sealed class Index(
-    val param: String,
+    var param: String,
     var startText: String,
     var startTextColor: Int,
     var textFormatter: (idx: Int, value: Float?) -> String,
