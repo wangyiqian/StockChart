@@ -25,15 +25,14 @@ import kotlin.math.abs
  * @author wangyiqian E-mail: wangyiqian9891@gmail.com
  * @version 创建时间: 2021/1/29
  */
-class TouchHelper(private val stockChart: IStockChart, private val callBack: CallBack) :
+internal class TouchHelper(private val stockChart: IStockChart, private val callBack: CallBack) :
     GestureDetector.SimpleOnGestureListener(),
     ScaleGestureDetector.OnScaleGestureListener,
     View.OnTouchListener {
 
-    private val gestureDetector: GestureDetector = GestureDetector(stockChart.getContext(), this)
+    private val gestureDetector by lazy { GestureDetector(stockChart.getContext(), this) }
 
-    private val scaleGestureDetector: ScaleGestureDetector =
-        ScaleGestureDetector(stockChart.getContext(), this)
+    private val scaleGestureDetector by lazy { ScaleGestureDetector(stockChart.getContext(), this) }
 
     // 是否正在缩放
     private var isTouchScaling = false

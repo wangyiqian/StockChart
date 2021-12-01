@@ -28,11 +28,11 @@ import java.util.*
 class TimeBar(stockChart: IStockChart, chartConfig: TimeBarConfig) :
     BaseChildChart<TimeBarConfig>(stockChart, chartConfig) {
 
-    private val tmpDate = Date()
+    private val tmpDate by lazy { Date() }
 
-    private val labelPaint = Paint(Paint.ANTI_ALIAS_FLAG)
-    private val highlightLabelPaint = Paint(Paint.ANTI_ALIAS_FLAG)
-    private val highlightLabelBgPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val labelPaint by lazy { Paint(Paint.ANTI_ALIAS_FLAG) }
+    private val highlightLabelPaint by lazy { Paint(Paint.ANTI_ALIAS_FLAG) }
+    private val highlightLabelBgPaint by lazy { Paint(Paint.ANTI_ALIAS_FLAG) }
 
 
     override fun onKEntitiesChanged() {

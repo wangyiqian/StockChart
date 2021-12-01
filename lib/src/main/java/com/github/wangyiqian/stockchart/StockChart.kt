@@ -42,15 +42,15 @@ class StockChart @JvmOverloads constructor(context: Context, attrs: AttributeSet
     IStockChart {
 
     private val childCharts = mutableListOf<IChildChart>()
-    private var touchHelper = TouchHelper(this, TouchHelperCallBack())
-    private var onKEntitiesChangedListeners = mutableSetOf<OnKEntitiesChangedListener>()
-    private val matrixHelper = MatrixHelper(this)
-    private var highlightMap = mutableMapOf<IChildChart, Highlight>()
+    private val touchHelper by lazy { TouchHelper(this, TouchHelperCallBack()) }
+    private val onKEntitiesChangedListeners by lazy { mutableSetOf<OnKEntitiesChangedListener>() }
+    private val matrixHelper by lazy { MatrixHelper(this) }
+    private val highlightMap by lazy { mutableMapOf<IChildChart, Highlight>() }
     private var config: StockChartConfig =
         StockChartConfig()
-    private val tmp2FloatArray = FloatArray(2)
-    private val tmp4FloatArray = FloatArray(4)
-    private val backgroundGridPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val tmp2FloatArray by lazy { FloatArray(2) }
+    private val tmp4FloatArray by lazy { FloatArray(4) }
+    private val backgroundGridPaint by lazy { Paint(Paint.ANTI_ALIAS_FLAG) }
 
     init {
         setWillNotDraw(false)
@@ -110,7 +110,7 @@ class StockChart @JvmOverloads constructor(context: Context, attrs: AttributeSet
             }
         }
 
-        if(config.insertKEntitiesFlag){
+        if (config.insertKEntitiesFlag) {
             config.insertKEntitiesFlag = false
             onKEntitiesChangedListeners.forEach {
                 it.onInsertKEntities()
@@ -403,4 +403,5 @@ class StockChart @JvmOverloads constructor(context: Context, attrs: AttributeSet
     override fun computeScroll() {
         matrixHelper.handleComputeScroll()
     }
+
 }

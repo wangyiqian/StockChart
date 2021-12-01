@@ -39,11 +39,8 @@ object DataMock {
 
     fun loadDayTimeData(context: Context, callback: (List<IKEntity>) -> Unit) {
         MainScope().launch {
-            val deferred = async {
-                delay(MOCK_DELAY)
-                loadDataFromTimeDataAsserts(context, "mock_time_data_day.txt")
-            }
-            callback.invoke(deferred.await())
+            delay(MOCK_DELAY)
+            callback.invoke(loadDataFromTimeDataAsserts(context, "mock_time_data_day.txt"))
         }
     }
 
@@ -59,11 +56,8 @@ object DataMock {
 
     fun loadFiveDayData(context: Context, callback: (List<IKEntity>) -> Unit) {
         MainScope().launch {
-            val deferred = async {
-                delay(MOCK_DELAY)
-                loadDataFromTimeDataAsserts(context, "mock_time_data_five_day.txt")
-            }
-            val result = deferred.await()
+            delay(MOCK_DELAY)
+            val result = loadDataFromTimeDataAsserts(context, "mock_time_data_five_day.txt")
             val dateFormat = SimpleDateFormat("MM/dd")
             val date = Date()
             var dateStr = ""
@@ -112,11 +106,8 @@ object DataMock {
 
     fun loadYTDData(context: Context, callback: (List<IKEntity>) -> Unit) {
         MainScope().launch {
-            val deferred = async {
-                delay(MOCK_DELAY)
-                loadDataFromAsserts(context, "mock_data_ytd.txt")
-            }
-            val result = deferred.await()
+            delay(MOCK_DELAY)
+            val result = loadDataFromAsserts(context, "mock_data_ytd.txt")
             if (result.isNotEmpty()) {
                 val time = result[0].getTime()
                 val calendar = Calendar.getInstance()
@@ -165,102 +156,115 @@ object DataMock {
         callback: (List<IKEntity>) -> Unit
     ) {
         MainScope().launch {
-            val deferred = async {
-                delay(MOCK_DELAY)
-                loadDataFromAsserts(context, assertsFileName)
-            }
-            callback.invoke(deferred.await())
+            delay(MOCK_DELAY)
+            callback.invoke(loadDataFromAsserts(context, assertsFileName))
         }
     }
 
-    private fun loadDataFromAsserts(context: Context, fileName: String): MutableList<IKEntity> {
-        val result = mutableListOf<IKEntity>()
-        context.assets.open(fileName).use { inputStream ->
-            var buffer = ByteArray(inputStream.available())
-            inputStream.read(buffer)
-            val jsonStr = String(buffer)
-            var data = JSONArray(jsonStr)
-            for (i in 0 until data.length()) {
-                val item = data.getJSONObject(i)
-                val kEntity = KEntity(
-                    item.getString("high").toFloat(),
-                    item.getString("low").toFloat(),
-                    item.getString("open").toFloat(),
-                    item.getString("close").toFloat(),
-                    item.getLong("volume"),
-                    item.getLong("time")
-                )
-                result.add(kEntity)
-            }
-        }
-        return result
-    }
-
-    private fun loadDataFromTimeDataAsserts(
+    private suspend fun loadDataFromAsserts(
         context: Context,
         fileName: String
     ): MutableList<IKEntity> {
-        val result = mutableListOf<IKEntity>()
-        context.assets.open(fileName).use { inputStream ->
-            var buffer = ByteArray(inputStream.available())
-            inputStream.read(buffer)
-            val jsonStr = String(buffer)
-            var data = JSONArray(jsonStr)
-            for (i in 0 until data.length()) {
-                val item = data.getJSONObject(i)
-                val kEntity = KEntity(
-                    item.getString("price").toFloat(),
-                    item.getString("price").toFloat(),
-                    item.getString("price").toFloat(),
-                    item.getString("price").toFloat(),
-                    item.getLong("volume"),
-                    item.getLong("time"),
-                    item.getString("avgPrice").toFloat()
-                )
-                result.add(kEntity)
+        return withContext(Dispatchers.IO) {
+            val result = mutableListOf<IKEntity>()
+            context.assets.open(fileName).use { inputStream ->
+                var buffer = ByteArray(inputStream.available())
+                inputStream.read(buffer)
+                val jsonStr = String(buffer)
+                var data = JSONArray(jsonStr)
+                for (i in 0 until data.length()) {
+                    val item = data.getJSONObject(i)
+                    val kEntity = KEntity(
+                        item.getString("high").toFloat(),
+                        item.getString("low").toFloat(),
+                        item.getString("open").toFloat(),
+                        item.getString("close").toFloat(),
+                        item.getLong("volume"),
+                        item.getLong("time")
+                    )
+                    result.add(kEntity)
+                }
             }
+            result
         }
-        return result
+    }
+
+    private suspend fun loadDataFromTimeDataAsserts(
+        context: Context,
+        fileName: String
+    ): MutableList<IKEntity> {
+        return withContext(Dispatchers.IO) {
+            val result = mutableListOf<IKEntity>()
+            context.assets.open(fileName).use { inputStream ->
+                var buffer = ByteArray(inputStream.available())
+                inputStream.read(buffer)
+                val jsonStr = String(buffer)
+                var data = JSONArray(jsonStr)
+                for (i in 0 until data.length()) {
+                    val item = data.getJSONObject(i)
+                    val kEntity = KEntity(
+                        item.getString("price").toFloat(),
+                        item.getString("price").toFloat(),
+                        item.getString("price").toFloat(),
+                        item.getString("price").toFloat(),
+                        item.getLong("volume"),
+                        item.getLong("time"),
+                        item.getString("avgPrice").toFloat()
+                    )
+                    result.add(kEntity)
+                }
+            }
+            result
+        }
+
     }
 
 
     fun loadActiveChartData(context: Context, fileIdx: Int, callback: (ActiveResponse) -> Unit) {
         MainScope().launch {
-            val deferred = async {
-                loadDataFromActiveDataAsserts(context, "mock_active_data_${fileIdx}.txt")
-            }
-            callback.invoke(deferred.await())
+            callback.invoke(
+                loadDataFromActiveDataAsserts(
+                    context,
+                    "mock_active_data_${fileIdx}.txt"
+                )
+            )
         }
     }
 
-    private fun loadDataFromActiveDataAsserts(context: Context, fileName: String): ActiveResponse {
-        var dataList = mutableListOf<IKEntity>()
-        var preClosePrice = 0f
-        context.assets.open(fileName).use { inputStream ->
-            var buffer = ByteArray(inputStream.available())
-            inputStream.read(buffer)
-            val jsonStr = String(buffer)
-            val json = JSONObject(jsonStr)
-            preClosePrice = json.getString("preClosePrice").toFloat()
-            var data = json.getJSONArray("data")
-            for (i in 0 until data.length()) {
-                val item = data.getJSONObject(i)
+    private suspend fun loadDataFromActiveDataAsserts(
+        context: Context,
+        fileName: String
+    ): ActiveResponse {
+        return withContext(Dispatchers.IO) {
+            var dataList = mutableListOf<IKEntity>()
+            var preClosePrice = 0f
+            context.assets.open(fileName).use { inputStream ->
+                var buffer = ByteArray(inputStream.available())
+                inputStream.read(buffer)
+                val jsonStr = String(buffer)
+                val json = JSONObject(jsonStr)
+                preClosePrice = json.getString("preClosePrice").toFloat()
+                var data = json.getJSONArray("data")
+                for (i in 0 until data.length()) {
+                    val item = data.getJSONObject(i)
 
-                var activeInfo: ActiveInfo? = null
-                item.optJSONObject("active")?.let {
-                    activeInfo = ActiveInfo(it.getString("industry"), it.getBoolean("red"))
+                    var activeInfo: ActiveInfo? = null
+                    item.optJSONObject("active")?.let {
+                        activeInfo = ActiveInfo(it.getString("industry"), it.getBoolean("red"))
+                    }
+                    val activeChartEntity = ActiveChartKEntity(
+                        item.getString("price").toFloat(),
+                        item.getString("avgPrice").toFloat(),
+                        item.getLong("time"),
+                        item.getLong("volume"),
+                        activeInfo
+                    )
+                    dataList.add(activeChartEntity)
                 }
-                val activeChartEntity = ActiveChartKEntity(
-                    item.getString("price").toFloat(),
-                    item.getString("avgPrice").toFloat(),
-                    item.getLong("time"),
-                    item.getLong("volume"),
-                    activeInfo
-                )
-                dataList.add(activeChartEntity)
             }
+            ActiveResponse(preClosePrice, dataList)
         }
-        return ActiveResponse(preClosePrice, dataList)
+
     }
 
 }

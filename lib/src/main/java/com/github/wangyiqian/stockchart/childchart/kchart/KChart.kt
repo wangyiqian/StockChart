@@ -31,37 +31,39 @@ open class KChart(
     chartConfig: KChartConfig
 ) : BaseChildChart<KChartConfig>(stockChart, chartConfig) {
 
-    private val lineKChartLinePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        strokeCap = Paint.Cap.ROUND
+    private val lineKChartLinePaint by lazy {
+        Paint(Paint.ANTI_ALIAS_FLAG).apply { strokeCap = Paint.Cap.ROUND }
     }
-    private val candleKChartPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        strokeCap = Paint.Cap.ROUND
+    private val candleKChartPaint by lazy {
+        Paint(Paint.ANTI_ALIAS_FLAG).apply { strokeCap = Paint.Cap.ROUND }
     }
-    private val hollowKChartPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        strokeCap = Paint.Cap.ROUND
+    private val hollowKChartPaint by lazy {
+        Paint(Paint.ANTI_ALIAS_FLAG).apply { strokeCap = Paint.Cap.ROUND }
     }
-    private val barKChartPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        strokeCap = Paint.Cap.ROUND
+    private val barKChartPaint by lazy {
+        Paint(Paint.ANTI_ALIAS_FLAG).apply { strokeCap = Paint.Cap.ROUND }
     }
-    private val mountainKChartPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        strokeCap = Paint.Cap.ROUND
+    private val mountainKChartPaint by lazy {
+        Paint(Paint.ANTI_ALIAS_FLAG).apply { strokeCap = Paint.Cap.ROUND }
     }
-    private val mountainGradientKChartPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { isDither = true }
+    private val mountainGradientKChartPaint by lazy {
+        Paint(Paint.ANTI_ALIAS_FLAG).apply { isDither = true }
+    }
     private var mountainLinearGradient: LinearGradient? = null
     private var mountainLinearGradientColors = intArrayOf()
-    private val highlightHorizontalLinePaint = Paint(Paint.ANTI_ALIAS_FLAG)
-    private val highlightVerticalLinePaint = Paint(Paint.ANTI_ALIAS_FLAG)
-    private val costPriceLinePaint = Paint(Paint.ANTI_ALIAS_FLAG)
-    private val highlightLabelPaint = Paint(Paint.ANTI_ALIAS_FLAG)
-    private val highlightLabelBgPaint = Paint(Paint.ANTI_ALIAS_FLAG)
-    private val indexPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        strokeCap = Paint.Cap.ROUND
+    private val highlightHorizontalLinePaint by lazy { Paint(Paint.ANTI_ALIAS_FLAG) }
+    private val highlightVerticalLinePaint by lazy { Paint(Paint.ANTI_ALIAS_FLAG) }
+    private val costPriceLinePaint by lazy { Paint(Paint.ANTI_ALIAS_FLAG) }
+    private val highlightLabelPaint by lazy { Paint(Paint.ANTI_ALIAS_FLAG) }
+    private val highlightLabelBgPaint by lazy { Paint(Paint.ANTI_ALIAS_FLAG) }
+    private val indexPaint by lazy {
+        Paint(Paint.ANTI_ALIAS_FLAG).apply { strokeCap = Paint.Cap.ROUND }
     }
-    private val indexTextPaint = Paint(Paint.ANTI_ALIAS_FLAG)
-    private val highestAndLowestLabelPaint = Paint(Paint.ANTI_ALIAS_FLAG)
-    private val labelPaint = Paint(Paint.ANTI_ALIAS_FLAG)
-    private val avgPriceLinePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        strokeCap = Paint.Cap.ROUND
+    private val indexTextPaint by lazy { Paint(Paint.ANTI_ALIAS_FLAG) }
+    private val highestAndLowestLabelPaint by lazy { Paint(Paint.ANTI_ALIAS_FLAG) }
+    private val labelPaint by lazy { Paint(Paint.ANTI_ALIAS_FLAG) }
+    private val avgPriceLinePaint by lazy {
+        Paint(Paint.ANTI_ALIAS_FLAG).apply { strokeCap = Paint.Cap.ROUND }
     }
 
     private var indexList: List<List<Float?>>? = null
@@ -107,7 +109,7 @@ open class KChart(
 
     override fun getYValueRange(startIndex: Int, endIndex: Int, result: FloatArray) {
 
-        if (chartConfig.index == null ||  chartConfig.index != lastCalculateIndexType) {
+        if (chartConfig.index == null || chartConfig.index != lastCalculateIndexType) {
             calculateIndexList()
         }
 
@@ -653,7 +655,7 @@ open class KChart(
         drawAvgPriceLine(canvas)
     }
 
-    private fun drawAvgPriceLine(canvas: Canvas){
+    private fun drawAvgPriceLine(canvas: Canvas) {
         if (chartConfig.showAvgLine) {
 
             avgPriceLinePaint.strokeWidth = chartConfig.avgLineStrokeWidth

@@ -32,11 +32,11 @@ class VolumeChart(
     chartConfig: VolumeChartConfig
 ) : BaseChildChart<VolumeChartConfig>(stockChart, chartConfig) {
 
-    private val volumePaint = Paint(Paint.ANTI_ALIAS_FLAG)
-    private val highlightHorizontalLinePaint = Paint(Paint.ANTI_ALIAS_FLAG)
-    private val highlightVerticalLinePaint = Paint(Paint.ANTI_ALIAS_FLAG)
-    private val highlightLabelPaint = Paint(Paint.ANTI_ALIAS_FLAG)
-    private val highlightLabelBgPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val volumePaint by lazy { Paint(Paint.ANTI_ALIAS_FLAG) }
+    private val highlightHorizontalLinePaint by lazy { Paint(Paint.ANTI_ALIAS_FLAG) }
+    private val highlightVerticalLinePaint by lazy { Paint(Paint.ANTI_ALIAS_FLAG) }
+    private val highlightLabelPaint by lazy { Paint(Paint.ANTI_ALIAS_FLAG) }
+    private val highlightLabelBgPaint by lazy { Paint(Paint.ANTI_ALIAS_FLAG) }
 
     override fun onKEntitiesChanged() {}
 

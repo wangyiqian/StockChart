@@ -25,14 +25,14 @@ import com.github.wangyiqian.stockchart.childchart.base.BaseChildChart
 class KdjChart(stockChart: IStockChart, chartConfig: KdjChartConfig) :
     BaseChildChart<KdjChartConfig>(stockChart, chartConfig) {
 
-    private val linePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        strokeCap = Paint.Cap.ROUND
+    private val linePaint by lazy {
+        Paint(Paint.ANTI_ALIAS_FLAG).apply { strokeCap = Paint.Cap.ROUND }
     }
-    private val highlightHorizontalLinePaint = Paint(Paint.ANTI_ALIAS_FLAG)
-    private val highlightVerticalLinePaint = Paint(Paint.ANTI_ALIAS_FLAG)
-    private val highlightLabelPaint = Paint(Paint.ANTI_ALIAS_FLAG)
-    private val highlightLabelBgPaint = Paint(Paint.ANTI_ALIAS_FLAG)
-    private val indexTextPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val highlightHorizontalLinePaint by lazy { Paint(Paint.ANTI_ALIAS_FLAG) }
+    private val highlightVerticalLinePaint by lazy { Paint(Paint.ANTI_ALIAS_FLAG) }
+    private val highlightLabelPaint by lazy { Paint(Paint.ANTI_ALIAS_FLAG) }
+    private val highlightLabelBgPaint by lazy { Paint(Paint.ANTI_ALIAS_FLAG) }
+    private val indexTextPaint by lazy { Paint(Paint.ANTI_ALIAS_FLAG) }
 
     private var indexList: List<List<Float?>>? = null
 

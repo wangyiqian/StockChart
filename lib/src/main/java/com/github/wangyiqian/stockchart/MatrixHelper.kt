@@ -23,24 +23,24 @@ import kotlin.math.abs
  * @author wangyiqian E-mail: wangyiqian9891@gmail.com
  * @version 创建时间: 2021/2/6
  */
-class MatrixHelper(private val stockChart: IStockChart) {
+internal class MatrixHelper(private val stockChart: IStockChart) {
 
     // 缩放
-    val xScaleMatrix = Matrix()
+    val xScaleMatrix by lazy { Matrix() }
 
     // 如果需要"一格一格"滑动，则用于缩放修正
-    val fixXScaleMatrix = Matrix()
+    val fixXScaleMatrix by lazy { Matrix() }
 
     // 左右滑动
-    val scrollMatrix = Matrix()
+    val scrollMatrix by lazy { Matrix() }
 
     // 临时载体
-    private val tmp2FloatArray = FloatArray(2)
-    private val tmp4FloatArray = FloatArray(4)
-    private val tmp9FloatArray = FloatArray(9)
-    private val tmpMatrix = Matrix()
+    private val tmp2FloatArray by lazy { FloatArray(2) }
+    private val tmp4FloatArray by lazy { FloatArray(4) }
+    private val tmp9FloatArray by lazy { FloatArray(9) }
+    private val tmpMatrix by lazy { Matrix() }
 
-    private var scroller: OverScroller = OverScroller(stockChart.getContext())
+    private val scroller by lazy { OverScroller(stockChart.getContext()) }
     private var computeScrollCurrX = 0
 
     private var scalePx = 0f
@@ -77,7 +77,7 @@ class MatrixHelper(private val stockChart: IStockChart) {
     }
 
     // 目前总共缩放了多少
-    fun getTotalScaleX(): Float{
+    fun getTotalScaleX(): Float {
         xScaleMatrix.getValues(tmp9FloatArray)
         return tmp9FloatArray[Matrix.MSCALE_X]
     }

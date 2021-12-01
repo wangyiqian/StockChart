@@ -25,27 +25,27 @@ import kotlin.math.round
  * @author wangyiqian E-mail: wangyiqian9891@gmail.com
  * @version 创建时间: 2021/2/3
  */
-class ChildChartMatrixHelper<O : BaseChildChartConfig>(
+internal class ChildChartMatrixHelper<O : BaseChildChartConfig>(
     private val stockChart: IStockChart,
     private val chart: BaseChildChart<O>
 ) {
 
     // 用于逻辑坐标转实际坐标，这个matrix转换的结果是所有数据填满显示区域，而不关注需要显示哪些指定范围的数据
-    val coordinateMatrix = Matrix()
+    val coordinateMatrix by lazy { Matrix() }
 
     // 如果需要"一格一格"滑动，则x轴可能由于缩放引起"半个"数据显示在边缘，需要调整
-    private val fixXMatrix = Matrix()
+    private val fixXMatrix by lazy { Matrix() }
 
     // 调整Y，使得最终的内容填满显示区域
-    private val fixYMatrix = Matrix()
+    private val fixYMatrix by lazy { Matrix() }
 
     // 多个matrix组合后
-    private val concatMatrix = Matrix()
+    private val concatMatrix by lazy { Matrix() }
 
     // 临时载体
-    private val tmp2FloatArray = FloatArray(2)
-    private val tmp4FloatArray = FloatArray(4)
-    private val tmpMatrix = Matrix()
+    private val tmp2FloatArray by lazy { FloatArray(2) }
+    private val tmp4FloatArray by lazy { FloatArray(4) }
+    private val tmpMatrix by lazy { Matrix() }
 
     /**
      * 初始准备

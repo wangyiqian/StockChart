@@ -43,14 +43,14 @@ abstract class BaseChildChart<C : BaseChildChartConfig> @JvmOverloads constructo
     private val chartMainDisplayArea = RectF()
 
     // 临时载体
-    protected val tmp2FloatArray = FloatArray(2)
-    protected val tmp4FloatArray = FloatArray(4)
-    protected val tmp12FloatArray = FloatArray(12)
-    protected val tmp24FloatArray = FloatArray(24)
-    protected val tmpRectF = RectF()
-    protected val tmpRect = Rect()
-    protected val tmpPath = Path()
-    protected val tmpFontMetrics = Paint.FontMetrics()
+    protected val tmp2FloatArray by lazy { FloatArray(2) }
+    protected val tmp4FloatArray by lazy { FloatArray(4) }
+    protected val tmp12FloatArray by lazy { FloatArray(12) }
+    protected val tmp24FloatArray by lazy { FloatArray(24) }
+    protected val tmpRectF by lazy { RectF() }
+    protected val tmpRect by lazy { Rect() }
+    protected val tmpPath by lazy { Path() }
+    protected val tmpFontMetrics by lazy { Paint.FontMetrics() }
 
     init {
         val layoutParams =

@@ -29,15 +29,15 @@ class MacdChart(
     chartConfig: MacdChartConfig
 ) : BaseChildChart<MacdChartConfig>(stockChart, chartConfig) {
 
-    private val linePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        strokeCap = Paint.Cap.ROUND
+    private val linePaint by lazy {
+        Paint(Paint.ANTI_ALIAS_FLAG).apply { strokeCap = Paint.Cap.ROUND }
     }
-    private val barPaint = Paint(Paint.ANTI_ALIAS_FLAG)
-    private val highlightHorizontalLinePaint = Paint(Paint.ANTI_ALIAS_FLAG)
-    private val highlightVerticalLinePaint = Paint(Paint.ANTI_ALIAS_FLAG)
-    private val highlightLabelPaint = Paint(Paint.ANTI_ALIAS_FLAG)
-    private val highlightLabelBgPaint = Paint(Paint.ANTI_ALIAS_FLAG)
-    private val indexTextPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+    private val barPaint by lazy { Paint(Paint.ANTI_ALIAS_FLAG) }
+    private val highlightHorizontalLinePaint by lazy { Paint(Paint.ANTI_ALIAS_FLAG) }
+    private val highlightVerticalLinePaint by lazy { Paint(Paint.ANTI_ALIAS_FLAG) }
+    private val highlightLabelPaint by lazy { Paint(Paint.ANTI_ALIAS_FLAG) }
+    private val highlightLabelBgPaint by lazy { Paint(Paint.ANTI_ALIAS_FLAG) }
+    private val indexTextPaint by lazy { Paint(Paint.ANTI_ALIAS_FLAG) }
 
     private var indexList: List<List<Float?>>? = null
 
@@ -141,7 +141,8 @@ class MacdChart(
         chartConfig.index?.let { index ->
             indexList?.let { indexList ->
                 val highlight = getHighlight()
-                var indexIdx = highlight?.getIdx() ?: stockChart.findLastNotEmptyKEntityIdxInDisplayArea()
+                var indexIdx =
+                    highlight?.getIdx() ?: stockChart.findLastNotEmptyKEntityIdxInDisplayArea()
                 indexTextPaint.textSize = index.textSize
                 var left = index.textMarginLeft
                 val top = index.textMarginTop
