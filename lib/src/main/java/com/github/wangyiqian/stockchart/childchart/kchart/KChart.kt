@@ -807,7 +807,17 @@ open class KChart(
                 tmpRectF.right = left + barWidth
                 tmpRectF.bottom = kEntity.getClosePrice()
                 mapRectValue2Real(tmpRectF)
-                canvas.drawRect(tmpRectF, candleKChartPaint)
+                if (tmpRectF.height() == 0f) {
+                    canvas.drawLine(
+                        tmpRectF.left,
+                        tmpRectF.top,
+                        tmpRectF.right,
+                        tmpRectF.bottom,
+                        candleKChartPaint
+                    )
+                } else {
+                    canvas.drawRect(tmpRectF, candleKChartPaint)
+                }
             }
             left += barWidth + spaceWidth
         }
