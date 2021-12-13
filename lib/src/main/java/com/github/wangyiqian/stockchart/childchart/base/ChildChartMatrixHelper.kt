@@ -90,7 +90,7 @@ internal class ChildChartMatrixHelper<O : BaseChildChartConfig>(
             // 非正常情况，y轴逻辑区间无法算出（所有值相等），之前处于原始逻辑坐标，将需要显示的逻辑区域移动到显示区域左边垂直居中位置
             coordinateMatrix.postTranslate(
                 chartDisplayArea.left - xValueRangeFrom,
-                (chartDisplayArea.bottom - chartDisplayArea.top) / 2 - yValueRangeFrom
+                (chartDisplayArea.bottom - chartDisplayArea.top) / 2
             )
         } else {
             // 正常情况，之前处于原始逻辑坐标，将需要显示的逻辑区域移动到显示区域左上角

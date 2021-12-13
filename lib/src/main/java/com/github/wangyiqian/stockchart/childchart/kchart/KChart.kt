@@ -19,6 +19,7 @@ import com.github.wangyiqian.stockchart.childchart.base.BaseChildChart
 import com.github.wangyiqian.stockchart.entities.EmptyKEntity
 import com.github.wangyiqian.stockchart.entities.KEntityOfLineStarter
 import com.github.wangyiqian.stockchart.index.Index
+import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
 
@@ -153,8 +154,17 @@ open class KChart(
                 }
         }
 
-        result[0] = yMin
-        result[1] = yMax
+        if (abs(yMin - yMax) > 0.0001) {
+            result[0] = yMin
+            result[1] = yMax
+        } else { // 约等于0
+            var delta = abs(chartConfig.costPrice ?: 0f - yMin) * 2
+            if (delta == yMin) {
+                delta = abs(yMin / 2f)
+            }
+            result[0] = yMin - delta
+            result[1] = yMax + delta
+        }
     }
 
     override fun preDrawBackground(canvas: Canvas) {}
@@ -593,11 +603,16 @@ open class KChart(
         mountainGradientKChartPaint.shader = mountainLinearGradient
         tmpPath.reset()
 
+        tmp2FloatArray[1] = getChartDisplayArea().bottom
+        mapPointsReal2Value(tmp2FloatArray)
+        val yMinValue = tmp2FloatArray[1]
+
         var preIdx = -1
         for (idx in getKEntities().indices) {
             if (getKEntities()[idx] is EmptyKEntity || getKEntities()[idx] is KEntityOfLineStarter) {
                 if (preIdx != -1) {
-                    tmpPath.lineTo(preIdx + 0.5f, 0f)
+                    tmpPath.lineTo(preIdx + 1f, getKEntities()[preIdx].getClosePrice())
+                    tmpPath.lineTo(preIdx + 1f, yMinValue)
                     mapPathValue2Real(tmpPath)
                     canvas.drawPath(tmpPath, mountainGradientKChartPaint)
                     tmpPath.reset()
@@ -610,7 +625,11 @@ open class KChart(
             if (preIdx == -1) {
                 preIdx = idx
                 tmpPath.reset()
-                tmpPath.moveTo(preIdx + 0.5f, 0f)
+                tmpPath.moveTo(preIdx.toFloat(), yMinValue)
+                tmpPath.lineTo(preIdx.toFloat(), getKEntities()[preIdx].getClosePrice())
+                tmpPath.lineTo(preIdx + 0.5f, getKEntities()[preIdx].getClosePrice())
+
+
             } else {
                 preIdx = idx
             }
@@ -619,7 +638,8 @@ open class KChart(
         }
 
         if (preIdx != -1) {
-            tmpPath.lineTo(preIdx + 0.5f, 0f)
+            tmpPath.lineTo(preIdx + 1f, getKEntities()[preIdx].getClosePrice())
+            tmpPath.lineTo(preIdx + 1f, yMinValue)
             mapPathValue2Real(tmpPath)
             canvas.drawPath(tmpPath, mountainGradientKChartPaint)
             tmpPath.reset()
