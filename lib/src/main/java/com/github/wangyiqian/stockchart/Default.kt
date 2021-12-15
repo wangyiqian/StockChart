@@ -92,6 +92,7 @@ val DEFAULT_AVG_LINE_COLOR = Color.parseColor("#FF7B11")
 
 // Volume图
 const val DEFAULT_VOLUME_BAR_SPACE_RATIO = 0.5f
+const val DEFAULT_VOLUME_CHART_HOLLOW_CHART_LINE_STROKE_WIDTH = 1.5f
 
 // HighlightLabel
 const val DEFAULT_HIGHLIGHT_LABEL_BG_COLOR = Color.LTGRAY

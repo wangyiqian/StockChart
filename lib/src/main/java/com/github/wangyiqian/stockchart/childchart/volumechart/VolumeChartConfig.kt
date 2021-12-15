@@ -29,12 +29,16 @@ class VolumeChartConfig(
     onHighlightListener: OnHighlightListener? = null,
     chartMainDisplayAreaPaddingTop: Float = 0f,
     chartMainDisplayAreaPaddingBottom: Float = 0f,
+    // 柱子样式
+    var volumeChartType: VolumeChartType = VolumeChartType.CANDLE(),
     // 长按时高亮线左侧标签配置
     var highlightLabelLeft: HighlightLabelConfig? = null,
     // 长按时高亮线右侧标签配置
     var highlightLabelRight: HighlightLabelConfig? = null,
     // 柱子之间的空间占比柱子宽度
-    var barSpaceRatio: Float = DEFAULT_VOLUME_BAR_SPACE_RATIO
+    var barSpaceRatio: Float = DEFAULT_VOLUME_BAR_SPACE_RATIO,
+    // 柱子空心时的线条宽度
+    var hollowChartLineStrokeWidth: Float = DEFAULT_VOLUME_CHART_HOLLOW_CHART_LINE_STROKE_WIDTH
 ) : BaseChildChartConfig(
     height,
     marginTop,
@@ -42,4 +46,13 @@ class VolumeChartConfig(
     onHighlightListener,
     chartMainDisplayAreaPaddingTop,
     chartMainDisplayAreaPaddingBottom
-)
+) {
+
+    sealed class VolumeChartType {
+        // 实心
+        class CANDLE : VolumeChartType()
+        // 空心
+        class HOLLOW : VolumeChartType()
+    }
+
+}

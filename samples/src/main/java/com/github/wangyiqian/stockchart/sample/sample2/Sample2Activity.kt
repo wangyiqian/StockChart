@@ -535,6 +535,8 @@ class Sample2Activity : AppCompatActivity() {
 
         this.kChartType = kChartType
         kChartConfig.kChartType = this.kChartType
+        // 成交量图根据K线图类型决定是空心还是实现
+        volumeChartConfig.volumeChartType = if(this.kChartType is KChartConfig.KChartType.HOLLOW) VolumeChartConfig.VolumeChartType.HOLLOW() else VolumeChartConfig.VolumeChartType.CANDLE()
         stock_chart.notifyChanged()
         refreshOptionButtonsState()
     }

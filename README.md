@@ -214,6 +214,8 @@ Data.loadDayData(this, 0) { kEntities: List<IKEntity> ->
 |highlightLabelLeft|长按时高亮线左侧标签配置|
 |highlightLabelRight|长按时高亮线右侧标签配置|
 |barSpaceRatio|柱子之间的空间占比柱子宽度|
+|volumeChartType|柱子样式|
+|hollowChartLineStrokeWidth|柱子空心时的线条宽度|
 
 ##### MACD指标图配置`MacdChartConfig`
 |字段|描述|
