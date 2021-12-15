@@ -753,54 +753,32 @@ open class KChart(
                 hollowKChartPaint.color =
                     if (kEntity.getClosePrice() >= kEntity.getOpenPrice()) stockChart.getConfig().riseColor else stockChart.getConfig().downColor
 
-                if (kEntity.getClosePrice() >= kEntity.getOpenPrice()) { // 空心阳线
-                    tmp24FloatArray[0] = left
-                    tmp24FloatArray[1] = kEntity.getOpenPrice()
-                    tmp24FloatArray[2] = left
-                    tmp24FloatArray[3] = kEntity.getClosePrice()
+                tmp4FloatArray[0] = left + barWidth / 2
+                tmp4FloatArray[1] = kEntity.getHighPrice()
+                tmp4FloatArray[2] = tmp4FloatArray[0]
+                tmp4FloatArray[3] = max(kEntity.getOpenPrice(), kEntity.getClosePrice())
+                mapPointsValue2Real(tmp4FloatArray)
+                canvas.drawLines(tmp4FloatArray, hollowKChartPaint)
 
-                    tmp24FloatArray[4] = left
-                    tmp24FloatArray[5] = kEntity.getOpenPrice()
-                    tmp24FloatArray[6] = left + barWidth
-                    tmp24FloatArray[7] = kEntity.getOpenPrice()
+                tmp4FloatArray[0] = left + barWidth / 2
+                tmp4FloatArray[1] = kEntity.getLowPrice()
+                tmp4FloatArray[2] = tmp4FloatArray[0]
+                tmp4FloatArray[3] = min(kEntity.getOpenPrice(), kEntity.getClosePrice())
+                mapPointsValue2Real(tmp4FloatArray)
+                canvas.drawLines(tmp4FloatArray, hollowKChartPaint)
 
-                    tmp24FloatArray[8] = left + barWidth
-                    tmp24FloatArray[9] = kEntity.getOpenPrice()
-                    tmp24FloatArray[10] = left + barWidth
-                    tmp24FloatArray[11] = kEntity.getClosePrice()
-
-                    tmp24FloatArray[12] = left
-                    tmp24FloatArray[13] = kEntity.getClosePrice()
-                    tmp24FloatArray[14] = left + barWidth
-                    tmp24FloatArray[15] = kEntity.getClosePrice()
-
-                    tmp24FloatArray[16] = left + barWidth / 2
-                    tmp24FloatArray[17] = kEntity.getHighPrice()
-                    tmp24FloatArray[18] = left + barWidth / 2
-                    tmp24FloatArray[19] = max(kEntity.getOpenPrice(), kEntity.getClosePrice())
-
-                    tmp24FloatArray[20] = left + barWidth / 2
-                    tmp24FloatArray[21] = kEntity.getLowPrice()
-                    tmp24FloatArray[22] = left + barWidth / 2
-                    tmp24FloatArray[23] = min(kEntity.getOpenPrice(), kEntity.getClosePrice())
-
-                    mapPointsValue2Real(tmp24FloatArray)
-                    canvas.drawLines(tmp24FloatArray, hollowKChartPaint)
-                } else { // 实心阴线
-                    tmp4FloatArray[0] = left + barWidth / 2
-                    tmp4FloatArray[1] = kEntity.getHighPrice()
-                    tmp4FloatArray[2] = left + barWidth / 2
-                    tmp4FloatArray[3] = kEntity.getLowPrice()
-                    mapPointsValue2Real(tmp4FloatArray)
-                    canvas.drawLines(tmp4FloatArray, hollowKChartPaint)
-                    tmpRectF.left = left
-                    tmpRectF.top = kEntity.getOpenPrice()
-                    tmpRectF.right = left + barWidth
-                    tmpRectF.bottom = kEntity.getClosePrice()
-                    mapRectValue2Real(tmpRectF)
-                    canvas.drawRect(tmpRectF, hollowKChartPaint)
+                tmpRectF.left = left
+                tmpRectF.top = kEntity.getOpenPrice()
+                tmpRectF.right = left + barWidth
+                tmpRectF.bottom = kEntity.getClosePrice()
+                mapRectValue2Real(tmpRectF)
+                hollowKChartPaint.style = if (kEntity.getClosePrice() >= kEntity.getOpenPrice()) {
+                    // 空心阳线
+                    Paint.Style.STROKE
+                } else {
+                    Paint.Style.FILL
                 }
-
+                canvas.drawRect(tmpRectF, hollowKChartPaint)
             }
             left += barWidth + spaceWidth
         }
@@ -808,6 +786,7 @@ open class KChart(
 
     private fun drawCandleKChart(canvas: Canvas) {
         candleKChartPaint.strokeWidth = chartConfig.candleChartLineStrokeWidth
+
         val barWidth = 1 * (1 - chartConfig.barSpaceRatio)
         val spaceWidth = 1 * chartConfig.barSpaceRatio
         var left = spaceWidth / 2f
@@ -818,7 +797,7 @@ open class KChart(
                 candleKChartPaint.color = candleKChartPaint.color
                 tmp4FloatArray[0] = left + barWidth / 2
                 tmp4FloatArray[1] = kEntity.getHighPrice()
-                tmp4FloatArray[2] = left + barWidth / 2
+                tmp4FloatArray[2] = tmp4FloatArray[0]
                 tmp4FloatArray[3] = kEntity.getLowPrice()
                 mapPointsValue2Real(tmp4FloatArray)
                 canvas.drawLines(tmp4FloatArray, candleKChartPaint)
@@ -827,17 +806,9 @@ open class KChart(
                 tmpRectF.right = left + barWidth
                 tmpRectF.bottom = kEntity.getClosePrice()
                 mapRectValue2Real(tmpRectF)
-                if (tmpRectF.height() == 0f) {
-                    canvas.drawLine(
-                        tmpRectF.left,
-                        tmpRectF.top,
-                        tmpRectF.right,
-                        tmpRectF.bottom,
-                        candleKChartPaint
-                    )
-                } else {
-                    canvas.drawRect(tmpRectF, candleKChartPaint)
-                }
+                candleKChartPaint.style =
+                    if (tmpRectF.height() == 0f) Paint.Style.STROKE else Paint.Style.FILL
+                canvas.drawRect(tmpRectF, candleKChartPaint)
             }
             left += barWidth + spaceWidth
         }
