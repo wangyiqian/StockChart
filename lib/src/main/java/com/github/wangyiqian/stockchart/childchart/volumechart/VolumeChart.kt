@@ -54,9 +54,21 @@ class VolumeChart(
     override fun drawBackground(canvas: Canvas) {
     }
 
-    override fun preDrawData(canvas: Canvas) {}
+    override fun preDrawData(canvas: Canvas) {
+    }
 
     override fun drawData(canvas: Canvas) {
+        when (chartConfig.volumeChartType) {
+            is VolumeChartConfig.VolumeChartType.CANDLE -> {
+                drawVolumeChart(canvas, false)
+            }
+            is VolumeChartConfig.VolumeChartType.HOLLOW -> {
+                drawVolumeChart(canvas, true)
+            }
+        }
+    }
+
+    private fun drawVolumeChart(canvas: Canvas, isHollow: Boolean) {
         val barWidth = 1 * (1 - chartConfig.barSpaceRatio)
         val spaceWidth = 1 * chartConfig.barSpaceRatio
         var left = spaceWidth / 2f
@@ -80,6 +92,12 @@ class VolumeChart(
                 }
                 volumePaint.color =
                     if (isRise) stockChart.getConfig().riseColor else stockChart.getConfig().downColor
+                volumePaint.strokeWidth = chartConfig.hollowChartLineStrokeWidth
+                if (kEntity.getClosePrice() >= kEntity.getOpenPrice() && isHollow) { // 空心
+                    volumePaint.style = Paint.Style.STROKE
+                } else {
+                    volumePaint.style = Paint.Style.FILL
+                }
 
                 tmpRectF.left = left
                 tmpRectF.top = kEntity.getVolume().toFloat()
