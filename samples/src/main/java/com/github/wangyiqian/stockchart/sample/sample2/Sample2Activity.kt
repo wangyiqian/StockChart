@@ -299,6 +299,10 @@ class Sample2Activity : AppCompatActivity() {
                     Util.formatVolume(volume = volume.toLong())
                 }
             )
+
+            // 柱子空心时的线条宽度
+            hollowChartLineStrokeWidth = DimensionUtil.dp2px(this@Sample2Activity, 1f).toFloat()
+
         }
 
     }

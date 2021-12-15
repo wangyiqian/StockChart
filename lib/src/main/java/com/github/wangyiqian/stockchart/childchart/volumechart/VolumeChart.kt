@@ -69,6 +69,7 @@ class VolumeChart(
     }
 
     private fun drawVolumeChart(canvas: Canvas, isHollow: Boolean) {
+        volumePaint.strokeWidth = chartConfig.hollowChartLineStrokeWidth
         val barWidth = 1 * (1 - chartConfig.barSpaceRatio)
         val spaceWidth = 1 * chartConfig.barSpaceRatio
         var left = spaceWidth / 2f
@@ -92,7 +93,6 @@ class VolumeChart(
                 }
                 volumePaint.color =
                     if (isRise) stockChart.getConfig().riseColor else stockChart.getConfig().downColor
-                volumePaint.strokeWidth = chartConfig.hollowChartLineStrokeWidth
                 if (kEntity.getClosePrice() >= kEntity.getOpenPrice() && isHollow) { // 空心
                     volumePaint.style = Paint.Style.STROKE
                 } else {
