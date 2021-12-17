@@ -134,7 +134,7 @@ open class KChart(
                                 yMax = max(yMax, kEntity.getClosePrice())
                             }
                             kEntity.getAvgPrice()?.let { avgPrice ->
-                                if (chartConfig.showAvgLine) {
+                                if (needDrawAvgPriceLine()) {
                                     yMin = min(yMin, avgPrice)
                                     yMax = max(yMax, avgPrice)
                                 }
@@ -191,6 +191,7 @@ open class KChart(
                 drawBarKChart(canvas)
             }
         }
+        drawAvgPriceLine(canvas)
         drawHighestAndLowestLabel(canvas)
         drawIndex(canvas)
     }
@@ -671,12 +672,12 @@ open class KChart(
             )
             preIdx = idx
         }
-
-        drawAvgPriceLine(canvas)
     }
 
+    private fun needDrawAvgPriceLine() = chartConfig.showAvgLine && (chartConfig.kChartType is KChartConfig.KChartType.LINE || chartConfig.kChartType is KChartConfig.KChartType.MOUNTAIN)
+
     private fun drawAvgPriceLine(canvas: Canvas) {
-        if (chartConfig.showAvgLine) {
+        if (needDrawAvgPriceLine()) {
 
             avgPriceLinePaint.strokeWidth = chartConfig.avgLineStrokeWidth
             avgPriceLinePaint.color = chartConfig.avgLineColor
@@ -843,8 +844,6 @@ open class KChart(
             )
             preIdx = idx
         }
-
-        drawAvgPriceLine(canvas)
     }
 
     private fun drawLabels(canvas: Canvas) {
