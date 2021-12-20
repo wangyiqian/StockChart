@@ -674,7 +674,8 @@ open class KChart(
         }
     }
 
-    private fun needDrawAvgPriceLine() = chartConfig.showAvgLine && (chartConfig.kChartType is KChartConfig.KChartType.LINE || chartConfig.kChartType is KChartConfig.KChartType.MOUNTAIN)
+    private fun needDrawAvgPriceLine() =
+        chartConfig.showAvgLine && (chartConfig.kChartType is KChartConfig.KChartType.LINE || chartConfig.kChartType is KChartConfig.KChartType.MOUNTAIN)
 
     private fun drawAvgPriceLine(canvas: Canvas) {
         if (needDrawAvgPriceLine()) {
@@ -716,10 +717,10 @@ open class KChart(
         val barWidth = 1 * (1 - chartConfig.barSpaceRatio)
         val spaceWidth = 1 * chartConfig.barSpaceRatio
         var left = spaceWidth / 2f
-        getKEntities().forEach { kEntity ->
+        getKEntities().forEachIndexed { idx, kEntity ->
             if (kEntity !is EmptyKEntity) {
                 barKChartPaint.color =
-                    if (kEntity.getClosePrice() >= kEntity.getOpenPrice()) stockChart.getConfig().riseColor else stockChart.getConfig().downColor
+                    if (isRise(idx)) stockChart.getConfig().riseColor else stockChart.getConfig().downColor
 
                 tmp12FloatArray[0] = left + barWidth / 2
                 tmp12FloatArray[1] = kEntity.getHighPrice()
@@ -749,10 +750,10 @@ open class KChart(
         val barWidth = 1 * (1 - chartConfig.barSpaceRatio)
         val spaceWidth = 1 * chartConfig.barSpaceRatio
         var left = spaceWidth / 2f
-        getKEntities().forEach { kEntity ->
+        getKEntities().forEachIndexed { idx, kEntity ->
             if (kEntity !is EmptyKEntity) {
                 hollowKChartPaint.color =
-                    if (kEntity.getClosePrice() >= kEntity.getOpenPrice()) stockChart.getConfig().riseColor else stockChart.getConfig().downColor
+                    if (isRise(idx)) stockChart.getConfig().riseColor else stockChart.getConfig().downColor
 
                 tmp4FloatArray[0] = left + barWidth / 2
                 tmp4FloatArray[1] = kEntity.getHighPrice()
@@ -791,10 +792,10 @@ open class KChart(
         val barWidth = 1 * (1 - chartConfig.barSpaceRatio)
         val spaceWidth = 1 * chartConfig.barSpaceRatio
         var left = spaceWidth / 2f
-        getKEntities().forEach { kEntity ->
+        getKEntities().forEachIndexed { idx, kEntity ->
             if (kEntity !is EmptyKEntity) {
                 candleKChartPaint.color =
-                    if (kEntity.getClosePrice() >= kEntity.getOpenPrice()) stockChart.getConfig().riseColor else stockChart.getConfig().downColor
+                    if (isRise(idx)) stockChart.getConfig().riseColor else stockChart.getConfig().downColor
                 candleKChartPaint.color = candleKChartPaint.color
                 tmp4FloatArray[0] = left + barWidth / 2
                 tmp4FloatArray[1] = kEntity.getHighPrice()
@@ -814,6 +815,22 @@ open class KChart(
             left += barWidth + spaceWidth
         }
     }
+
+    private fun isRise(idx: Int) =
+        if (getKEntities()[idx].getClosePrice() == getKEntities()[idx].getOpenPrice()) {
+            if (idx - 1 in getKEntities().indices) {
+                val preKEntity = getKEntities()[idx - 1]
+                if (preKEntity !is EmptyKEntity) {
+                    getKEntities()[idx].getClosePrice() >= preKEntity.getClosePrice()
+                } else {
+                    true
+                }
+            } else {
+                true
+            }
+        } else {
+            getKEntities()[idx].getClosePrice() > getKEntities()[idx].getOpenPrice()
+        }
 
     private fun drawLineKChart(canvas: Canvas) {
         lineKChartLinePaint.strokeWidth = chartConfig.lineChartStrokeWidth

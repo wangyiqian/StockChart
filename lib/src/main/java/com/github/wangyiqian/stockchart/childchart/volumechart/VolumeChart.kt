@@ -77,23 +77,10 @@ class VolumeChart(
         getKEntities().forEachIndexed { idx, kEntity ->
 
             if (kEntity !is EmptyKEntity) {
-                val isRise = if (kEntity.getClosePrice() == kEntity.getOpenPrice()) {
-                    if (idx - 1 in getKEntities().indices) {
-                        val preKEntity = getKEntities()[idx - 1]
-                        if (preKEntity !is EmptyKEntity) {
-                            kEntity.getClosePrice() >= preKEntity.getClosePrice()
-                        } else {
-                            true
-                        }
-                    } else {
-                        true
-                    }
-                } else {
-                    kEntity.getClosePrice() > kEntity.getOpenPrice()
-                }
+                val isRise = isRise(idx)
                 volumePaint.color =
                     if (isRise) stockChart.getConfig().riseColor else stockChart.getConfig().downColor
-                if (kEntity.getClosePrice() >= kEntity.getOpenPrice() && isHollow) { // 空心
+                if (isRise && isHollow) { // 空心
                     volumePaint.style = Paint.Style.STROKE
                 } else {
                     volumePaint.style = Paint.Style.FILL
@@ -112,6 +99,22 @@ class VolumeChart(
             left += barWidth + spaceWidth
         }
     }
+
+    private fun isRise(idx: Int) =
+        if (getKEntities()[idx].getClosePrice() == getKEntities()[idx].getOpenPrice()) {
+            if (idx - 1 in getKEntities().indices) {
+                val preKEntity = getKEntities()[idx - 1]
+                if (preKEntity !is EmptyKEntity) {
+                    getKEntities()[idx].getClosePrice() >= preKEntity.getClosePrice()
+                } else {
+                    true
+                }
+            } else {
+                true
+            }
+        } else {
+            getKEntities()[idx].getClosePrice() > getKEntities()[idx].getOpenPrice()
+        }
 
     override fun preDrawHighlight(canvas: Canvas) {}
 
