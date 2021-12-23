@@ -13,6 +13,7 @@
 
 package com.github.wangyiqian.stockchart.sample.sample3.data
 
+import com.github.wangyiqian.stockchart.entities.FLAG_DEFAULT
 import com.github.wangyiqian.stockchart.entities.IKEntity
 
 /**
@@ -24,7 +25,8 @@ class ActiveChartKEntity(
     private var avgPrice: Float?,
     private var time: Long,
     private var volume: Long,
-    private var active: ActiveInfo?
+    private var active: ActiveInfo?,
+    private var flag: Int = FLAG_DEFAULT
 ) : IKEntity, IActiveChartKEntity {
     override fun getAvgPrice() = avgPrice
 
@@ -69,4 +71,10 @@ class ActiveChartKEntity(
     }
 
     override fun getActiveInfo() = active
+
+    override fun setFlag(flag: Int) {
+        this.flag = flag
+    }
+
+    override fun getFlag() = flag
 }

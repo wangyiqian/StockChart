@@ -19,8 +19,8 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.github.wangyiqian.stockchart.StockChartConfig
-import com.github.wangyiqian.stockchart.entities.EmptyKEntity
 import com.github.wangyiqian.stockchart.entities.IKEntity
+import com.github.wangyiqian.stockchart.entities.KEntity
 import com.github.wangyiqian.stockchart.sample.DataMock
 import com.github.wangyiqian.stockchart.sample.R
 import com.github.wangyiqian.stockchart.sample.sample3.activechart.ActiveChartConfig
@@ -138,7 +138,7 @@ class Sample3Activity : AppCompatActivity() {
                     kEntities = kEntities.subList(0, fixDataCount)
                 } else { // 不够的数据补点为空白点EmptyKEntity
                     for (i in 0..(fixDataCount - kEntities.size)) {
-                        kEntities.add(EmptyKEntity())
+                        kEntities.add(KEntity.obtainEmptyKEntity())
                     }
                 }
             }

@@ -26,7 +26,8 @@ open class KEntity(
     private var closePrice: Float,
     private var volume: Long,
     private var time: Long,
-    private var avgPrice: Float? = null
+    private var avgPrice: Float? = null,
+    private var flag: Int = FLAG_DEFAULT
 ) : IKEntity {
 
     override fun getHighPrice() = highPrice
@@ -69,5 +70,17 @@ open class KEntity(
 
     override fun setAvgPrice(price: Float?) {
         this.avgPrice = price
+    }
+
+    override fun setFlag(flag: Int) {
+        this.flag = flag
+    }
+
+    override fun getFlag(): Int {
+        return flag
+    }
+
+    companion object {
+        fun obtainEmptyKEntity() = KEntity(0f, 0f, 0f, 0f, 0, 0, null, FLAG_EMPTY)
     }
 }

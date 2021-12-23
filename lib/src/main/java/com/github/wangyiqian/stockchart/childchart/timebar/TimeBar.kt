@@ -17,7 +17,8 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import com.github.wangyiqian.stockchart.IStockChart
 import com.github.wangyiqian.stockchart.childchart.base.BaseChildChart
-import com.github.wangyiqian.stockchart.entities.EmptyKEntity
+import com.github.wangyiqian.stockchart.entities.FLAG_EMPTY
+import com.github.wangyiqian.stockchart.entities.containFlag
 import com.github.wangyiqian.stockchart.util.DimensionUtil
 import java.util.*
 
@@ -96,7 +97,7 @@ class TimeBar(stockChart: IStockChart, chartConfig: TimeBarConfig) :
 
         getKEntities().forEachIndexed { idx, kEntity ->
 
-            if (kEntity is EmptyKEntity) return@forEachIndexed
+            if (kEntity.containFlag(FLAG_EMPTY)) return@forEachIndexed
 
             val time = kEntity.getTime()
             tmpDate.time = time
@@ -156,7 +157,7 @@ class TimeBar(stockChart: IStockChart, chartConfig: TimeBarConfig) :
         var tmpLabel = ""
 
         getKEntities().forEachIndexed { idx, kEntity ->
-            if (kEntity is EmptyKEntity) return@forEachIndexed
+            if (kEntity.containFlag(FLAG_EMPTY)) return@forEachIndexed
 
             val time = kEntity.getTime()
             tmpDate.time = time
@@ -191,7 +192,7 @@ class TimeBar(stockChart: IStockChart, chartConfig: TimeBarConfig) :
         val labelMinSpace = DimensionUtil.dp2px(context, 70f)
 
         getKEntities().forEachIndexed { idx, kEntity ->
-            if (kEntity is EmptyKEntity) return@forEachIndexed
+            if (kEntity.containFlag(FLAG_EMPTY)) return@forEachIndexed
 
             val time = kEntity.getTime()
             tmpDate.time = time
@@ -230,7 +231,7 @@ class TimeBar(stockChart: IStockChart, chartConfig: TimeBarConfig) :
 
         getKEntities().forEachIndexed { idx, kEntity ->
 
-            if (kEntity is EmptyKEntity) return@forEachIndexed
+            if (kEntity.containFlag(FLAG_EMPTY)) return@forEachIndexed
 
             val time = kEntity.getTime()
             tmpDate.time = time
@@ -267,7 +268,7 @@ class TimeBar(stockChart: IStockChart, chartConfig: TimeBarConfig) :
 
         getKEntities().forEachIndexed { idx, kEntity ->
 
-            if (kEntity is EmptyKEntity) return@forEachIndexed
+            if (kEntity.containFlag(FLAG_EMPTY)) return@forEachIndexed
 
             val time = kEntity.getTime()
             tmpDate.time = time
@@ -305,7 +306,7 @@ class TimeBar(stockChart: IStockChart, chartConfig: TimeBarConfig) :
 
         getKEntities().forEachIndexed { idx, kEntity ->
 
-            if (kEntity is EmptyKEntity) return@forEachIndexed
+            if (kEntity.containFlag(FLAG_EMPTY)) return@forEachIndexed
 
             val time = kEntity.getTime()
             tmpDate.time = time
@@ -343,7 +344,7 @@ class TimeBar(stockChart: IStockChart, chartConfig: TimeBarConfig) :
 
         getKEntities().forEachIndexed { idx, kEntity ->
 
-            if (kEntity is EmptyKEntity) return@forEachIndexed
+            if (kEntity.containFlag(FLAG_EMPTY)) return@forEachIndexed
 
             val time = kEntity.getTime()
             tmpDate.time = time
@@ -381,7 +382,7 @@ class TimeBar(stockChart: IStockChart, chartConfig: TimeBarConfig) :
 
         getKEntities().forEachIndexed { idx, kEntity ->
 
-            if (kEntity is EmptyKEntity) return@forEachIndexed
+            if (kEntity.containFlag(FLAG_EMPTY)) return@forEachIndexed
 
             val time = kEntity.getTime()
             tmpDate.time = time
@@ -424,7 +425,7 @@ class TimeBar(stockChart: IStockChart, chartConfig: TimeBarConfig) :
 
         getKEntities().forEachIndexed { idx, kEntity ->
 
-            if (kEntity is EmptyKEntity) return@forEachIndexed
+            if (kEntity.containFlag(FLAG_EMPTY)) return@forEachIndexed
 
             val time = kEntity.getTime()
             tmpDate.time = time
@@ -462,7 +463,7 @@ class TimeBar(stockChart: IStockChart, chartConfig: TimeBarConfig) :
 
         getKEntities().forEachIndexed { idx, kEntity ->
 
-            if (kEntity is EmptyKEntity) return@forEachIndexed
+            if (kEntity.containFlag(FLAG_EMPTY)) return@forEachIndexed
 
             val time = kEntity.getTime()
             tmpDate.time = time
@@ -499,7 +500,7 @@ class TimeBar(stockChart: IStockChart, chartConfig: TimeBarConfig) :
 
         getKEntities().forEachIndexed { idx, kEntity ->
 
-            if (kEntity is EmptyKEntity) return@forEachIndexed
+            if (kEntity.containFlag(FLAG_EMPTY)) return@forEachIndexed
 
             val time = kEntity.getTime()
             tmpDate.time = time
@@ -536,7 +537,7 @@ class TimeBar(stockChart: IStockChart, chartConfig: TimeBarConfig) :
 
         getKEntities().forEachIndexed { idx, kEntity ->
 
-            if (kEntity is EmptyKEntity) return@forEachIndexed
+            if (kEntity.containFlag(FLAG_EMPTY)) return@forEachIndexed
 
             val time = kEntity.getTime()
             tmpDate.time = time
@@ -613,7 +614,7 @@ class TimeBar(stockChart: IStockChart, chartConfig: TimeBarConfig) :
 
                 val kEntity = getKEntities()[idx]
 
-                if (kEntity is EmptyKEntity) return
+                if (kEntity.containFlag(FLAG_EMPTY)) return
 
                 val time = kEntity.getTime()
                 tmpDate.time = time

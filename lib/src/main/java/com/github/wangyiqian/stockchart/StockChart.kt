@@ -22,9 +22,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.UiThread
 import com.github.wangyiqian.stockchart.childchart.base.IChildChart
-import com.github.wangyiqian.stockchart.entities.EmptyKEntity
-import com.github.wangyiqian.stockchart.entities.GestureEvent
-import com.github.wangyiqian.stockchart.entities.Highlight
+import com.github.wangyiqian.stockchart.entities.*
 import com.github.wangyiqian.stockchart.listener.OnKEntitiesChangedListener
 import com.github.wangyiqian.stockchart.util.checkMainThread
 import kotlin.math.max
@@ -149,7 +147,7 @@ class StockChart @JvmOverloads constructor(context: Context, attrs: AttributeSet
         val rightIdx = (tmp4FloatArray[2] + 0.5f).toInt() - 1
         var result: Int? = null
         for (i in rightIdx downTo leftIdx) {
-            if (i in config.kEntities.indices && config.kEntities[i] !is EmptyKEntity) {
+            if (i in config.kEntities.indices && !config.kEntities[i].containFlag(FLAG_EMPTY)) {
                 result = i
                 break
             }
@@ -169,7 +167,7 @@ class StockChart @JvmOverloads constructor(context: Context, attrs: AttributeSet
         val rightIdx = (tmp4FloatArray[2] + 0.5f).toInt() - 1
         var result: Int? = null
         for (i in leftIdx..rightIdx) {
-            if (i in config.kEntities.indices && config.kEntities[i] !is EmptyKEntity) {
+            if (i in config.kEntities.indices && !config.kEntities[i].containFlag(FLAG_EMPTY)) {
                 result = i
                 break
             }

@@ -14,10 +14,9 @@
 package com.github.wangyiqian.stockchart.sample
 
 import android.content.Context
-import com.github.wangyiqian.stockchart.entities.EmptyKEntity
+import com.github.wangyiqian.stockchart.entities.FLAG_LINE_STARTER
 import com.github.wangyiqian.stockchart.entities.IKEntity
 import com.github.wangyiqian.stockchart.entities.KEntity
-import com.github.wangyiqian.stockchart.entities.KEntityOfLineStarter
 import com.github.wangyiqian.stockchart.sample.sample3.data.ActiveChartKEntity
 import com.github.wangyiqian.stockchart.sample.sample3.data.ActiveInfo
 import com.github.wangyiqian.stockchart.sample.sample3.data.ActiveResponse
@@ -61,13 +60,13 @@ object DataMock {
             val dateFormat = SimpleDateFormat("MM/dd")
             val date = Date()
             var dateStr = ""
-            result.forEachIndexed { idx, kEntity ->
+            result.forEach { kEntity ->
                 date.time = kEntity.getTime()
                 val formatDate = dateFormat.format(date)
 
                 if (formatDate != dateStr) {
                     dateStr = formatDate
-                    result[idx] = KEntityOfLineStarter(kEntity)
+                    kEntity.setFlag(FLAG_LINE_STARTER)
                 }
             }
             callback.invoke(result)
@@ -116,7 +115,7 @@ object DataMock {
                 val maxDaysOfYear = calendar.getActualMaximum(Calendar.DAY_OF_YEAR)
                 val weekCount = (maxDaysOfYear - dayOfYear) / 7 + 1
                 for (i in 0 until (weekCount - result.size)) {
-                    result.add(EmptyKEntity()) // 一年内还未产生的数据用EmptyKEntity()填充
+                    result.add(KEntity.obtainEmptyKEntity()) // 一年内还未产生的数据用EmptyKEntity()填充
                 }
             }
             callback.invoke(result)

@@ -18,8 +18,9 @@ import android.graphics.Color
 import android.graphics.Paint
 import com.github.wangyiqian.stockchart.IStockChart
 import com.github.wangyiqian.stockchart.childchart.base.BaseChildChart
-import com.github.wangyiqian.stockchart.entities.EmptyKEntity
+import com.github.wangyiqian.stockchart.entities.FLAG_EMPTY
 import com.github.wangyiqian.stockchart.entities.IKEntity
+import com.github.wangyiqian.stockchart.entities.containFlag
 import com.github.wangyiqian.stockchart.util.DimensionUtil
 
 /**
@@ -52,7 +53,7 @@ class CustomChart(
         var yMax = 0f
         var yMin = 0f
 
-        getKEntities().filterIndexed { index, kEntity -> index in startIndex..endIndex && kEntity !is EmptyKEntity }
+        getKEntities().filterIndexed { index, kEntity -> index in startIndex..endIndex && !kEntity.containFlag(FLAG_EMPTY) }
             .map { getAvgPrice(it) }.apply {
                 if (size > 0) {
                     yMax = max()!!
@@ -88,7 +89,7 @@ class CustomChart(
 
     override fun drawData(canvas: Canvas) {
         getKEntities().forEachIndexed { index, kEntity ->
-            if (kEntity !is EmptyKEntity) {
+            if (!kEntity.containFlag(FLAG_EMPTY)) {
                 tmp2FloatArray[0] = index + 0.5f
                 tmp2FloatArray[1] = getAvgPrice(kEntity)
                 mapPointsValue2Real(tmp2FloatArray)
@@ -106,7 +107,7 @@ class CustomChart(
 
                 val idx = highlight.getIdx()
 
-                if (idx >= 0 && idx <= getKEntities().size - 1 && getKEntities()[idx] !is EmptyKEntity) {
+                if (idx >= 0 && idx <= getKEntities().size - 1 && !getKEntities()[idx].containFlag(FLAG_EMPTY)) {
                     val yValue = getAvgPrice(getKEntities()[idx])
 
                     // 计算出要绘制的坐标

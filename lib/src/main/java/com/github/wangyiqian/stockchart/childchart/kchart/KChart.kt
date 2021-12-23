@@ -16,8 +16,9 @@ package com.github.wangyiqian.stockchart.childchart.kchart
 import android.graphics.*
 import com.github.wangyiqian.stockchart.IStockChart
 import com.github.wangyiqian.stockchart.childchart.base.BaseChildChart
-import com.github.wangyiqian.stockchart.entities.EmptyKEntity
-import com.github.wangyiqian.stockchart.entities.KEntityOfLineStarter
+import com.github.wangyiqian.stockchart.entities.FLAG_EMPTY
+import com.github.wangyiqian.stockchart.entities.FLAG_LINE_STARTER
+import com.github.wangyiqian.stockchart.entities.containFlag
 import com.github.wangyiqian.stockchart.index.Index
 import kotlin.math.abs
 import kotlin.math.max
@@ -117,7 +118,7 @@ open class KChart(
         var yMin = 0f
         var yMax = 0f
 
-        getKEntities().filterIndexed { index, kEntity -> index in startIndex..endIndex && kEntity !is EmptyKEntity }
+        getKEntities().filterIndexed { index, kEntity -> index in startIndex..endIndex && !kEntity.containFlag(FLAG_EMPTY) }
             .apply {
                 when (chartConfig.kChartType) {
                     is KChartConfig.KChartType.CANDLE, is KChartConfig.KChartType.HOLLOW, is KChartConfig.KChartType.BAR -> {
@@ -450,7 +451,7 @@ open class KChart(
             mapPointsReal2Value(tmp4FloatArray)
             val leftIdx = (tmp4FloatArray[0] + 0.5f).toInt()
             val rightIdx = (tmp4FloatArray[2] + 0.5f).toInt() - 1
-            getKEntities().filterIndexed { kEntityIdx, kEntity -> kEntityIdx in leftIdx..rightIdx && kEntity !is EmptyKEntity }
+            getKEntities().filterIndexed { kEntityIdx, kEntity -> kEntityIdx in leftIdx..rightIdx && !kEntity.containFlag(FLAG_EMPTY) }
                 .map { it.getHighPrice() }.max()
 
             var maxIdx: Int? = null
@@ -459,7 +460,7 @@ open class KChart(
             var minPrice = 0f
             val kEntities = getKEntities()
             for (i in leftIdx..rightIdx) {
-                if (i in kEntities.indices && kEntities[i] !is EmptyKEntity) {
+                if (i in kEntities.indices && !kEntities[i].containFlag(FLAG_EMPTY)) {
                     if (minIdx == null || maxIdx == null) {
                         maxIdx = i
                         minIdx = i
@@ -610,7 +611,7 @@ open class KChart(
 
         var preIdx = -1
         for (idx in getKEntities().indices) {
-            if (getKEntities()[idx] is EmptyKEntity || getKEntities()[idx] is KEntityOfLineStarter) {
+            if (getKEntities()[idx].containFlag(FLAG_EMPTY) || getKEntities()[idx].containFlag(FLAG_LINE_STARTER)) {
                 if (preIdx != -1) {
                     tmpPath.lineTo(preIdx + 1f, getKEntities()[preIdx].getClosePrice())
                     tmpPath.lineTo(preIdx + 1f, yMinValue)
@@ -619,7 +620,7 @@ open class KChart(
                     tmpPath.reset()
                 }
                 preIdx = -1
-                if (getKEntities()[idx] is EmptyKEntity) {
+                if (getKEntities()[idx].containFlag(FLAG_EMPTY)) {
                     continue
                 }
             }
@@ -648,12 +649,12 @@ open class KChart(
 
         preIdx = -1
         for (idx in getKEntities().indices) {
-            if (getKEntities()[idx] is EmptyKEntity) {
+            if (getKEntities()[idx].containFlag(FLAG_EMPTY)) {
                 preIdx = -1
                 continue
             }
 
-            if (preIdx == -1 || getKEntities()[idx] is KEntityOfLineStarter) {
+            if (preIdx == -1 || getKEntities()[idx].containFlag(FLAG_LINE_STARTER)) {
                 preIdx = idx
                 continue
             }
@@ -685,12 +686,12 @@ open class KChart(
             var preAvgIdx = -1
             for (idx in getKEntities().indices) {
 
-                if (getKEntities()[idx] is EmptyKEntity || getKEntities()[idx].getAvgPrice() == null) {
+                if (getKEntities()[idx].containFlag(FLAG_EMPTY) || getKEntities()[idx].getAvgPrice() == null) {
                     preAvgIdx = -1
                     continue
                 }
 
-                if (preAvgIdx == -1 || getKEntities()[idx] is KEntityOfLineStarter) {
+                if (preAvgIdx == -1 || getKEntities()[idx].containFlag(FLAG_LINE_STARTER)) {
                     preAvgIdx = idx
                     continue
                 }
@@ -718,7 +719,7 @@ open class KChart(
         val spaceWidth = 1 * chartConfig.barSpaceRatio
         var left = spaceWidth / 2f
         getKEntities().forEachIndexed { idx, kEntity ->
-            if (kEntity !is EmptyKEntity) {
+            if (!kEntity.containFlag(FLAG_EMPTY)) {
                 barKChartPaint.color =
                     if (isRise(idx)) stockChart.getConfig().riseColor else stockChart.getConfig().downColor
 
@@ -751,7 +752,7 @@ open class KChart(
         val spaceWidth = 1 * chartConfig.barSpaceRatio
         var left = spaceWidth / 2f
         getKEntities().forEachIndexed { idx, kEntity ->
-            if (kEntity !is EmptyKEntity) {
+            if (!kEntity.containFlag(FLAG_EMPTY)) {
                 hollowKChartPaint.color =
                     if (isRise(idx)) stockChart.getConfig().riseColor else stockChart.getConfig().downColor
 
@@ -793,7 +794,7 @@ open class KChart(
         val spaceWidth = 1 * chartConfig.barSpaceRatio
         var left = spaceWidth / 2f
         getKEntities().forEachIndexed { idx, kEntity ->
-            if (kEntity !is EmptyKEntity) {
+            if (!kEntity.containFlag(FLAG_EMPTY)) {
                 candleKChartPaint.color =
                     if (isRise(idx)) stockChart.getConfig().riseColor else stockChart.getConfig().downColor
                 candleKChartPaint.color = candleKChartPaint.color
@@ -820,7 +821,7 @@ open class KChart(
         if (getKEntities()[idx].getClosePrice() == getKEntities()[idx].getOpenPrice()) {
             if (idx - 1 in getKEntities().indices) {
                 val preKEntity = getKEntities()[idx - 1]
-                if (preKEntity !is EmptyKEntity) {
+                if (!preKEntity.containFlag(FLAG_EMPTY)) {
                     getKEntities()[idx].getClosePrice() >= preKEntity.getClosePrice()
                 } else {
                     true
@@ -837,12 +838,12 @@ open class KChart(
         lineKChartLinePaint.color = chartConfig.lineChartColor
         var preIdx = -1
         for (idx in getKEntities().indices) {
-            if (getKEntities()[idx] is EmptyKEntity) {
+            if (getKEntities()[idx].containFlag(FLAG_EMPTY)) {
                 preIdx = -1
                 continue
             }
 
-            if (preIdx == -1 || getKEntities()[idx] is KEntityOfLineStarter) {
+            if (preIdx == -1 || getKEntities()[idx].containFlag(FLAG_LINE_STARTER)) {
                 preIdx = idx
                 continue
             }
