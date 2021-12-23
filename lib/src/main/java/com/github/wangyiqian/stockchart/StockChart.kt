@@ -350,9 +350,7 @@ class StockChart @JvmOverloads constructor(context: Context, attrs: AttributeSet
                 childCharts.forEach { childChart ->
                     val childChartX = x - childChart.view().left
                     val childChartY = y - childChart.view().top
-                    tmp2FloatArray[0] = childChartX
-                    tmp2FloatArray[1] = childChartY
-                    childChart.mapPointsReal2Value(tmp2FloatArray)
+                    childChart.getHighlightValue(childChartX, childChartY, tmp2FloatArray)
                     val valueX = tmp2FloatArray[0]
                     val valueY = tmp2FloatArray[1]
                     var highlight = highlightMap[childChart]

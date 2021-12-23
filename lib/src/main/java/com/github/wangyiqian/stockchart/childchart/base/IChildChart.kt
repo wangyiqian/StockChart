@@ -91,4 +91,10 @@ interface IChildChart {
      * 点击
      */
     fun onTap(event: GestureEvent)
+
+    fun getHighlightValue(highlightX: Float, highlightY: Float, highlightValue: FloatArray) {
+        highlightValue[0] = highlightX
+        highlightValue[1] = highlightY
+        mapPointsReal2Value(highlightValue)
+    }
 }
