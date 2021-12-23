@@ -19,6 +19,7 @@ package com.github.wangyiqian.stockchart.entities
  * @author wangyiqian E-mail: wangyiqian9891@gmail.com
  * @version 创建时间: 2021/2/22
  */
+@Deprecated("")
 open class KEntityOfLineStarter(private val kEntity: IKEntity) : IKEntity {
 
     override fun getHighPrice() = kEntity.getHighPrice()
@@ -62,4 +63,10 @@ open class KEntityOfLineStarter(private val kEntity: IKEntity) : IKEntity {
     override fun setAvgPrice(price: Float?) {
         kEntity.setAvgPrice(price)
     }
+
+    override fun setFlag(flag: Int) {
+        kEntity.setFlag(flag)
+    }
+
+    override fun getFlag() = FLAG_LINE_STARTER
 }

@@ -17,9 +17,9 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import com.github.wangyiqian.stockchart.IStockChart
 import com.github.wangyiqian.stockchart.childchart.base.BaseChildChart
-import com.github.wangyiqian.stockchart.entities.EmptyKEntity
+import com.github.wangyiqian.stockchart.entities.FLAG_EMPTY
+import com.github.wangyiqian.stockchart.entities.containFlag
 import kotlin.math.max
-import kotlin.math.round
 
 /**
  * 成交量图
@@ -76,7 +76,7 @@ class VolumeChart(
 
         getKEntities().forEachIndexed { idx, kEntity ->
 
-            if (kEntity !is EmptyKEntity) {
+            if (!kEntity.containFlag(FLAG_EMPTY)) {
                 val isRise = isRise(idx)
                 volumePaint.color =
                     if (isRise) stockChart.getConfig().riseColor else stockChart.getConfig().downColor
@@ -104,7 +104,7 @@ class VolumeChart(
         if (getKEntities()[idx].getClosePrice() == getKEntities()[idx].getOpenPrice()) {
             if (idx - 1 in getKEntities().indices) {
                 val preKEntity = getKEntities()[idx - 1]
-                if (preKEntity !is EmptyKEntity) {
+                if (!preKEntity.containFlag(FLAG_EMPTY)) {
                     getKEntities()[idx].getClosePrice() >= preKEntity.getClosePrice()
                 } else {
                     true

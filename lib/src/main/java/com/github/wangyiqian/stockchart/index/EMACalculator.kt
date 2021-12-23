@@ -13,8 +13,9 @@
 
 package com.github.wangyiqian.stockchart.index
 
-import com.github.wangyiqian.stockchart.entities.EmptyKEntity
+import com.github.wangyiqian.stockchart.entities.FLAG_EMPTY
 import com.github.wangyiqian.stockchart.entities.IKEntity
+import com.github.wangyiqian.stockchart.entities.containFlag
 
 /**
  * 指数移动平均值（Exponential Moving Average）
@@ -29,14 +30,14 @@ object EMACalculator : ICalculator {
 
         val result = MutableList(emaPeriodList.size) { MutableList<Float?>(input.size) { 0f } }
         input.forEachIndexed { kEntityIdx, kEntity ->
-            if (kEntity is EmptyKEntity) {
+            if (kEntity.containFlag(FLAG_EMPTY)) {
                 emaPeriodList.forEachIndexed { periodListIdx, _ ->
                     result[periodListIdx][kEntityIdx] = null
                 }
                 return@forEachIndexed
             }
             emaPeriodList.forEachIndexed { periodListIdx, n ->
-                if (kEntityIdx == 0 || input[kEntityIdx - 1] is EmptyKEntity) {
+                if (kEntityIdx == 0 || input[kEntityIdx - 1].containFlag(FLAG_EMPTY)) {
                     result[periodListIdx][kEntityIdx] = input[kEntityIdx].getClosePrice()
                 } else {
                     result[periodListIdx][kEntityIdx] =

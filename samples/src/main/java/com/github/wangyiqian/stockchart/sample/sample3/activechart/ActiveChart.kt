@@ -16,9 +16,7 @@ package com.github.wangyiqian.stockchart.sample.sample3.activechart
 import android.graphics.*
 import com.github.wangyiqian.stockchart.IStockChart
 import com.github.wangyiqian.stockchart.childchart.base.BaseChildChart
-import com.github.wangyiqian.stockchart.entities.EmptyKEntity
-import com.github.wangyiqian.stockchart.entities.GestureEvent
-import com.github.wangyiqian.stockchart.entities.KEntityOfLineStarter
+import com.github.wangyiqian.stockchart.entities.*
 import com.github.wangyiqian.stockchart.sample.sample3.data.ActiveInfo
 import com.github.wangyiqian.stockchart.sample.sample3.data.IActiveChartKEntity
 import java.lang.Float.max
@@ -61,7 +59,7 @@ class ActiveChart(stockChart: IStockChart, chartConfig: ActiveChartConfig) :
     override fun getYValueRange(startIndex: Int, endIndex: Int, result: FloatArray) {
         var yMin = 0f
         var yMax = 0f
-        getKEntities().filterIndexed { index, kEntity -> index in startIndex..endIndex && kEntity !is EmptyKEntity }
+        getKEntities().filterIndexed { index, kEntity -> index in startIndex..endIndex && !kEntity.containFlag(FLAG_EMPTY) }
             .apply {
                 forEachIndexed { index, kEntity ->
                     if (index == 0) {
@@ -113,7 +111,7 @@ class ActiveChart(stockChart: IStockChart, chartConfig: ActiveChartConfig) :
 
         var preIdx = -1
         for (idx in getKEntities().indices) {
-            if (getKEntities()[idx] is EmptyKEntity || getKEntities()[idx] is KEntityOfLineStarter) {
+            if (getKEntities()[idx].containFlag(FLAG_EMPTY) || getKEntities()[idx].containFlag(FLAG_LINE_STARTER)) {
                 if (preIdx != -1) {
                     tmpPath.lineTo(preIdx + 0.5f, 0f)
                     mapPathValue2Real(tmpPath)
@@ -121,7 +119,7 @@ class ActiveChart(stockChart: IStockChart, chartConfig: ActiveChartConfig) :
                     tmpPath.reset()
                 }
                 preIdx = -1
-                if (getKEntities()[idx] is EmptyKEntity) {
+                if (getKEntities()[idx].containFlag(FLAG_EMPTY)) {
                     continue
                 }
             }
@@ -145,12 +143,12 @@ class ActiveChart(stockChart: IStockChart, chartConfig: ActiveChartConfig) :
 
         preIdx = -1
         for (idx in getKEntities().indices) {
-            if (getKEntities()[idx] is EmptyKEntity) {
+            if (getKEntities()[idx].containFlag(FLAG_EMPTY)) {
                 preIdx = -1
                 continue
             }
 
-            if (preIdx == -1 || getKEntities()[idx] is KEntityOfLineStarter) {
+            if (preIdx == -1 || getKEntities()[idx].containFlag(FLAG_LINE_STARTER)) {
                 preIdx = idx
                 continue
             }

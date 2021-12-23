@@ -30,9 +30,7 @@ import com.github.wangyiqian.stockchart.childchart.timebar.TimeBarConfig
 import com.github.wangyiqian.stockchart.childchart.timebar.TimeBarFactory
 import com.github.wangyiqian.stockchart.childchart.volumechart.VolumeChartConfig
 import com.github.wangyiqian.stockchart.childchart.volumechart.VolumeChartFactory
-import com.github.wangyiqian.stockchart.entities.EmptyKEntity
-import com.github.wangyiqian.stockchart.entities.Highlight
-import com.github.wangyiqian.stockchart.entities.IKEntity
+import com.github.wangyiqian.stockchart.entities.*
 import com.github.wangyiqian.stockchart.index.Index
 import com.github.wangyiqian.stockchart.listener.OnHighlightListener
 import com.github.wangyiqian.stockchart.listener.OnLoadMoreListener
@@ -209,7 +207,7 @@ class Sample2Activity : AppCompatActivity() {
 
                     if (idx in kEntities.indices) {
                         val kEntity = kEntities[idx]
-                        if (kEntity is EmptyKEntity) {
+                        if (kEntity.containFlag(FLAG_EMPTY)) {
                             showContent = ""
                         } else if (kChartType is KChartConfig.KChartType.LINE || kChartType is KChartConfig.KChartType.MOUNTAIN) {
                             val firstIdx = stock_chart.findFirstNotEmptyKEntityIdxInDisplayArea()

@@ -13,8 +13,9 @@
 
 package com.github.wangyiqian.stockchart.index
 
-import com.github.wangyiqian.stockchart.entities.EmptyKEntity
+import com.github.wangyiqian.stockchart.entities.FLAG_EMPTY
 import com.github.wangyiqian.stockchart.entities.IKEntity
+import com.github.wangyiqian.stockchart.entities.containFlag
 import kotlin.math.pow
 import kotlin.math.sqrt
 
@@ -40,7 +41,7 @@ object BollCalculator: ICalculator {
         var pEnd = 0
         var sum = 0f
         input.forEachIndexed { kEntityIdx, kEntity ->
-            if (kEntity is EmptyKEntity) {
+            if (kEntity.containFlag(FLAG_EMPTY)) {
                 result[mbIdx][kEntityIdx] = null
                 result[upIdx][kEntityIdx] = null
                 result[dnIdx][kEntityIdx] = null
@@ -48,7 +49,7 @@ object BollCalculator: ICalculator {
                 return@forEachIndexed
             }
 
-            if (kEntityIdx == 0 || input[kEntityIdx - 1] is EmptyKEntity) {
+            if (kEntityIdx == 0 || input[kEntityIdx - 1].containFlag(FLAG_EMPTY)) {
                 pFrom = kEntityIdx
             }
 

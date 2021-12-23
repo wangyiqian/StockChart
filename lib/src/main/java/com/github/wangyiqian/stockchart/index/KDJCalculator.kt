@@ -13,8 +13,9 @@
 
 package com.github.wangyiqian.stockchart.index
 
-import com.github.wangyiqian.stockchart.entities.EmptyKEntity
+import com.github.wangyiqian.stockchart.entities.FLAG_EMPTY
 import com.github.wangyiqian.stockchart.entities.IKEntity
+import com.github.wangyiqian.stockchart.entities.containFlag
 import kotlin.math.max
 import kotlin.math.min
 
@@ -36,7 +37,7 @@ object KDJCalculator: ICalculator {
         val dIdx = 1
         val jIdx = 2
         input.forEachIndexed { kEntityIdx, kEntity ->
-            if (kEntity is EmptyKEntity) {
+            if (kEntity.containFlag(FLAG_EMPTY)) {
                 result[kIdx][kEntityIdx] = null
                 result[dIdx][kEntityIdx] = null
                 result[jIdx][kEntityIdx] = null

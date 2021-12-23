@@ -13,8 +13,9 @@
 
 package com.github.wangyiqian.stockchart.index
 
-import com.github.wangyiqian.stockchart.entities.EmptyKEntity
+import com.github.wangyiqian.stockchart.entities.FLAG_EMPTY
 import com.github.wangyiqian.stockchart.entities.IKEntity
+import com.github.wangyiqian.stockchart.entities.containFlag
 
 /**
  * 移动平均线（Moving Average）
@@ -33,7 +34,7 @@ object MACalculator: ICalculator {
         val pEndList = MutableList(periodList.size) { 0 }
         val sumList = MutableList(periodList.size) { 0f }
         input.forEachIndexed { kEntityIdx, kEntity ->
-            if (kEntity is EmptyKEntity) {
+            if (kEntity.containFlag(FLAG_EMPTY)) {
                 periodList.forEachIndexed { periodListIdx, _ ->
                     result[periodListIdx][kEntityIdx] = null
                     sumList[periodListIdx] = 0f
@@ -42,7 +43,7 @@ object MACalculator: ICalculator {
             }
 
             periodList.forEachIndexed { periodListIdx, period ->
-                if (kEntityIdx == 0 || input[kEntityIdx - 1] is EmptyKEntity) {
+                if (kEntityIdx == 0 || input[kEntityIdx - 1].containFlag(FLAG_EMPTY)) {
                     pFromList[periodListIdx] = kEntityIdx
                 }
 

@@ -36,4 +36,14 @@ interface IKEntity {
      */
     fun getAvgPrice(): Float?
     fun setAvgPrice(price: Float?)
+
+    /**
+     * 用于设置标记位 如[FLAG_EMPTY]、[FLAG_LINE_STARTER]
+     */
+    fun setFlag(flag: Int)
+
+    /**
+     * 标记位
+     */
+    fun getFlag(): Int
 }

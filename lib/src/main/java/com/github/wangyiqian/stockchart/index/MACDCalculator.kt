@@ -13,8 +13,9 @@
 
 package com.github.wangyiqian.stockchart.index
 
-import com.github.wangyiqian.stockchart.entities.EmptyKEntity
+import com.github.wangyiqian.stockchart.entities.FLAG_EMPTY
 import com.github.wangyiqian.stockchart.entities.IKEntity
+import com.github.wangyiqian.stockchart.entities.containFlag
 
 /**
  * 指数平滑异同移动平均线（Moving Average Convergence and Divergence）
@@ -37,14 +38,14 @@ object MACDCalculator : ICalculator {
         var preEmaShort = 0f
         var preEmaLong = 0f
         input.forEachIndexed { kEntityIdx, kEntity ->
-            if (kEntity is EmptyKEntity) {
+            if (kEntity.containFlag(FLAG_EMPTY)) {
                 result[difIdx][kEntityIdx] = null
                 result[deaIdx][kEntityIdx] = null
                 result[macdIdx][kEntityIdx] = null
                 return@forEachIndexed
             }
 
-            if (kEntityIdx == 0 || input[kEntityIdx - 1] is EmptyKEntity) {
+            if (kEntityIdx == 0 || input[kEntityIdx - 1].containFlag(FLAG_EMPTY)) {
                 result[difIdx][kEntityIdx] = 0f
                 result[deaIdx][kEntityIdx] = 0f
                 result[macdIdx][kEntityIdx] = 0f
