@@ -136,16 +136,6 @@ abstract class BaseChildChart<C : BaseChildChartConfig> @JvmOverloads constructo
         prepare()
     }
 
-    override fun onAppendKEntities() {
-        onKEntitiesChanged()
-        prepare()
-    }
-
-    override fun onInsertKEntities() {
-        onKEntitiesChanged()
-        prepare()
-    }
-
     private fun prepare() {
         if (stockChart.getConfig().getKEntitiesSize() <= 0) return
         childChartMatrixHelper?.prepare()

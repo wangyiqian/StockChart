@@ -17,7 +17,6 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import com.github.wangyiqian.stockchart.IStockChart
 import com.github.wangyiqian.stockchart.childchart.base.BaseChildChart
-import kotlin.math.round
 
 /**
  * MACD指标图
@@ -106,35 +105,15 @@ class MacdChart(
             }
         }
 
-        fun drawLine(valueList: List<Float?>?) {
-            valueList?.forEachIndexed { valueIdx, value ->
-                if (valueIdx == 0) {
-                    return@forEachIndexed
-                }
-                value?.let { value ->
-                    valueList[valueIdx - 1]?.let { preValue ->
-                        tmp4FloatArray[0] = valueIdx - 1 + 0.5f
-                        tmp4FloatArray[1] = preValue
-                        tmp4FloatArray[2] = valueIdx + 0.5f
-                        tmp4FloatArray[3] = value
-
-                        mapPointsValue2Real(tmp4FloatArray)
-
-                        canvas.drawLines(tmp4FloatArray, linePaint)
-                    }
-                }
-            }
-        }
-
         // draw dif line
         linePaint.strokeWidth = chartConfig.difLineStrokeWidth
         linePaint.color = chartConfig.difLineColor
-        drawLine(indexList?.get(difIdx))
+        doDrawLine(canvas, indexList?.get(difIdx))
 
         // draw dea line
         linePaint.strokeWidth = chartConfig.deaLineStrokeWidth
         linePaint.color = chartConfig.deaLineColor
-        drawLine(indexList?.get(deaIdx))
+        doDrawLine(canvas, indexList?.get(deaIdx))
 
         // draw index text
         drawnIndexTextHeight = 0f
@@ -147,20 +126,17 @@ class MacdChart(
                 var left = index.textMarginLeft
                 val top = index.textMarginTop
                 indexTextPaint.getFontMetrics(tmpFontMetrics)
-                fun drawIndexText(text: String) {
+                if (!index.startText.isNullOrEmpty()) {
+                    indexTextPaint.color = index.startTextColor
                     canvas.drawText(
-                        text,
+                        index.startText,
                         left,
                         -tmpFontMetrics.top + top,
                         indexTextPaint
                     )
-                    left += indexTextPaint.measureText(text) + index.textSpace
+                    left += indexTextPaint.measureText(index.startText) + index.textSpace
                     drawnIndexTextHeight =
                         tmpFontMetrics.bottom - tmpFontMetrics.top
-                }
-                if (!index.startText.isNullOrEmpty()) {
-                    indexTextPaint.color = index.startTextColor
-                    drawIndexText(index.startText)
                 }
                 indexList.forEachIndexed { lineIdx, pointList ->
                     indexTextPaint.color = when (lineIdx) {
@@ -171,7 +147,35 @@ class MacdChart(
                     val value =
                         if (indexIdx != null && indexIdx in pointList.indices && pointList[indexIdx] != null) pointList[indexIdx] else null
                     val text = index.textFormatter.invoke(lineIdx, value)
-                    drawIndexText(text)
+                    canvas.drawText(
+                        text,
+                        left,
+                        -tmpFontMetrics.top + top,
+                        indexTextPaint
+                    )
+                    left += indexTextPaint.measureText(text) + index.textSpace
+                    drawnIndexTextHeight =
+                        tmpFontMetrics.bottom - tmpFontMetrics.top
+                }
+            }
+        }
+    }
+
+    private fun doDrawLine(canvas: Canvas, valueList: List<Float?>?) {
+        valueList?.forEachIndexed { valueIdx, value ->
+            if (valueIdx == 0) {
+                return@forEachIndexed
+            }
+            value?.let { value ->
+                valueList[valueIdx - 1]?.let { preValue ->
+                    tmp4FloatArray[0] = valueIdx - 1 + 0.5f
+                    tmp4FloatArray[1] = preValue
+                    tmp4FloatArray[2] = valueIdx + 0.5f
+                    tmp4FloatArray[3] = value
+
+                    mapPointsValue2Real(tmp4FloatArray)
+
+                    canvas.drawLines(tmp4FloatArray, linePaint)
                 }
             }
         }

@@ -35,7 +35,6 @@ class TimeBar(stockChart: IStockChart, chartConfig: TimeBarConfig) :
     private val highlightLabelPaint by lazy { Paint(Paint.ANTI_ALIAS_FLAG) }
     private val highlightLabelBgPaint by lazy { Paint(Paint.ANTI_ALIAS_FLAG) }
 
-
     override fun onKEntitiesChanged() {
     }
 
@@ -129,29 +128,6 @@ class TimeBar(stockChart: IStockChart, chartConfig: TimeBarConfig) :
 
     private fun drawLabelOfFiveDaysType(canvas: Canvas) {
 
-        fun drawLabel(dayBeginKEntityIdx: Int, dayEndKEntityIdx: Int) {
-            val time = getKEntities()[dayBeginKEntityIdx].getTime()
-            tmpDate.time = time
-            val label = chartConfig.type.labelDateFormat.format(tmpDate)
-
-            val labelWidth = labelPaint.measureText(label)
-            val labelHalfWidth = labelWidth / 2
-
-            tmp2FloatArray[0] = (dayBeginKEntityIdx + dayEndKEntityIdx) / 2 + 0.5f
-            tmp2FloatArray[1] = 0f
-            mapPointsValue2Real(tmp2FloatArray)
-            val centerRealX = tmp2FloatArray[0]
-
-            if (centerRealX - labelHalfWidth < getChartDisplayArea().left || centerRealX + labelHalfWidth > getChartDisplayArea().right) {
-                return
-            }
-
-            val x = centerRealX - labelHalfWidth
-            val y =
-                getChartDisplayArea().top + getChartDisplayArea().height() / 2 + (tmpFontMetrics.bottom - tmpFontMetrics.top) / 2 - tmpFontMetrics.bottom
-            canvas.drawText(label, x, y, labelPaint)
-        }
-
         var dayBeginKEntityIdx: Int? = null
         var dayEndKEntityIdx: Int? = null
         var tmpLabel = ""
@@ -165,7 +141,7 @@ class TimeBar(stockChart: IStockChart, chartConfig: TimeBarConfig) :
 
             if (tmpLabel != label) {
                 if (dayBeginKEntityIdx != null && dayEndKEntityIdx != null) {
-                    drawLabel(dayBeginKEntityIdx!!, dayEndKEntityIdx!!)
+                    doDrawLabelOfFiveDaysType(canvas, dayBeginKEntityIdx!!, dayEndKEntityIdx!!)
                     dayBeginKEntityIdx = null
                     dayEndKEntityIdx = null
                 }
@@ -181,8 +157,35 @@ class TimeBar(stockChart: IStockChart, chartConfig: TimeBarConfig) :
         }
 
         if (dayBeginKEntityIdx != null && dayEndKEntityIdx != null) {
-            drawLabel(dayBeginKEntityIdx!!, dayEndKEntityIdx!!)
+            doDrawLabelOfFiveDaysType(canvas, dayBeginKEntityIdx!!, dayEndKEntityIdx!!)
         }
+    }
+
+    private fun doDrawLabelOfFiveDaysType(
+        canvas: Canvas,
+        dayBeginKEntityIdx: Int,
+        dayEndKEntityIdx: Int
+    ) {
+        val time = getKEntities()[dayBeginKEntityIdx].getTime()
+        tmpDate.time = time
+        val label = chartConfig.type.labelDateFormat.format(tmpDate)
+
+        val labelWidth = labelPaint.measureText(label)
+        val labelHalfWidth = labelWidth / 2
+
+        tmp2FloatArray[0] = (dayBeginKEntityIdx + dayEndKEntityIdx) / 2 + 0.5f
+        tmp2FloatArray[1] = 0f
+        mapPointsValue2Real(tmp2FloatArray)
+        val centerRealX = tmp2FloatArray[0]
+
+        if (centerRealX - labelHalfWidth < getChartDisplayArea().left || centerRealX + labelHalfWidth > getChartDisplayArea().right) {
+            return
+        }
+
+        val x = centerRealX - labelHalfWidth
+        val y =
+            getChartDisplayArea().top + getChartDisplayArea().height() / 2 + (tmpFontMetrics.bottom - tmpFontMetrics.top) / 2 - tmpFontMetrics.bottom
+        canvas.drawText(label, x, y, labelPaint)
     }
 
     private fun drawLabelOfWeekType(canvas: Canvas) {
@@ -568,39 +571,40 @@ class TimeBar(stockChart: IStockChart, chartConfig: TimeBarConfig) :
     }
 
     private fun drawLabelOfDayTimeType(canvas: Canvas) {
-        val labelMinSpace = DimensionUtil.dp2px(context, 5f)
-
-        fun drawLabel(idx: Int) {
-            val kEntity = getKEntities()[idx]
-            val time = kEntity.getTime()
-            tmpDate.time = time
-            val label = chartConfig.type.labelDateFormat.format(tmpDate)
-
-            val labelWidth = labelPaint.measureText(label)
-            val labelHalfWidth = labelWidth / 2
-
-            tmp2FloatArray[0] = idx + 0.5f
-            tmp2FloatArray[1] = 0f
-            mapPointsValue2Real(tmp2FloatArray)
-            val centerRealX = tmp2FloatArray[0]
-
-            var x = centerRealX - labelHalfWidth
-            if (x + labelWidth > getChartDisplayArea().right - labelMinSpace) x =
-                getChartDisplayArea().right - labelMinSpace - labelWidth
-            if (x < getChartDisplayArea().left + labelMinSpace) x =
-                getChartDisplayArea().left + labelMinSpace
-            val y =
-                getChartDisplayArea().top + getChartDisplayArea().height() / 2 + (tmpFontMetrics.bottom - tmpFontMetrics.top) / 2 - tmpFontMetrics.bottom
-            canvas.drawText(label, x, y, labelPaint)
-        }
 
         stockChart.findFirstNotEmptyKEntityIdxInDisplayArea()?.let { idx ->
-            drawLabel(idx)
+            doDrawLabelOfDayTimeType(canvas, idx)
         }
 
         stockChart.findLastNotEmptyKEntityIdxInDisplayArea()?.let { idx ->
-            drawLabel(idx)
+            doDrawLabelOfDayTimeType(canvas, idx)
         }
+    }
+
+    private fun doDrawLabelOfDayTimeType(canvas: Canvas, idx: Int) {
+        val labelMinSpace = DimensionUtil.dp2px(context, 5f)
+
+        val kEntity = getKEntities()[idx]
+        val time = kEntity.getTime()
+        tmpDate.time = time
+        val label = chartConfig.type.labelDateFormat.format(tmpDate)
+
+        val labelWidth = labelPaint.measureText(label)
+        val labelHalfWidth = labelWidth / 2
+
+        tmp2FloatArray[0] = idx + 0.5f
+        tmp2FloatArray[1] = 0f
+        mapPointsValue2Real(tmp2FloatArray)
+        val centerRealX = tmp2FloatArray[0]
+
+        var x = centerRealX - labelHalfWidth
+        if (x + labelWidth > getChartDisplayArea().right - labelMinSpace) x =
+            getChartDisplayArea().right - labelMinSpace - labelWidth
+        if (x < getChartDisplayArea().left + labelMinSpace) x =
+            getChartDisplayArea().left + labelMinSpace
+        val y =
+            getChartDisplayArea().top + getChartDisplayArea().height() / 2 + (tmpFontMetrics.bottom - tmpFontMetrics.top) / 2 - tmpFontMetrics.bottom
+        canvas.drawText(label, x, y, labelPaint)
     }
 
     private fun drawHighlightLabel(canvas: Canvas) {

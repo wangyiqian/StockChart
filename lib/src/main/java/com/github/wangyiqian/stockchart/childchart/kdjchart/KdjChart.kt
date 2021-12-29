@@ -77,40 +77,20 @@ class KdjChart(stockChart: IStockChart, chartConfig: KdjChartConfig) :
         val dIdx = 1
         val jIdx = 2
 
-        fun drawLine(valueList: List<Float?>?) {
-            valueList?.forEachIndexed { valueIdx, value ->
-                if (valueIdx == 0) {
-                    return@forEachIndexed
-                }
-                value?.let { value ->
-                    valueList[valueIdx - 1]?.let { preValue ->
-                        tmp4FloatArray[0] = valueIdx - 1 + 0.5f
-                        tmp4FloatArray[1] = preValue
-                        tmp4FloatArray[2] = valueIdx + 0.5f
-                        tmp4FloatArray[3] = value
-
-                        mapPointsValue2Real(tmp4FloatArray)
-
-                        canvas.drawLines(tmp4FloatArray, linePaint)
-                    }
-                }
-            }
-        }
-
         // draw k line
         linePaint.strokeWidth = chartConfig.kLineStrokeWidth
         linePaint.color = chartConfig.kLineColor
-        drawLine(indexList?.get(kIdx))
+        doDrawLine(canvas, indexList?.get(kIdx))
 
         // draw d line
         linePaint.strokeWidth = chartConfig.dLineStrokeWidth
         linePaint.color = chartConfig.dLineColor
-        drawLine(indexList?.get(dIdx))
+        doDrawLine(canvas, indexList?.get(dIdx))
 
         // draw j line
         linePaint.strokeWidth = chartConfig.jLineStrokeWidth
         linePaint.color = chartConfig.jLineColor
-        drawLine(indexList?.get(jIdx))
+        doDrawLine(canvas, indexList?.get(jIdx))
 
         // draw index text
         drawnIndexTextHeight = 0f
@@ -122,7 +102,28 @@ class KdjChart(stockChart: IStockChart, chartConfig: KdjChartConfig) :
                 indexTextPaint.textSize = index.textSize
                 var left = index.textMarginLeft
                 val top = index.textMarginTop
-                fun drawIndexText(text: String) {
+                if (!index.startText.isNullOrEmpty()) {
+                    indexTextPaint.color = index.startTextColor
+                    indexTextPaint.getFontMetrics(tmpFontMetrics)
+                    canvas.drawText(
+                        index.startText,
+                        left,
+                        -tmpFontMetrics.top + top,
+                        indexTextPaint
+                    )
+                    left += indexTextPaint.measureText(index.startText) + index.textSpace
+                    drawnIndexTextHeight =
+                        tmpFontMetrics.bottom - tmpFontMetrics.top
+                }
+                indexList.forEachIndexed { lineIdx, pointList ->
+                    indexTextPaint.color = when (lineIdx) {
+                        kIdx -> chartConfig.kLineColor
+                        dIdx -> chartConfig.dLineColor
+                        else -> chartConfig.jLineColor
+                    }
+                    val value =
+                        if (indexIdx != null && indexIdx in pointList.indices && pointList[indexIdx] != null) pointList[indexIdx] else null
+                    val text = index.textFormatter.invoke(lineIdx, value)
                     indexTextPaint.getFontMetrics(tmpFontMetrics)
                     canvas.drawText(
                         text,
@@ -134,20 +135,25 @@ class KdjChart(stockChart: IStockChart, chartConfig: KdjChartConfig) :
                     drawnIndexTextHeight =
                         tmpFontMetrics.bottom - tmpFontMetrics.top
                 }
-                if (!index.startText.isNullOrEmpty()) {
-                    indexTextPaint.color = index.startTextColor
-                    drawIndexText(index.startText)
-                }
-                indexList.forEachIndexed { lineIdx, pointList ->
-                    indexTextPaint.color = when (lineIdx) {
-                        kIdx -> chartConfig.kLineColor
-                        dIdx -> chartConfig.dLineColor
-                        else -> chartConfig.jLineColor
-                    }
-                    val value =
-                        if (indexIdx != null && indexIdx in pointList.indices && pointList[indexIdx] != null) pointList[indexIdx] else null
-                    val text = index.textFormatter.invoke(lineIdx, value)
-                    drawIndexText(text)
+            }
+        }
+    }
+
+    private fun doDrawLine(canvas: Canvas, valueList: List<Float?>?) {
+        valueList?.forEachIndexed { valueIdx, value ->
+            if (valueIdx == 0) {
+                return@forEachIndexed
+            }
+            value?.let { value ->
+                valueList[valueIdx - 1]?.let { preValue ->
+                    tmp4FloatArray[0] = valueIdx - 1 + 0.5f
+                    tmp4FloatArray[1] = preValue
+                    tmp4FloatArray[2] = valueIdx + 0.5f
+                    tmp4FloatArray[3] = value
+
+                    mapPointsValue2Real(tmp4FloatArray)
+
+                    canvas.drawLines(tmp4FloatArray, linePaint)
                 }
             }
         }
