@@ -20,6 +20,4 @@ package com.github.wangyiqian.stockchart.listener
 interface OnKEntitiesChangedListener {
     fun onSetKEntities()
     fun onModifyKEntities()
-    fun onAppendKEntities()
-    fun onInsertKEntities()
 }

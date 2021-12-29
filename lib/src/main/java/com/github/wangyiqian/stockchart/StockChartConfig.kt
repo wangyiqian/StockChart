@@ -14,12 +14,10 @@
 package com.github.wangyiqian.stockchart
 
 import androidx.annotation.ColorInt
-import androidx.annotation.UiThread
 import com.github.wangyiqian.stockchart.childchart.base.*
 import com.github.wangyiqian.stockchart.entities.IKEntity
 import com.github.wangyiqian.stockchart.listener.OnGestureListener
 import com.github.wangyiqian.stockchart.listener.OnLoadMoreListener
-import com.github.wangyiqian.stockchart.util.checkMainThread
 
 /**
  * @author wangyiqian E-mail: wangyiqian9891@gmail.com
@@ -32,14 +30,6 @@ class StockChartConfig {
         set(value) {
             setKEntities(value, 0, kEntities.size - 1)
         }
-
-    internal var setKEntitiesFlag = false
-
-    internal var modifyKEntitiesFlag = false
-
-    internal var appendKEntitiesFlag = false
-
-    internal var insertKEntitiesFlag = false
 
     // 初始显示区域的起始坐标
     var showStartIndex = 0
@@ -214,7 +204,7 @@ class StockChartConfig {
             setKEntities(kEntities)
         } else {
             this.kEntities.addAll(kEntities)
-            appendKEntitiesFlag = true
+            modifyKEntitiesFlag = true
         }
     }
 
@@ -228,7 +218,7 @@ class StockChartConfig {
             showStartIndex += kEntities.size
             showEndIndex += kEntities.size
             this.kEntities.addAll(0, kEntities)
-            appendKEntitiesFlag = true
+            modifyKEntitiesFlag = true
 
         }
     }
@@ -238,16 +228,25 @@ class StockChartConfig {
      */
     fun insertKEntities(index: Int, kEntities: List<IKEntity>) {
         check(index in this.kEntities.indices) { "Index $index out of bounds for length ${kEntities.size}" }
-        if (this.kEntities.isEmpty()) {
-            setKEntities(kEntities)
-        } else {
-            if(index < showEndIndex) {
-                showEndIndex += kEntities.size
-                showStartIndex += kEntities.size
-            }
-            this.kEntities.addAll(index, kEntities)
-            insertKEntitiesFlag = true
+        if(index <= showEndIndex) {
+            showEndIndex += kEntities.size
+            showStartIndex += kEntities.size
         }
+        this.kEntities.addAll(index, kEntities)
+        modifyKEntitiesFlag = true
+    }
+
+    /**
+     * 删除一个K线数据点
+     */
+    fun removeKEntity(index: Int){
+        check(index in this.kEntities.indices) { "Index $index out of bounds for length ${kEntities.size}" }
+        if(index <= showEndIndex){
+            showEndIndex --
+            showStartIndex --
+        }
+        this.kEntities.removeAt(index)
+        modifyKEntitiesFlag = true
     }
 
     /**
@@ -285,6 +284,8 @@ class StockChartConfig {
         onGestureListeners.remove(listener)
     }
 
-    fun getOnGestureListeners() = onGestureListeners
+    internal fun getOnGestureListeners() = onGestureListeners
+    internal var setKEntitiesFlag = false
+    internal var modifyKEntitiesFlag = false
 
 }

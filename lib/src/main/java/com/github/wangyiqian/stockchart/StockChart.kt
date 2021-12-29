@@ -101,20 +101,6 @@ class StockChart @JvmOverloads constructor(context: Context, attrs: AttributeSet
             }
         }
 
-        if (config.appendKEntitiesFlag) {
-            config.appendKEntitiesFlag = false
-            onKEntitiesChangedListeners.forEach {
-                it.onAppendKEntities()
-            }
-        }
-
-        if (config.insertKEntitiesFlag) {
-            config.insertKEntitiesFlag = false
-            onKEntitiesChangedListeners.forEach {
-                it.onInsertKEntities()
-            }
-        }
-
         checkChildViews()
 
         invalidate()

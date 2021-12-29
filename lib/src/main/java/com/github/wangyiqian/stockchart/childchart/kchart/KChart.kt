@@ -118,7 +118,11 @@ open class KChart(
         var yMin = 0f
         var yMax = 0f
 
-        getKEntities().filterIndexed { index, kEntity -> index in startIndex..endIndex && !kEntity.containFlag(FLAG_EMPTY) }
+        getKEntities().filterIndexed { index, kEntity ->
+            index in startIndex..endIndex && !kEntity.containFlag(
+                FLAG_EMPTY
+            )
+        }
             .apply {
                 when (chartConfig.kChartType) {
                     is KChartConfig.KChartType.CANDLE, is KChartConfig.KChartType.HOLLOW, is KChartConfig.KChartType.BAR -> {
@@ -451,7 +455,11 @@ open class KChart(
             mapPointsReal2Value(tmp4FloatArray)
             val leftIdx = (tmp4FloatArray[0] + 0.5f).toInt()
             val rightIdx = (tmp4FloatArray[2] + 0.5f).toInt() - 1
-            getKEntities().filterIndexed { kEntityIdx, kEntity -> kEntityIdx in leftIdx..rightIdx && !kEntity.containFlag(FLAG_EMPTY) }
+            getKEntities().filterIndexed { kEntityIdx, kEntity ->
+                kEntityIdx in leftIdx..rightIdx && !kEntity.containFlag(
+                    FLAG_EMPTY
+                )
+            }
                 .map { it.getHighPrice() }.max()
 
             var maxIdx: Int? = null
@@ -479,39 +487,44 @@ open class KChart(
                 }
             }
 
-            fun doDraw(idx: Int, price: Float) {
-                tmp2FloatArray[0] = idx + 0.5f
-                tmp2FloatArray[1] = price
-                mapPointsValue2Real(tmp2FloatArray)
-                val isLeft =
-                    tmp2FloatArray[0] - getChartDisplayArea().left > (getChartDisplayArea().right - getChartDisplayArea().left) / 2
-                val lineLength = config.lineLength
-                val lineEndX =
-                    if (isLeft) tmp2FloatArray[0] - lineLength else tmp2FloatArray[0] + lineLength
-                canvas.drawLine(
-                    tmp2FloatArray[0],
-                    tmp2FloatArray[1],
-                    lineEndX,
-                    tmp2FloatArray[1],
-                    highestAndLowestLabelPaint
-                )
-                val text = "${config.formatter.invoke(price)}"
-                val textWidth = highestAndLowestLabelPaint.measureText(text)
-                val textStartX = if (isLeft) lineEndX - textWidth else lineEndX
-                highestAndLowestLabelPaint.getFontMetrics(tmpFontMetrics)
-                val baseLine =
-                    tmp2FloatArray[1] + (tmpFontMetrics.bottom - tmpFontMetrics.top) / 2 - tmpFontMetrics.bottom
-                canvas.drawText(text, textStartX, baseLine, highestAndLowestLabelPaint)
-            }
-
             maxIdx?.let {
-                doDraw(it, maxPrice)
+                doDrawHighestAndLowestLabel(canvas, config, it, maxPrice)
             }
 
             minIdx?.let {
-                doDraw(it, minPrice)
+                doDrawHighestAndLowestLabel(canvas, config, it, minPrice)
             }
         }
+    }
+
+    private fun doDrawHighestAndLowestLabel(
+        canvas: Canvas,
+        config: KChartConfig.HighestAndLowestLabelConfig,
+        idx: Int,
+        price: Float
+    ) {
+        tmp2FloatArray[0] = idx + 0.5f
+        tmp2FloatArray[1] = price
+        mapPointsValue2Real(tmp2FloatArray)
+        val isLeft =
+            tmp2FloatArray[0] - getChartDisplayArea().left > (getChartDisplayArea().right - getChartDisplayArea().left) / 2
+        val lineLength = config.lineLength
+        val lineEndX =
+            if (isLeft) tmp2FloatArray[0] - lineLength else tmp2FloatArray[0] + lineLength
+        canvas.drawLine(
+            tmp2FloatArray[0],
+            tmp2FloatArray[1],
+            lineEndX,
+            tmp2FloatArray[1],
+            highestAndLowestLabelPaint
+        )
+        val text = "${config.formatter.invoke(price)}"
+        val textWidth = highestAndLowestLabelPaint.measureText(text)
+        val textStartX = if (isLeft) lineEndX - textWidth else lineEndX
+        highestAndLowestLabelPaint.getFontMetrics(tmpFontMetrics)
+        val baseLine =
+            tmp2FloatArray[1] + (tmpFontMetrics.bottom - tmpFontMetrics.top) / 2 - tmpFontMetrics.bottom
+        canvas.drawText(text, textStartX, baseLine, highestAndLowestLabelPaint)
     }
 
     private fun drawIndex(canvas: Canvas) {
@@ -564,20 +577,17 @@ open class KChart(
                 var left = index.textMarginLeft
                 val top = index.textMarginTop
                 indexTextPaint.getFontMetrics(tmpFontMetrics)
-                fun drawIndexText(text: String) {
+                if (!index.startText.isNullOrEmpty()) {
+                    indexTextPaint.color = index.startTextColor
                     canvas.drawText(
-                        text,
+                        index.startText,
                         left,
                         -tmpFontMetrics.top + top,
                         indexTextPaint
                     )
-                    left += indexTextPaint.measureText(text) + index.textSpace
+                    left += indexTextPaint.measureText(index.startText) + index.textSpace
                     drawnIndexTextHeight =
                         tmpFontMetrics.bottom - tmpFontMetrics.top
-                }
-                if (!index.startText.isNullOrEmpty()) {
-                    indexTextPaint.color = index.startTextColor
-                    drawIndexText(index.startText)
                 }
                 indexList.forEachIndexed { lineIdx, pointList ->
                     chartConfig.indexColors?.let { indexColors ->
@@ -586,7 +596,15 @@ open class KChart(
                             val value =
                                 if (indexIdx != null && indexIdx in pointList.indices && pointList[indexIdx] != null) pointList[indexIdx] else null
                             val text = index.textFormatter.invoke(lineIdx, value)
-                            drawIndexText(text)
+                            canvas.drawText(
+                                text,
+                                left,
+                                -tmpFontMetrics.top + top,
+                                indexTextPaint
+                            )
+                            left += indexTextPaint.measureText(text) + index.textSpace
+                            drawnIndexTextHeight =
+                                tmpFontMetrics.bottom - tmpFontMetrics.top
                         }
                     }
                 }
@@ -611,7 +629,10 @@ open class KChart(
 
         var preIdx = -1
         for (idx in getKEntities().indices) {
-            if (getKEntities()[idx].containFlag(FLAG_EMPTY) || getKEntities()[idx].containFlag(FLAG_LINE_STARTER)) {
+            if (getKEntities()[idx].containFlag(FLAG_EMPTY) || getKEntities()[idx].containFlag(
+                    FLAG_LINE_STARTER
+                )
+            ) {
                 if (preIdx != -1) {
                     tmpPath.lineTo(preIdx + 1f, getKEntities()[preIdx].getClosePrice())
                     tmpPath.lineTo(preIdx + 1f, yMinValue)
@@ -865,46 +886,45 @@ open class KChart(
     }
 
     private fun drawLabels(canvas: Canvas) {
-
-        fun doDraw(isLeft: Boolean, config: KChartConfig.LabelConfig) {
-            if (config.count > 0) {
-                labelPaint.textSize = config.textSize
-                labelPaint.color = config.textColor
-                labelPaint.getFontMetrics(tmpFontMetrics)
-                val labelHeight = tmpFontMetrics.bottom - tmpFontMetrics.top
-                val areaTop =
-                    getChartDisplayArea().top + drawnIndexTextHeight + config.marginTop
-                val areaBottom = getChartDisplayArea().bottom - config.marginBottom
-                var verticalSpace = 0f
-                if (config.count > 1) {
-                    verticalSpace =
-                        (areaBottom - areaTop - config.count * labelHeight) / (config.count - 1)
-                }
-                var pos = areaTop
-                for (i in 1..config.count) {
-                    tmp2FloatArray[0] = 0f
-                    tmp2FloatArray[1] = pos + labelHeight / 2
-                    mapPointsReal2Value(tmp2FloatArray)
-                    val text = config.formatter.invoke(tmp2FloatArray[1])
-                    val startX = if (isLeft) {
-                        config.horizontalMargin
-                    } else {
-                        getChartDisplayArea().right - config.horizontalMargin - labelPaint.measureText(
-                            text
-                        )
-                    }
-                    canvas.drawText(text, startX, pos - tmpFontMetrics.top, labelPaint)
-                    pos += verticalSpace + labelHeight
-                }
-            }
-        }
-
         chartConfig.leftLabelConfig?.let { config ->
-            doDraw(true, config)
+            doDrawLabel(canvas, true, config)
         }
 
         chartConfig.rightLabelConfig?.let { config ->
-            doDraw(false, config)
+            doDrawLabel(canvas, false, config)
+        }
+    }
+
+    private fun doDrawLabel(canvas: Canvas, isLeft: Boolean, config: KChartConfig.LabelConfig) {
+        if (config.count > 0) {
+            labelPaint.textSize = config.textSize
+            labelPaint.color = config.textColor
+            labelPaint.getFontMetrics(tmpFontMetrics)
+            val labelHeight = tmpFontMetrics.bottom - tmpFontMetrics.top
+            val areaTop =
+                getChartDisplayArea().top + drawnIndexTextHeight + config.marginTop
+            val areaBottom = getChartDisplayArea().bottom - config.marginBottom
+            var verticalSpace = 0f
+            if (config.count > 1) {
+                verticalSpace =
+                    (areaBottom - areaTop - config.count * labelHeight) / (config.count - 1)
+            }
+            var pos = areaTop
+            for (i in 1..config.count) {
+                tmp2FloatArray[0] = 0f
+                tmp2FloatArray[1] = pos + labelHeight / 2
+                mapPointsReal2Value(tmp2FloatArray)
+                val text = config.formatter.invoke(tmp2FloatArray[1])
+                val startX = if (isLeft) {
+                    config.horizontalMargin
+                } else {
+                    getChartDisplayArea().right - config.horizontalMargin - labelPaint.measureText(
+                        text
+                    )
+                }
+                canvas.drawText(text, startX, pos - tmpFontMetrics.top, labelPaint)
+                pos += verticalSpace + labelHeight
+            }
         }
     }
 }
