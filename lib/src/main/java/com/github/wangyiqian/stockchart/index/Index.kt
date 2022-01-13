@@ -20,7 +20,7 @@ import com.github.wangyiqian.stockchart.entities.IKEntity
  * @author wangyiqian E-mail: wangyiqian9891@gmail.com
  * @version 创建时间: 2021/2/18
  */
-sealed class Index(
+open abstract class Index(
     var param: String,
     var startText: String,
     var startTextColor: Int,

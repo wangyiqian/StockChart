@@ -17,6 +17,7 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import com.github.wangyiqian.stockchart.IStockChart
 import com.github.wangyiqian.stockchart.childchart.base.BaseChildChart
+import kotlin.math.abs
 
 /**
  * @author wangyiqian E-mail: wangyiqian9891@gmail.com
@@ -59,8 +60,15 @@ class KdjChart(stockChart: IStockChart, chartConfig: KdjChartConfig) :
                     }
                 }
         }
-        result[0] = yMin
-        result[1] = yMax
+
+        if (abs(yMin - yMax) > 0.0001) {
+            result[0] = yMin
+            result[1] = yMax
+        } else { // 约等于0
+            var delta = 2
+            result[0] = yMin - delta
+            result[1] = yMax + delta
+        }
     }
 
     override fun preDrawBackground(canvas: Canvas) {

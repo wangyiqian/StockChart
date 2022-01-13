@@ -100,22 +100,6 @@ class VolumeChart(
         }
     }
 
-    private fun isRise(idx: Int) =
-        if (getKEntities()[idx].getClosePrice() == getKEntities()[idx].getOpenPrice()) {
-            if (idx - 1 in getKEntities().indices) {
-                val preKEntity = getKEntities()[idx - 1]
-                if (!preKEntity.containFlag(FLAG_EMPTY)) {
-                    getKEntities()[idx].getClosePrice() >= preKEntity.getClosePrice()
-                } else {
-                    true
-                }
-            } else {
-                true
-            }
-        } else {
-            getKEntities()[idx].getClosePrice() > getKEntities()[idx].getOpenPrice()
-        }
-
     override fun preDrawHighlight(canvas: Canvas) {}
 
     override fun drawHighlight(canvas: Canvas) {
