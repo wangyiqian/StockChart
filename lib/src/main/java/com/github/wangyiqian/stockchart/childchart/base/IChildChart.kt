@@ -92,6 +92,11 @@ interface IChildChart {
      */
     fun onTap(event: GestureEvent)
 
+    /**
+     * 涨跌判断
+     */
+    fun isRise(idx: Int): Boolean
+
     fun getHighlightValue(highlightX: Float, highlightY: Float, highlightValue: FloatArray) {
         highlightValue[0] = highlightX
         highlightValue[1] = highlightY

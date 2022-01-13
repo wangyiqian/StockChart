@@ -838,22 +838,6 @@ open class KChart(
         }
     }
 
-    private fun isRise(idx: Int) =
-        if (getKEntities()[idx].getClosePrice() == getKEntities()[idx].getOpenPrice()) {
-            if (idx - 1 in getKEntities().indices) {
-                val preKEntity = getKEntities()[idx - 1]
-                if (!preKEntity.containFlag(FLAG_EMPTY)) {
-                    getKEntities()[idx].getClosePrice() >= preKEntity.getClosePrice()
-                } else {
-                    true
-                }
-            } else {
-                true
-            }
-        } else {
-            getKEntities()[idx].getClosePrice() > getKEntities()[idx].getOpenPrice()
-        }
-
     private fun drawLineKChart(canvas: Canvas) {
         lineKChartLinePaint.strokeWidth = chartConfig.lineChartStrokeWidth
         lineKChartLinePaint.color = chartConfig.lineChartColor

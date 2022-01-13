@@ -18,7 +18,9 @@ import android.view.View
 import android.view.ViewGroup
 import com.github.wangyiqian.stockchart.IStockChart
 import com.github.wangyiqian.stockchart.StockChart
+import com.github.wangyiqian.stockchart.entities.FLAG_EMPTY
 import com.github.wangyiqian.stockchart.entities.GestureEvent
+import com.github.wangyiqian.stockchart.entities.containFlag
 import com.github.wangyiqian.stockchart.listener.OnKEntitiesChangedListener
 
 /**
@@ -246,4 +248,20 @@ abstract class BaseChildChart<C : BaseChildChartConfig> @JvmOverloads constructo
     override fun getConfig() = chartConfig
 
     override fun onTap(event: GestureEvent) {}
+
+    override fun isRise(idx: Int) =
+        if (getKEntities()[idx].getClosePrice() == getKEntities()[idx].getOpenPrice()) {
+            if (idx - 1 in getKEntities().indices) {
+                val preKEntity = getKEntities()[idx - 1]
+                if (!preKEntity.containFlag(FLAG_EMPTY)) {
+                    getKEntities()[idx].getClosePrice() >= preKEntity.getClosePrice()
+                } else {
+                    true
+                }
+            } else {
+                true
+            }
+        } else {
+            getKEntities()[idx].getClosePrice() > getKEntities()[idx].getOpenPrice()
+        }
 }
