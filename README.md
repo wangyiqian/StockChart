@@ -160,6 +160,7 @@ Data.loadDayData(this, 0) { kEntities: List<IKEntity> ->
 |onHighlightListener|长按回调|
 |chartMainDisplayAreaPaddingTop|主数据显示区域的顶部内间距|
 |chartMainDisplayAreaPaddingBottom|主数据显示区域的底部内间距|
+|kChartType|K线图类型|
 |highlightLabelLeft|长按时高亮线左侧标签配置|
 |highlightLabelTop|长按时高亮线顶部标签配置|
 |highlightLabelRight|长按时高亮线右侧标签配置|
