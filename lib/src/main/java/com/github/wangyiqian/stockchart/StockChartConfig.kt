@@ -130,6 +130,8 @@ class StockChartConfig {
     // 背景网格线条宽度
     var gridLineStrokeWidth = DEFAULT_GRID_LINE_STROKE_WIDTH
 
+    var valueTendToZero = DEFAULT_VALUE_TEND_TO_ZERO
+
     // 加载更多监听
     var onLoadMoreListener: OnLoadMoreListener? = null
     set(value) {
