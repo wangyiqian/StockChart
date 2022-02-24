@@ -65,7 +65,7 @@ class MacdChart(
                 }
         }
 
-        if (abs(yMin - yMax) > 0.0001) {
+        if (abs(yMin - yMax) > stockChart.getConfig().valueTendToZero) {
             result[0] = yMin
             result[1] = yMax
         } else { // 约等于0
