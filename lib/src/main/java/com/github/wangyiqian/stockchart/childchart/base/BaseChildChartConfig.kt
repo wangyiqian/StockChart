@@ -27,11 +27,11 @@ abstract class BaseChildChartConfig(
     /**
      * 主数据显示区域的顶部内间距
      */
-    val chartMainDisplayAreaPaddingTop: Float,
+    var chartMainDisplayAreaPaddingTop: Float,
     /**
      * 主数据显示区域的底部内间距
      */
-    val chartMainDisplayAreaPaddingBottom: Float
+    var chartMainDisplayAreaPaddingBottom: Float
 ) {
     var height: Int = 0
         set(value) {
