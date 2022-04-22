@@ -115,6 +115,12 @@ open class KChart(
             calculateIndexList()
         }
 
+        if (chartConfig.yValueMin != null && chartConfig.yValueMax != null) {
+            result[0] = chartConfig.yValueMin!!
+            result[1] = chartConfig.yValueMax!!
+            return
+        }
+
         var yMin = 0f
         var yMax = 0f
 
@@ -170,6 +176,8 @@ open class KChart(
             result[0] = yMin - delta
             result[1] = yMax + delta
         }
+        chartConfig.yValueMin?.apply { result[0] = this }
+        chartConfig.yValueMax?.apply { result[1] = this }
     }
 
     override fun preDrawBackground(canvas: Canvas) {}

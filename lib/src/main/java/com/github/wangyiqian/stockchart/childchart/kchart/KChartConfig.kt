@@ -81,7 +81,11 @@ open class KChartConfig(
     // 分时均线颜色
     var avgLineColor: Int = DEFAULT_AVG_LINE_COLOR,
     // 分时均线宽度
-    var avgLineStrokeWidth: Float = DEFAULT_AVG_LINE_WIDTH
+    var avgLineStrokeWidth: Float = DEFAULT_AVG_LINE_WIDTH,
+    // y轴范围最小值，在增加或修改K线数据之前指定才有效
+    var yValueMin: Float? = null,
+    // y轴范围最大值，在增加或修改K线数据之前指定才有效
+    var yValueMax: Float? = null
 ) : BaseChildChartConfig(
     height,
     marginTop,
