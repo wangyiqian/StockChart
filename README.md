@@ -185,6 +185,8 @@ Data.loadDayData(this, 0) { kEntities: List<IKEntity> ->
 |showAvgLine|是否显示分时均线。若需要显示，K线数据需带有分时均线价格。|
 |avgLineColor|分时均线颜色|
 |avgLineStrokeWidth|分时均线宽度|
+|yValueMin|y轴范围最小值，在增加或修改K线数据之前指定才有效|
+|yValueMax|y轴范围最大值，在增加或修改K线数据之前指定才有效|
 
 ##### 时间条图配置`TimeBarConfig`
 |字段|描述|

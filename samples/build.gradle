@@ -18,13 +18,13 @@ plugins {
 }
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 32
     buildToolsVersion "29.0.3"
 
     defaultConfig {
         applicationId "com.github.wangyiqian.stockchart.sample"
         minSdkVersion 24
-        targetSdkVersion 29
+        targetSdkVersion 32
         versionCode 1
         versionName "1.0"
 
@@ -71,5 +71,5 @@ dependencies {
     implementation 'com.google.android:flexbox:2.0.1'
 
 //    implementation project(':lib')
-    implementation 'com.github.wangyiqian:StockChart:1.1.0'
+    implementation 'com.github.wangyiqian:StockChart:1.1.1'
 }
