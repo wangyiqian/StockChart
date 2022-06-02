@@ -276,7 +276,8 @@ class StockChart @JvmOverloads constructor(context: Context, attrs: AttributeSet
         backgroundGridPaint.pathEffect = config.gridLinePathEffect
 
         if (config.gridHorizontalLineCount > 0) {
-            val space = height.toFloat() / (config.gridHorizontalLineCount + 1)
+            val space = config.horizontalGridLineSpaceCalculator?.invoke(this)
+                ?: height.toFloat() / (config.gridHorizontalLineCount + 1)
             var top = config.horizontalGridLineTopOffset ?: space
 
             for (i in 1..config.gridHorizontalLineCount) {
