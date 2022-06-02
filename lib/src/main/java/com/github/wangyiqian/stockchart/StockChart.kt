@@ -273,13 +273,20 @@ class StockChart @JvmOverloads constructor(context: Context, attrs: AttributeSet
     private fun drawBackgroundGrid(canvas: Canvas) {
         backgroundGridPaint.color = config.gridLineColor
         backgroundGridPaint.strokeWidth = config.gridLineStrokeWidth
+        backgroundGridPaint.pathEffect = config.gridLinePathEffect
 
         if (config.gridHorizontalLineCount > 0) {
             val space = height.toFloat() / (config.gridHorizontalLineCount + 1)
-            var top = space
+            var top = config.horizontalGridLineTopOffset ?: space
 
             for (i in 1..config.gridHorizontalLineCount) {
-                canvas.drawLine(0f, top, width.toFloat(), top, backgroundGridPaint)
+                canvas.drawLine(
+                    config.horizontalGridLineLeftOffset,
+                    top,
+                    width.toFloat(),
+                    top,
+                    backgroundGridPaint
+                )
                 top += space
 
             }

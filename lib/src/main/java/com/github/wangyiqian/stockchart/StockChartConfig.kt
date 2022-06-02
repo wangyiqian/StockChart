@@ -13,6 +13,8 @@
 
 package com.github.wangyiqian.stockchart
 
+import android.graphics.DashPathEffect
+import android.graphics.PathEffect
 import androidx.annotation.ColorInt
 import com.github.wangyiqian.stockchart.childchart.base.*
 import com.github.wangyiqian.stockchart.entities.IKEntity
@@ -129,6 +131,15 @@ class StockChartConfig {
 
     // 背景网格线条宽度
     var gridLineStrokeWidth = DEFAULT_GRID_LINE_STROKE_WIDTH
+
+    // 背景网格线条虚线配置
+    var gridLinePathEffect: PathEffect? = null
+
+    // 背景网格第一条线的顶部偏移量，默认是高度按照网格线数量平均分后的距离
+    var horizontalGridLineTopOffset: Float? = null
+
+    // 背景网格左侧偏移量
+    var horizontalGridLineLeftOffset: Float = DEFAULT_HORIZONTAL_GRID_LINE_LEFT_OFFSET
 
     var valueTendToZero = DEFAULT_VALUE_TEND_TO_ZERO
 
