@@ -282,7 +282,7 @@ class StockChart @JvmOverloads constructor(context: Context, attrs: AttributeSet
 
             for (i in 1..config.gridHorizontalLineCount) {
                 canvas.drawLine(
-                    config.horizontalGridLineLeftOffset,
+                    config.horizontalGridLineLeftOffsetCalculator?.invoke(this)?:0f,
                     top,
                     width.toFloat(),
                     top,
