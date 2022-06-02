@@ -139,7 +139,7 @@ class StockChartConfig {
     var horizontalGridLineTopOffsetCalculator: ((StockChart) -> Float)? = null
 
     // 背景网格横线左侧偏移量
-    var horizontalGridLineLeftOffset: Float = DEFAULT_HORIZONTAL_GRID_LINE_LEFT_OFFSET
+    var horizontalGridLineLeftOffsetCalculator: ((StockChart) -> Float)? = null
 
     // 背景网格横线间距
     var horizontalGridLineSpaceCalculator: ((StockChart) -> Float)? = null
