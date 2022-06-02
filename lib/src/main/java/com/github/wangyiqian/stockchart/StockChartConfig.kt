@@ -135,30 +135,33 @@ class StockChartConfig {
     // 背景网格线条虚线配置
     var gridLinePathEffect: PathEffect? = null
 
-    // 背景网格第一条线的顶部偏移量，默认是高度按照网格线数量平均分后的距离
-    var horizontalGridLineTopOffset: Float? = null
+    // 背景网格横线第一条线的顶部偏移量
+    var horizontalGridLineTopOffsetCalculator: ((StockChart) -> Float)? = null
 
-    // 背景网格左侧偏移量
+    // 背景网格横线左侧偏移量
     var horizontalGridLineLeftOffset: Float = DEFAULT_HORIZONTAL_GRID_LINE_LEFT_OFFSET
+
+    // 背景网格横线间距
+    var horizontalGridLineSpaceCalculator: ((StockChart) -> Float)? = null
 
     var valueTendToZero = DEFAULT_VALUE_TEND_TO_ZERO
 
     // 加载更多监听
     var onLoadMoreListener: OnLoadMoreListener? = null
-    set(value) {
-        field?.apply { removeOnLoadMoreListener(this) }
-        value?.apply { addOnLoadMoreListener(this)}
-        field = value
+        set(value) {
+            field?.apply { removeOnLoadMoreListener(this) }
+            value?.apply { addOnLoadMoreListener(this) }
+            field = value
 
-    }
+        }
 
     // 手势监听
     var onGestureListener: OnGestureListener? = null
-    set(value) {
-        field?.apply { removeOnGestureListener(this) }
-        value?.apply { addOnGestureListener(this) }
-        field = value
-    }
+        set(value) {
+            field?.apply { removeOnGestureListener(this) }
+            value?.apply { addOnGestureListener(this) }
+            field = value
+        }
 
     val childChartFactories = mutableListOf<AbsChildChartFactory<*>>()
 
@@ -241,7 +244,7 @@ class StockChartConfig {
      */
     fun insertKEntities(index: Int, kEntities: List<IKEntity>) {
         check(index in this.kEntities.indices) { "Index $index out of bounds for length ${kEntities.size}" }
-        if(index <= showEndIndex) {
+        if (index <= showEndIndex) {
             showEndIndex += kEntities.size
             showStartIndex += kEntities.size
         }
@@ -252,11 +255,11 @@ class StockChartConfig {
     /**
      * 删除一个K线数据点
      */
-    fun removeKEntity(index: Int){
+    fun removeKEntity(index: Int) {
         check(index in this.kEntities.indices) { "Index $index out of bounds for length ${kEntities.size}" }
-        if(index <= showEndIndex){
-            showEndIndex --
-            showStartIndex --
+        if (index <= showEndIndex) {
+            showEndIndex--
+            showStartIndex--
         }
         this.kEntities.removeAt(index)
         modifyKEntitiesFlag = true
@@ -286,14 +289,14 @@ class StockChartConfig {
     /**
      * 添加手势监听
      */
-    fun addOnGestureListener(listener: OnGestureListener){
+    fun addOnGestureListener(listener: OnGestureListener) {
         onGestureListeners.add(listener)
     }
 
     /**
      * 移除手势监听
      */
-    fun removeOnGestureListener(listener: OnGestureListener){
+    fun removeOnGestureListener(listener: OnGestureListener) {
         onGestureListeners.remove(listener)
     }
 
