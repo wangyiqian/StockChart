@@ -31,8 +31,8 @@
 [![](https://jitpack.io/v/wangyiqian/StockChart.svg)](https://jitpack.io/#wangyiqian/StockChart)
 
 # 介绍
-StockChart是一款适用于Android的高扩展性、高性能股票图开发库，轻松完成各种子图的组合，还能灵活的定制自己的子图满足复杂的业务需求。
-### 特点
+StockChart 一款适用于Android的高扩展性、高性能股票图/K线图开发库，支持多图组合，除了使用内置子图还支持定制子图满足复杂的业务需求。
+## 特点
 * **内置子图**：K线图、时间条图、成交量图、MACD指标图、KDJ指标图
 * **内置指标**：MA（移动平均线）、EMA（指数移动平均值）、BOLL（布林线）、MACD（指数平滑异同移动平均线）、KDJ（随机指标）
 * **支持自定义子图（以StockChart为内核，UI完全自己定制）**：若内置的子图样式（如K线图）无法满足您的需求或者您需要更多类型的指标图时，您可以通过自定义子图的方式来实现自己的子图。您甚至可以把内置的所有子图都当做你实现自定义子图的参考示例。如果您的项目是一个商业项目，可能更需要此功能来绘制自己需要的UI。**这种设计可以避免基于源码修改，满足开闭原则**。
@@ -46,7 +46,7 @@ StockChart是一款适用于Android的高扩展性、高性能股票图开发库
 **阿里巴巴** 、**老虎集团（老虎证券）** 2022各岗位内推，可发简历到我邮箱:wangyiqian9891@gmail.com。
 
 # 用法
-### 先明白几个概念
+## 先明白几个概念
 * 所有要显示的图（内置的子图与自定义的子图）都是`StockChart`的子图。内置的子图：`KChart`（K线图）、`TimeBarChart`（时间条图）、`VolumeChart`（成交量图）、`MacdChart`（MACD指标图）、`KdjChart`（KDJ指标图）
 * 任何变化（如K线数据增加）都是通过修改配置去更新。全局配置：`StockChartConfig`，每个子图也有自己的配置如：`KChartConfig`、`KDJChartConfig`。
 * 逻辑坐标：原点是左下角，x轴从左到右变大，y轴从下到上变大。是最接近普通人理解股票图的坐标。
@@ -54,8 +54,8 @@ StockChart是一款适用于Android的高扩展性、高性能股票图开发库
     * 逻辑坐标的y轴：由子类各自根据实际情况提供。比如成交量图每个数据对应y轴上的值应该是成交量，比如K线图每个数据对应y轴上的值应该是价格。
 * 实际坐标：就是Android View的坐标体系，即最终绘制时View认识的坐标，原点是左上角，x轴从左到右变大，y轴从上到下变大。
 
-### 基本使用
-#### 1. 集成
+## 基本使用
+### 1. 集成
 ```groovy
 allprojects {
     repositories {
@@ -65,22 +65,22 @@ allprojects {
 ```
 ```groovy
 dependencies {
-    implementation 'com.github.wangyiqian:StockChart:1.0.4'
+    implementation 'com.github.wangyiqian:StockChart:1.1.5'
 }
 ```
-#### 2. 布局文件加入StockChart布局
+### 2. 布局文件加入StockChart布局
 ```xml
 <com.github.wangyiqian.stockchart.StockChart
     android:id="@+id/stock_chart"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"/>
 ```
-#### 3. 设置`StockChart`的配置
+### 3. 设置`StockChart`的配置
 ```kotlin
 val stockChartConfig = StockChartConfig()
 stock_chart.setConfig(stockChartConfig)
 ```
-#### 4. 添加子图，将需要的子图的工厂添加给全局配置即可，如以下将添加三个子图：K线图、时间条、MACD指标图
+### 4. 添加子图，将需要的子图的工厂添加给全局配置即可，如以下将添加三个子图：K线图、时间条、MACD指标图
 ```kotlin
 // K线图的配置与工厂
 val kChartConfig = KChartConfig()
@@ -97,7 +97,7 @@ val macdChartFactory = MacdChartFactory(stockChart = stock_chart, childChartConf
 // 将需要显示的子图的工厂加入全局配置
 stockChartConfig.addChildCharts(kChartFactory, timeBarFactory, macdChartFactory)
 ```
-#### 5. 将K线数据传给全局配置
+### 5. 将K线数据传给全局配置
 ```kotlin
 // 加载模拟数据
 Data.loadDayData(this, 0) { kEntities: List<IKEntity> ->
@@ -118,11 +118,11 @@ Data.loadDayData(this, 0) { kEntities: List<IKEntity> ->
 ```
 > 注意：任何配置的修改都需要调用`StockChart`的`notifyChanged()`方法去更新视图展示
 
-### 使用进阶
+## 使用进阶
 详细请参考提供的示例（samples模块）
 
-### 所有配置
-##### 全局配置`StockChartConfig`
+## 所有配置
+### 全局配置`StockChartConfig`
 |字段|描述|
 |---|---|
 |kEntities|K线数据|
@@ -151,7 +151,7 @@ Data.loadDayData(this, 0) { kEntities: List<IKEntity> ->
 |gridLineColor|背景网格线条色|
 |gridLineStrokeWidth|背景网格线条宽度|
 
-##### K线图配置`KChartConfig`
+### K线图配置`KChartConfig`
 |字段|描述|
 |---|---|
 |height|高度|
@@ -188,7 +188,7 @@ Data.loadDayData(this, 0) { kEntities: List<IKEntity> ->
 |yValueMin|y轴范围最小值，在增加或修改K线数据之前指定才有效|
 |yValueMax|y轴范围最大值，在增加或修改K线数据之前指定才有效|
 
-##### 时间条图配置`TimeBarConfig`
+### 时间条图配置`TimeBarConfig`
 |字段|描述|
 |---|---|
 |height|高度|
@@ -205,7 +205,7 @@ Data.loadDayData(this, 0) { kEntities: List<IKEntity> ->
 |highlightLabelBgColor|长按显示的标签背景色|
 |type|时间条样式|
 
-##### 成交量图配置`VolumeChartConfig`
+### 成交量图配置`VolumeChartConfig`
 |字段|描述|
 |---|---|
 |height|高度|
@@ -220,7 +220,7 @@ Data.loadDayData(this, 0) { kEntities: List<IKEntity> ->
 |volumeChartType|柱子样式|
 |hollowChartLineStrokeWidth|柱子空心时的线条宽度|
 
-##### MACD指标图配置`MacdChartConfig`
+### MACD指标图配置`MacdChartConfig`
 |字段|描述|
 |---|---|
 |height|高度|
@@ -239,7 +239,7 @@ Data.loadDayData(this, 0) { kEntities: List<IKEntity> ->
 |barSpaceRatio|柱子之间的空间占比柱子宽度|
 |index|需要展示的指标配置|
 
-##### KDJ指标图配置`KdjChartConfig`
+### KDJ指标图配置`KdjChartConfig`
 |字段|描述|
 |---|---|
 |height|高度|
@@ -258,7 +258,7 @@ Data.loadDayData(this, 0) { kEntities: List<IKEntity> ->
 |jLineStrokeWidth|j线宽度|
 |index|需要展示的指标配置|
 
-##### 长按时高亮线的标签配置`HighlightLabelConfig`
+### 长按时高亮线的标签配置`HighlightLabelConfig`
 |字段|描述|
 |---|---|
 |bgColor|背景色|
@@ -268,7 +268,7 @@ Data.loadDayData(this, 0) { kEntities: List<IKEntity> ->
 |textColor|文字颜色|
 |textFormat|显示的内容格式化|
 
-##### K线图标签配置`LabelConfig`
+### K线图标签配置`LabelConfig`
 |字段|描述|
 |---|---|
 |count|标签数|
@@ -280,12 +280,12 @@ Data.loadDayData(this, 0) { kEntities: List<IKEntity> ->
 |marginBottom|底部外间距|
 
 
-### 如何自定义子图
-##### 三步走
+## 如何自定义子图
+### 三步走
 1. 提供子图的配置类，用于定义子图的各种配置，需要继承`BaseChildChartConfig`
 2. 提供子图的UI类，用于绘制UI细节，需要继承`BaseChildChart`
 3. 提供子图的工厂类，用于实例化子图，需要继承`AbsChildChartFactory`
-##### 示例
+### 示例
 ```kotlin
 class CustomChartConfig(  
     height: Int = DEFAULT_CHILD_CHART_HEIGHT,  
