@@ -65,7 +65,7 @@ allprojects {
 ```
 ```groovy
 dependencies {
-    implementation 'com.github.wangyiqian:StockChart:1.1.5'
+    implementation 'com.github.wangyiqian:StockChart:1.1.6'
 }
 ```
 ### 2. 布局文件加入StockChart布局

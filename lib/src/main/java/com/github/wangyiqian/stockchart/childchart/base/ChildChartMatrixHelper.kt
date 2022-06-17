@@ -133,7 +133,6 @@ internal class ChildChartMatrixHelper<O : BaseChildChartConfig>(
 
             val chartDisplayArea = chart.getChartMainDisplayArea()
 
-
             tmp2FloatArray[0] = chartDisplayArea.left
             tmp2FloatArray[1] = 0f
             // 反算出会被移动到显示区域的第一个逻辑坐标值（数据下标）
@@ -275,6 +274,9 @@ internal class ChildChartMatrixHelper<O : BaseChildChartConfig>(
             postConcat(stockChart.getScrollMatrix())
             postConcat(fixXMatrix)
             postConcat(fixYMatrix)
+            stockChart.getConfig().extMatrix?.also {
+                postConcat(it)
+            }
         }
     }
 
