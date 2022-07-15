@@ -583,8 +583,9 @@ open class KChart(
                     highlight?.getIdx() ?: stockChart.findLastNotEmptyKEntityIdxInDisplayArea()
                 indexTextPaint.textSize = index.textSize
                 var left = index.textMarginLeft
-                val top = index.textMarginTop
+                var top = index.textMarginTop
                 indexTextPaint.getFontMetrics(tmpFontMetrics)
+                val textHeight = tmpFontMetrics.bottom - tmpFontMetrics.top
                 if (!index.startText.isNullOrEmpty()) {
                     indexTextPaint.color = index.startTextColor
                     canvas.drawText(
@@ -594,9 +595,9 @@ open class KChart(
                         indexTextPaint
                     )
                     left += indexTextPaint.measureText(index.startText) + index.textSpace
-                    drawnIndexTextHeight =
-                        tmpFontMetrics.bottom - tmpFontMetrics.top
+                    drawnIndexTextHeight = textHeight + index.textMarginTop
                 }
+                var isFirstLine = true
                 indexList.forEachIndexed { lineIdx, pointList ->
                     chartConfig.indexColors?.let { indexColors ->
                         if (lineIdx < indexColors.size) {
@@ -604,6 +605,20 @@ open class KChart(
                             val value =
                                 if (indexIdx != null && indexIdx in pointList.indices && pointList[indexIdx] != null) pointList[indexIdx] else null
                             val text = index.textFormatter.invoke(lineIdx, value)
+                            val textWidth = indexTextPaint.measureText(text)
+
+                            if(left + textWidth > getChartDisplayArea().width()){
+                                // 需要换行
+                                isFirstLine = false
+                                left = index.textMarginLeft
+                                top += textHeight
+                                drawnIndexTextHeight += textHeight
+                            }
+
+                            if(isFirstLine){
+                                drawnIndexTextHeight = textHeight + index.textMarginTop
+                            }
+
                             canvas.drawText(
                                 text,
                                 left,
@@ -611,8 +626,6 @@ open class KChart(
                                 indexTextPaint
                             )
                             left += indexTextPaint.measureText(text) + index.textSpace
-                            drawnIndexTextHeight =
-                                tmpFontMetrics.bottom - tmpFontMetrics.top
                         }
                     }
                 }
