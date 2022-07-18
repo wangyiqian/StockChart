@@ -76,7 +76,7 @@ interface IStockChart {
     fun findLastNotEmptyKEntityIdxInDisplayArea(): Int?
 
     /**
-     * 获取显示区域最后一个不为空的K线数据点下标
+     * 获取显示区域第一个不为空的K线数据点下标
      */
     fun findFirstNotEmptyKEntityIdxInDisplayArea(): Int?
 
