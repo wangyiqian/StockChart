@@ -57,19 +57,24 @@ object BollCalculator: ICalculator {
 
             sum += kEntity.getClosePrice()
 
-            var ma = sum / (pEnd - pFrom + 1)
-            result[mbIdx][kEntityIdx] = ma
-            if(pEnd - pFrom + 1 == n){
+            if (pEnd - pFrom + 1 == n) {
+                val ma = sum / n
+                result[mbIdx][kEntityIdx] = ma
                 sum -= input[pFrom].getClosePrice()
                 pFrom += 1
+
+                var squareSum = 0f
+                for (i in pEnd downTo pEnd - n + 1) {
+                    squareSum += (input[i].getClosePrice() - ma).pow(2)
+                }
+                val std = sqrt(squareSum / n)
+                result[upIdx][kEntityIdx] = ma + k * std
+                result[dnIdx][kEntityIdx] = ma - k * std
+            } else {
+                result[mbIdx][kEntityIdx] = null
+                result[upIdx][kEntityIdx] = null
+                result[dnIdx][kEntityIdx] = null
             }
-            var squareSum = 0f
-            for (i in pEnd downTo pFrom) {
-                squareSum += (input[i].getClosePrice() - ma).pow(2)
-            }
-            val std = sqrt(squareSum / n)
-            result[upIdx][kEntityIdx] = ma + k * std
-            result[dnIdx][kEntityIdx] = ma - k * std
         }
         return result
     }
