@@ -65,7 +65,7 @@ allprojects {
 ```
 ```groovy
 dependencies {
-    implementation 'com.github.wangyiqian:StockChart:1.1.9'
+    implementation 'com.github.wangyiqian:StockChart:1.1.11'
 }
 ```
 ### 2. 布局文件加入StockChart布局
@@ -140,9 +140,11 @@ Data.loadDayData(this, 0) { kEntities: List<IKEntity> ->
 |showHighlightHorizontalLine|是否支持长按高亮横线|
 |highlightHorizontalLineWidth|长按高亮横线宽度|
 |highlightHorizontalLineColor|长按高亮横线颜色|
+|highlightHorizontalLinePathEffect|长按高亮横线虚线|
 |showHighlightVerticalLine|是否支持长按高亮竖线|
 |highlightVerticalLineWidth|长按高亮竖线宽度|
 |highlightVerticalLineColor|长按高亮竖线颜色|
+|highlightVerticalLinePathEffect|长按高亮竖线虚线|
 |riseColor|涨色值|
 |downColor|跌色值|
 |backgroundColor|背景色|

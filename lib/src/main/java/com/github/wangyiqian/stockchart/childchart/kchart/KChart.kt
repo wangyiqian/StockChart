@@ -224,6 +224,8 @@ open class KChart(
                         stockChart.getConfig().highlightHorizontalLineColor
                     highlightHorizontalLinePaint.strokeWidth =
                         stockChart.getConfig().highlightHorizontalLineWidth
+                    highlightHorizontalLinePaint.pathEffect =
+                        stockChart.getConfig().highlightHorizontalLinePathEffect
 
                     var highlightHorizontalLineLeft = getChartDisplayArea().left
                     var highlightHorizontalLineRight = getChartDisplayArea().right
@@ -339,6 +341,8 @@ open class KChart(
                         stockChart.getConfig().highlightVerticalLineColor
                     highlightVerticalLinePaint.strokeWidth =
                         stockChart.getConfig().highlightVerticalLineWidth
+                    highlightVerticalLinePaint.pathEffect =
+                        stockChart.getConfig().highlightVerticalLinePathEffect
 
                     tmp2FloatArray[0] = highlight.getIdx() + 0.5f
                     tmp2FloatArray[1] = 0f
