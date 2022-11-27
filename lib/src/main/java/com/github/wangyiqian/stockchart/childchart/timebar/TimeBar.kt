@@ -90,7 +90,7 @@ class TimeBar(stockChart: IStockChart, chartConfig: TimeBarConfig) :
 
     private fun drawLabelOfDayType(canvas: Canvas) {
 
-        var lastDrawRight = getChartDisplayArea().left
+        var lastDrawRight = getChartMainDisplayArea().left
         var lastDrawLabel = ""
         val labelMinSpace = DimensionUtil.dp2px(context, 50f)
 
@@ -112,7 +112,7 @@ class TimeBar(stockChart: IStockChart, chartConfig: TimeBarConfig) :
             tmp2FloatArray[1] = 0f
             mapPointsValue2Real(tmp2FloatArray)
             val centerRealX = tmp2FloatArray[0]
-            if (centerRealX - labelHalfWidth < lastDrawRight + labelMinSpace || centerRealX + labelHalfWidth > getChartDisplayArea().right) {
+            if (centerRealX - labelHalfWidth < lastDrawRight + labelMinSpace || centerRealX + labelHalfWidth > getChartMainDisplayArea().right) {
                 return@forEachIndexed
             }
 
@@ -178,7 +178,7 @@ class TimeBar(stockChart: IStockChart, chartConfig: TimeBarConfig) :
         mapPointsValue2Real(tmp2FloatArray)
         val centerRealX = tmp2FloatArray[0]
 
-        if (centerRealX - labelHalfWidth < getChartDisplayArea().left || centerRealX + labelHalfWidth > getChartDisplayArea().right) {
+        if (centerRealX - labelHalfWidth < getChartMainDisplayArea().left || centerRealX + labelHalfWidth > getChartMainDisplayArea().right) {
             return
         }
 
@@ -190,7 +190,7 @@ class TimeBar(stockChart: IStockChart, chartConfig: TimeBarConfig) :
 
     private fun drawLabelOfWeekType(canvas: Canvas) {
 
-        var lastDrawRight = getChartDisplayArea().left
+        var lastDrawRight = getChartMainDisplayArea().left
         var lastDrawLabel = ""
         val labelMinSpace = DimensionUtil.dp2px(context, 70f)
 
@@ -213,7 +213,7 @@ class TimeBar(stockChart: IStockChart, chartConfig: TimeBarConfig) :
             tmp2FloatArray[1] = 0f
             mapPointsValue2Real(tmp2FloatArray)
             val centerRealX = tmp2FloatArray[0]
-            if (centerRealX - labelHalfWidth < lastDrawRight + labelMinSpace || centerRealX + labelHalfWidth > getChartDisplayArea().right) {
+            if (centerRealX - labelHalfWidth < lastDrawRight + labelMinSpace || centerRealX + labelHalfWidth > getChartMainDisplayArea().right) {
                 return@forEachIndexed
             }
 
@@ -228,7 +228,7 @@ class TimeBar(stockChart: IStockChart, chartConfig: TimeBarConfig) :
     }
 
     private fun drawLabelOfMonthType(canvas: Canvas) {
-        var lastDrawRight = getChartDisplayArea().left
+        var lastDrawRight = getChartMainDisplayArea().left
         var lastDrawLabel = ""
         val labelMinSpace = DimensionUtil.dp2px(context, 100f)
 
@@ -250,7 +250,7 @@ class TimeBar(stockChart: IStockChart, chartConfig: TimeBarConfig) :
             tmp2FloatArray[1] = 0f
             mapPointsValue2Real(tmp2FloatArray)
             val centerRealX = tmp2FloatArray[0]
-            if (centerRealX - labelHalfWidth < lastDrawRight + labelMinSpace || centerRealX + labelHalfWidth > getChartDisplayArea().right) {
+            if (centerRealX - labelHalfWidth < lastDrawRight + labelMinSpace || centerRealX + labelHalfWidth > getChartMainDisplayArea().right) {
                 return@forEachIndexed
             }
 
@@ -265,7 +265,7 @@ class TimeBar(stockChart: IStockChart, chartConfig: TimeBarConfig) :
     }
 
     private fun drawLabelOfQuarterType(canvas: Canvas) {
-        var lastDrawRight = getChartDisplayArea().left
+        var lastDrawRight = getChartMainDisplayArea().left
         var lastDrawLabel = ""
         val labelMinSpace = DimensionUtil.dp2px(context, 50f)
 
@@ -289,7 +289,7 @@ class TimeBar(stockChart: IStockChart, chartConfig: TimeBarConfig) :
             tmp2FloatArray[1] = 0f
             mapPointsValue2Real(tmp2FloatArray)
             val centerRealX = tmp2FloatArray[0]
-            if (centerRealX - labelHalfWidth < lastDrawRight + labelMinSpace || centerRealX + labelHalfWidth > getChartDisplayArea().right) {
+            if (centerRealX - labelHalfWidth < lastDrawRight + labelMinSpace || centerRealX + labelHalfWidth > getChartMainDisplayArea().right) {
                 return@forEachIndexed
             }
 
@@ -303,7 +303,7 @@ class TimeBar(stockChart: IStockChart, chartConfig: TimeBarConfig) :
     }
 
     private fun drawLabelOfYearType(canvas: Canvas) {
-        var lastDrawRight = getChartDisplayArea().left
+        var lastDrawRight = getChartMainDisplayArea().left
         var lastDrawLabel = ""
         val labelMinSpace = DimensionUtil.dp2px(context, 30f)
 
@@ -327,7 +327,7 @@ class TimeBar(stockChart: IStockChart, chartConfig: TimeBarConfig) :
             tmp2FloatArray[1] = 0f
             mapPointsValue2Real(tmp2FloatArray)
             val centerRealX = tmp2FloatArray[0]
-            if (centerRealX - labelHalfWidth < lastDrawRight + labelMinSpace || centerRealX + labelHalfWidth > getChartDisplayArea().right) {
+            if (centerRealX - labelHalfWidth < lastDrawRight + labelMinSpace || centerRealX + labelHalfWidth > getChartMainDisplayArea().right) {
                 return@forEachIndexed
             }
 
@@ -341,7 +341,7 @@ class TimeBar(stockChart: IStockChart, chartConfig: TimeBarConfig) :
     }
 
     private fun drawLabelOfFiveYearsType(canvas: Canvas) {
-        var lastDrawRight = getChartDisplayArea().left
+        var lastDrawRight = getChartMainDisplayArea().left
         var lastDrawLabel = ""
         val labelMinSpace = DimensionUtil.dp2px(context, 50f)
 
@@ -365,7 +365,7 @@ class TimeBar(stockChart: IStockChart, chartConfig: TimeBarConfig) :
             tmp2FloatArray[1] = 0f
             mapPointsValue2Real(tmp2FloatArray)
             val centerRealX = tmp2FloatArray[0]
-            if (centerRealX - labelHalfWidth < lastDrawRight + labelMinSpace || centerRealX + labelHalfWidth > getChartDisplayArea().right) {
+            if (centerRealX - labelHalfWidth < lastDrawRight + labelMinSpace || centerRealX + labelHalfWidth > getChartMainDisplayArea().right) {
                 return@forEachIndexed
             }
 
@@ -379,7 +379,7 @@ class TimeBar(stockChart: IStockChart, chartConfig: TimeBarConfig) :
     }
 
     private fun drawLabelOfAllType(canvas: Canvas) {
-        var lastDrawRight = getChartDisplayArea().left
+        var lastDrawRight = getChartMainDisplayArea().left
         var lastDrawLabel = ""
         val labelMinSpace = DimensionUtil.dp2px(context, 40f)
 
@@ -398,7 +398,7 @@ class TimeBar(stockChart: IStockChart, chartConfig: TimeBarConfig) :
             val labelWidth = labelPaint.measureText(label)
             val labelHalfWidth = labelWidth / 2
 
-            var x = getChartDisplayArea().left
+            var x = getChartMainDisplayArea().left
             val y =
                 getChartDisplayArea().top + getChartDisplayArea().height() / 2 + (tmpFontMetrics.bottom - tmpFontMetrics.top) / 2 - tmpFontMetrics.bottom
 
@@ -407,7 +407,7 @@ class TimeBar(stockChart: IStockChart, chartConfig: TimeBarConfig) :
                 tmp2FloatArray[1] = 0f
                 mapPointsValue2Real(tmp2FloatArray)
                 val centerRealX = tmp2FloatArray[0]
-                if (centerRealX - labelHalfWidth < lastDrawRight + labelMinSpace || centerRealX + labelHalfWidth > getChartDisplayArea().right) {
+                if (centerRealX - labelHalfWidth < lastDrawRight + labelMinSpace || centerRealX + labelHalfWidth > getChartMainDisplayArea().right) {
                     return@forEachIndexed
                 }
 
@@ -422,7 +422,7 @@ class TimeBar(stockChart: IStockChart, chartConfig: TimeBarConfig) :
     }
 
     private fun drawLabelOfYTDType(canvas: Canvas) {
-        var lastDrawRight = getChartDisplayArea().left
+        var lastDrawRight = getChartMainDisplayArea().left
         var lastDrawLabel = ""
         val labelMinSpace = DimensionUtil.dp2px(context, 30f)
 
@@ -446,7 +446,7 @@ class TimeBar(stockChart: IStockChart, chartConfig: TimeBarConfig) :
             tmp2FloatArray[1] = 0f
             mapPointsValue2Real(tmp2FloatArray)
             val centerRealX = tmp2FloatArray[0]
-            if (centerRealX - labelHalfWidth < lastDrawRight + labelMinSpace || centerRealX + labelHalfWidth > getChartDisplayArea().right) {
+            if (centerRealX - labelHalfWidth < lastDrawRight + labelMinSpace || centerRealX + labelHalfWidth > getChartMainDisplayArea().right) {
                 return@forEachIndexed
             }
 
@@ -460,7 +460,7 @@ class TimeBar(stockChart: IStockChart, chartConfig: TimeBarConfig) :
     }
 
     private fun drawLabelOfOneMinuteType(canvas: Canvas) {
-        var lastDrawRight = getChartDisplayArea().left
+        var lastDrawRight = getChartMainDisplayArea().left
         var lastDrawLabel = ""
         val labelMinSpace = DimensionUtil.dp2px(context, 50f)
 
@@ -482,7 +482,7 @@ class TimeBar(stockChart: IStockChart, chartConfig: TimeBarConfig) :
             tmp2FloatArray[1] = 0f
             mapPointsValue2Real(tmp2FloatArray)
             val centerRealX = tmp2FloatArray[0]
-            if (centerRealX - labelHalfWidth < lastDrawRight + labelMinSpace || centerRealX + labelHalfWidth > getChartDisplayArea().right) {
+            if (centerRealX - labelHalfWidth < lastDrawRight + labelMinSpace || centerRealX + labelHalfWidth > getChartMainDisplayArea().right) {
                 return@forEachIndexed
             }
 
@@ -497,7 +497,7 @@ class TimeBar(stockChart: IStockChart, chartConfig: TimeBarConfig) :
     }
 
     private fun drawLabelOfFiveMinutesType(canvas: Canvas) {
-        var lastDrawRight = getChartDisplayArea().left
+        var lastDrawRight = getChartMainDisplayArea().left
         var lastDrawLabel = ""
         val labelMinSpace = DimensionUtil.dp2px(context, 50f)
 
@@ -519,7 +519,7 @@ class TimeBar(stockChart: IStockChart, chartConfig: TimeBarConfig) :
             tmp2FloatArray[1] = 0f
             mapPointsValue2Real(tmp2FloatArray)
             val centerRealX = tmp2FloatArray[0]
-            if (centerRealX - labelHalfWidth < lastDrawRight + labelMinSpace || centerRealX + labelHalfWidth > getChartDisplayArea().right) {
+            if (centerRealX - labelHalfWidth < lastDrawRight + labelMinSpace || centerRealX + labelHalfWidth > getChartMainDisplayArea().right) {
                 return@forEachIndexed
             }
 
@@ -534,7 +534,7 @@ class TimeBar(stockChart: IStockChart, chartConfig: TimeBarConfig) :
     }
 
     private fun drawLabelOfSixtyMinutesType(canvas: Canvas) {
-        var lastDrawRight = getChartDisplayArea().left
+        var lastDrawRight = getChartMainDisplayArea().left
         var lastDrawLabel = ""
         val labelMinSpace = DimensionUtil.dp2px(context, 50f)
 
@@ -556,7 +556,7 @@ class TimeBar(stockChart: IStockChart, chartConfig: TimeBarConfig) :
             tmp2FloatArray[1] = 0f
             mapPointsValue2Real(tmp2FloatArray)
             val centerRealX = tmp2FloatArray[0]
-            if (centerRealX - labelHalfWidth < lastDrawRight + labelMinSpace || centerRealX + labelHalfWidth > getChartDisplayArea().right) {
+            if (centerRealX - labelHalfWidth < lastDrawRight + labelMinSpace || centerRealX + labelHalfWidth > getChartMainDisplayArea().right) {
                 return@forEachIndexed
             }
 
@@ -598,10 +598,10 @@ class TimeBar(stockChart: IStockChart, chartConfig: TimeBarConfig) :
         val centerRealX = tmp2FloatArray[0]
 
         var x = centerRealX - labelHalfWidth
-        if (x + labelWidth > getChartDisplayArea().right - labelMinSpace) x =
-            getChartDisplayArea().right - labelMinSpace - labelWidth
-        if (x < getChartDisplayArea().left + labelMinSpace) x =
-            getChartDisplayArea().left + labelMinSpace
+        if (x + labelWidth > getChartMainDisplayArea().right - labelMinSpace) x =
+            getChartMainDisplayArea().right - labelMinSpace - labelWidth
+        if (x < getChartMainDisplayArea().left + labelMinSpace) x =
+            getChartMainDisplayArea().left + labelMinSpace
         val y =
             getChartDisplayArea().top + getChartDisplayArea().height() / 2 + (tmpFontMetrics.bottom - tmpFontMetrics.top) / 2 - tmpFontMetrics.bottom
         canvas.drawText(label, x, y, labelPaint)
@@ -634,11 +634,11 @@ class TimeBar(stockChart: IStockChart, chartConfig: TimeBarConfig) :
 
                 val bgPadding = 10f
                 var x = centerRealX - labelHalfWidth
-                if (x - bgPadding < getChartDisplayArea().left) {
-                    x = getChartDisplayArea().left + bgPadding
+                if (x - bgPadding < getChartMainDisplayArea().left) {
+                    x = getChartMainDisplayArea().left + bgPadding
                 }
-                if (x + labelWidth + bgPadding > getChartDisplayArea().right) {
-                    x = getChartDisplayArea().right - labelWidth - bgPadding
+                if (x + labelWidth + bgPadding > getChartMainDisplayArea().right) {
+                    x = getChartMainDisplayArea().right - labelWidth - bgPadding
                 }
                 val y =
                     getChartDisplayArea().top + getChartDisplayArea().height() / 2 + (tmpFontMetrics.bottom - tmpFontMetrics.top) / 2 - tmpFontMetrics.bottom

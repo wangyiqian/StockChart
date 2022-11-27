@@ -148,6 +148,13 @@ class KdjChart(stockChart: IStockChart, chartConfig: KdjChartConfig) :
     }
 
     private fun doDrawLine(canvas: Canvas, valueList: List<Float?>?) {
+        val saveCount = canvas.saveLayer(
+            getChartMainDisplayArea().left,
+            getChartDisplayArea().top,
+            getChartMainDisplayArea().right,
+            getChartDisplayArea().bottom,
+            null
+        )
         valueList?.forEachIndexed { valueIdx, value ->
             if (valueIdx == 0) {
                 return@forEachIndexed
@@ -165,6 +172,7 @@ class KdjChart(stockChart: IStockChart, chartConfig: KdjChartConfig) :
                 }
             }
         }
+        canvas.restoreToCount(saveCount)
     }
 
     override fun preDrawHighlight(canvas: Canvas) {
@@ -266,6 +274,14 @@ class KdjChart(stockChart: IStockChart, chartConfig: KdjChartConfig) :
                         highlightHorizontalLineRight -= bgWidth
                     }
 
+                    val saveCount = canvas.saveLayer(
+                        getChartMainDisplayArea().left,
+                        getChartDisplayArea().top,
+                        getChartMainDisplayArea().right,
+                        getChartDisplayArea().bottom,
+                        null
+                    )
+
                     // highlight horizontal line
                     canvas.drawLine(
                         highlightHorizontalLineLeft,
@@ -274,6 +290,9 @@ class KdjChart(stockChart: IStockChart, chartConfig: KdjChartConfig) :
                         highlight.y,
                         highlightHorizontalLinePaint
                     )
+
+                    canvas.restoreToCount(saveCount)
+
                 }
             }
 
@@ -290,6 +309,14 @@ class KdjChart(stockChart: IStockChart, chartConfig: KdjChartConfig) :
                     mapPointsValue2Real(tmp2FloatArray)
                     val x = tmp2FloatArray[0]
 
+                    val saveCount = canvas.saveLayer(
+                        getChartMainDisplayArea().left,
+                        getChartDisplayArea().top,
+                        getChartMainDisplayArea().right,
+                        getChartDisplayArea().bottom,
+                        null
+                    )
+
                     // highlight vertical line
                     canvas.drawLine(
                         x,
@@ -298,6 +325,9 @@ class KdjChart(stockChart: IStockChart, chartConfig: KdjChartConfig) :
                         getChartDisplayArea().bottom,
                         highlightVerticalLinePaint
                     )
+
+                    canvas.restoreToCount(saveCount)
+
                 }
             }
         }

@@ -108,8 +108,8 @@ abstract class BaseChildChart<C : BaseChildChartConfig> @JvmOverloads constructo
         }
 
         chartMainDisplayArea.apply {
-            left = chartDisplayArea.left
-            right = chartDisplayArea.right
+            left = chartDisplayArea.left + stockChart.getConfig().chartMainDisplayAreaPaddingLeft
+            right = chartDisplayArea.right - stockChart.getConfig().chartMainDisplayAreaPaddingRight
             top = chartDisplayArea.top + chartConfig.chartMainDisplayAreaPaddingTop
             bottom = chartDisplayArea.bottom - chartConfig.chartMainDisplayAreaPaddingBottom
         }

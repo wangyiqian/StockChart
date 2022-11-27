@@ -150,6 +150,9 @@ Data.loadDayData(this, 0) { kEntities: List<IKEntity> ->
 |gridVerticalLineCount|背景网格竖线数|
 |gridLineColor|背景网格线条色|
 |gridLineStrokeWidth|背景网格线条宽度|
+|chartMainDisplayAreaPaddingLeft|主数据显示区域的左内间距，主数据一般指数据线|
+|chartMainDisplayAreaPaddingRight|主数据显示区域的右内间距，主数据一般指数据线|
+
 
 ### K线图配置`KChartConfig`
 |字段|描述|

@@ -175,7 +175,7 @@ internal class MatrixHelper(private val stockChart: IStockChart) {
             val limitRight = tmp4FloatArray[2]
 
             // 显示区域
-            val displayArea = stockChart.getChildCharts()[0].getChartMainDisplayArea()
+            val mainDisplayArea = stockChart.getChildCharts()[0].getChartMainDisplayArea()
 
             // 当前拖动的距离
             val dragDistanceX = -distanceX
@@ -184,25 +184,25 @@ internal class MatrixHelper(private val stockChart: IStockChart) {
             var dx = 0f
             if (dragDistanceX > 0) { // 手指往右拖
 
-                if (limitLeft + dragDistanceX > displayArea.left) {
+                if (limitLeft + dragDistanceX > mainDisplayArea.left) {
                     var dragDistanceXLeft = dragDistanceX // 需要拖动的距离
 
-                    if (limitLeft < displayArea.left) { // 处理未超出边界部分
-                        dx += displayArea.left - limitLeft
+                    if (limitLeft < mainDisplayArea.left) { // 处理未超出边界部分
+                        dx += mainDisplayArea.left - limitLeft
                         dragDistanceXLeft -= dx
                     }
 
                     if (stockChart.getConfig().overScrollAble && dragDistanceXLeft > 0) { // 超出边界部分，处理回弹区
-                        if (limitLeft - displayArea.left >= stockChart.getConfig().overScrollOnLoadMoreDistance) {
+                        if (limitLeft - mainDisplayArea.left >= stockChart.getConfig().overScrollOnLoadMoreDistance) {
                             if (enableTriggerOnLoadMoreNextTime) {
                                 enableTriggerOnLoadMoreNextTime = false
                                 stockChart.dispatchOnLeftLoadMore()
                             }
                         }
                         dragDistanceXLeft *= stockChart.getConfig().frictionScrollExceedLimit // 加阻力
-                        if (limitLeft + dragDistanceXLeft > displayArea.left + stockChart.getConfig().overScrollDistance) { // 超出极限
+                        if (limitLeft + dragDistanceXLeft > mainDisplayArea.left + stockChart.getConfig().overScrollDistance) { // 超出极限
                             dragDistanceXLeft =
-                                displayArea.left + stockChart.getConfig().overScrollDistance - limitLeft
+                                mainDisplayArea.left + stockChart.getConfig().overScrollDistance - limitLeft
                         }
                         dx += dragDistanceXLeft
                     } else {
@@ -218,25 +218,25 @@ internal class MatrixHelper(private val stockChart: IStockChart) {
 
             } else { // 手指往左拖
 
-                if (limitRight + dragDistanceX < displayArea.right) {
+                if (limitRight + dragDistanceX < mainDisplayArea.right) {
                     var dragDistanceXLeft = dragDistanceX // 需要拖动的距离
 
-                    if (limitRight > displayArea.right) { // 未超出边界部分
-                        dx += displayArea.right - limitRight
+                    if (limitRight > mainDisplayArea.right) { // 未超出边界部分
+                        dx += mainDisplayArea.right - limitRight
                         dragDistanceXLeft -= dx
                     }
 
                     if (stockChart.getConfig().overScrollAble && dragDistanceXLeft < 0) { // 超出边界部分，处理回弹区
-                        if (displayArea.right - limitRight >= stockChart.getConfig().overScrollOnLoadMoreDistance) {
+                        if (mainDisplayArea.right - limitRight >= stockChart.getConfig().overScrollOnLoadMoreDistance) {
                             if (enableTriggerOnLoadMoreNextTime) {
                                 enableTriggerOnLoadMoreNextTime = false
                                 stockChart.dispatchOnRightLoadMore()
                             }
                         }
                         dragDistanceXLeft *= stockChart.getConfig().frictionScrollExceedLimit // 加阻力
-                        if (limitRight + dragDistanceXLeft < displayArea.right - stockChart.getConfig().overScrollDistance) { // 超出极限
+                        if (limitRight + dragDistanceXLeft < mainDisplayArea.right - stockChart.getConfig().overScrollDistance) { // 超出极限
                             dragDistanceXLeft =
-                                displayArea.right - stockChart.getConfig().overScrollDistance - limitRight
+                                mainDisplayArea.right - stockChart.getConfig().overScrollDistance - limitRight
                         }
                         dx += dragDistanceXLeft
                     } else {
@@ -290,9 +290,9 @@ internal class MatrixHelper(private val stockChart: IStockChart) {
             val limitRight = tmp4FloatArray[2]
 
             // 显示区域
-            val displayArea = stockChart.getChildCharts()[0].getChartMainDisplayArea()
+            val mainDisplayArea = stockChart.getChildCharts()[0].getChartMainDisplayArea()
 
-            if (limitRight < displayArea.right || limitLeft > displayArea.left) {
+            if (limitRight < mainDisplayArea.right || limitLeft > mainDisplayArea.left) {
                 // 边界外不能开始fling
                 return
             }
@@ -300,8 +300,8 @@ internal class MatrixHelper(private val stockChart: IStockChart) {
             computeScrollCurrX = 0
 
             // 计算出x能惯性滑动的限制位置
-            val minX = -abs(limitRight - displayArea.right)
-            val maxX = abs(limitLeft - displayArea.left)
+            val minX = -abs(limitRight - mainDisplayArea.right)
+            val maxX = abs(limitLeft - mainDisplayArea.left)
 
 
             if (velocityX < 0 && maxX != 0f || velocityX > 0 && minX != 0f) {
@@ -340,14 +340,14 @@ internal class MatrixHelper(private val stockChart: IStockChart) {
             stockChart.getChildCharts()[0].mapPointsValue2Real(tmp4FloatArray)
             val limitLeft = tmp4FloatArray[0]
             val limitRight = tmp4FloatArray[2]
-            val displayArea = stockChart.getChildCharts()[0].getChartMainDisplayArea()
+            val mainDisplayArea = stockChart.getChildCharts()[0].getChartMainDisplayArea()
             if (stockChart.getConfig().overScrollAble) {
-                if (limitLeft - displayArea.left >= stockChart.getConfig().overScrollOnLoadMoreDistance) {
+                if (limitLeft - mainDisplayArea.left >= stockChart.getConfig().overScrollOnLoadMoreDistance) {
                     if (enableTriggerOnLoadMoreNextTime) {
                         enableTriggerOnLoadMoreNextTime = false
                         stockChart.dispatchOnLeftLoadMore()
                     }
-                } else if (displayArea.right - limitRight >= stockChart.getConfig().overScrollOnLoadMoreDistance) {
+                } else if (mainDisplayArea.right - limitRight >= stockChart.getConfig().overScrollOnLoadMoreDistance) {
                     if (enableTriggerOnLoadMoreNextTime) {
                         enableTriggerOnLoadMoreNextTime = false
                         stockChart.dispatchOnRightLoadMore()
@@ -356,12 +356,12 @@ internal class MatrixHelper(private val stockChart: IStockChart) {
                     enableTriggerOnLoadMoreNextTime = true
                 }
             } else {
-                if (limitLeft.toInt() >= displayArea.left.toInt()) {
+                if (limitLeft.toInt() >= mainDisplayArea.left.toInt()) {
                     if (enableTriggerOnLoadMoreNextTime) {
                         enableTriggerOnLoadMoreNextTime = false
                         stockChart.dispatchOnLeftLoadMore()
                     }
-                } else if (limitRight.toInt() <= displayArea.right.toInt()) {
+                } else if (limitRight.toInt() <= mainDisplayArea.right.toInt()) {
                     if (enableTriggerOnLoadMoreNextTime) {
                         enableTriggerOnLoadMoreNextTime = false
                         stockChart.dispatchOnRightLoadMore()
@@ -394,13 +394,13 @@ internal class MatrixHelper(private val stockChart: IStockChart) {
         val limitRight = tmp4FloatArray[2]
 
         // 显示区域
-        val displayArea = stockChart.getChildCharts()[0].getChartMainDisplayArea()
+        val mainDisplayArea = stockChart.getChildCharts()[0].getChartMainDisplayArea()
 
         var dx = 0
-        if (limitLeft > displayArea.left) { // 左边界滑过头
-            dx = (displayArea.left - limitLeft).toInt()
-        } else if (limitRight < displayArea.right) { // 右边界滑过头
-            dx = (displayArea.right - limitRight).toInt()
+        if (limitLeft > mainDisplayArea.left) { // 左边界滑过头
+            dx = (mainDisplayArea.left - limitLeft).toInt()
+        } else if (limitRight < mainDisplayArea.right) { // 右边界滑过头
+            dx = (mainDisplayArea.right - limitRight).toInt()
         }
 
         if (dx != 0) { // 需要回弹

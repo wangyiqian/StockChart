@@ -69,6 +69,13 @@ class VolumeChart(
     }
 
     private fun drawVolumeChart(canvas: Canvas, isHollow: Boolean) {
+        val saveCount = canvas.saveLayer(
+            getChartMainDisplayArea().left,
+            getChartDisplayArea().top,
+            getChartMainDisplayArea().right,
+            getChartDisplayArea().bottom,
+            null
+        )
         volumePaint.strokeWidth = chartConfig.hollowChartLineStrokeWidth
         val barWidth = 1 * (1 - chartConfig.barSpaceRatio)
         val spaceWidth = 1 * chartConfig.barSpaceRatio
@@ -98,13 +105,13 @@ class VolumeChart(
 
             left += barWidth + spaceWidth
         }
+        canvas.restoreToCount(saveCount)
     }
 
     override fun preDrawHighlight(canvas: Canvas) {}
 
     override fun drawHighlight(canvas: Canvas) {
         getHighlight()?.let { highlight ->
-
             if (stockChart.getConfig().showHighlightHorizontalLine) {
                 if (highlight.y >= getChartDisplayArea().top && highlight.y <= getChartDisplayArea().bottom) {
 
@@ -198,6 +205,14 @@ class VolumeChart(
                         highlightHorizontalLineRight -= bgWidth
                     }
 
+                    val saveCount = canvas.saveLayer(
+                        getChartMainDisplayArea().left,
+                        getChartDisplayArea().top,
+                        getChartMainDisplayArea().right,
+                        getChartDisplayArea().bottom,
+                        null
+                    )
+
                     // highlight horizontal line
                     canvas.drawLine(
                         highlightHorizontalLineLeft,
@@ -206,6 +221,8 @@ class VolumeChart(
                         highlight.y,
                         highlightHorizontalLinePaint
                     )
+
+                    canvas.restoreToCount(saveCount)
                 }
             }
 
@@ -222,6 +239,14 @@ class VolumeChart(
                     mapPointsValue2Real(tmp2FloatArray)
                     val x = tmp2FloatArray[0]
 
+                    val saveCount = canvas.saveLayer(
+                        getChartMainDisplayArea().left,
+                        getChartDisplayArea().top,
+                        getChartMainDisplayArea().right,
+                        getChartDisplayArea().bottom,
+                        null
+                    )
+
                     // highlight vertical line
                     canvas.drawLine(
                         x,
@@ -230,6 +255,8 @@ class VolumeChart(
                         getChartDisplayArea().bottom,
                         highlightVerticalLinePaint
                     )
+
+                    canvas.restoreToCount(saveCount)
                 }
             }
         }

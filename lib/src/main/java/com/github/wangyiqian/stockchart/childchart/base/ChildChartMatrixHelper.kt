@@ -66,7 +66,7 @@ internal class ChildChartMatrixHelper<O : BaseChildChartConfig>(
     private fun prepareCoordinateMatrix() {
         coordinateMatrix.reset()
 
-        val chartDisplayArea = chart.getChartMainDisplayArea()
+        val chartMainDisplayArea = chart.getChartMainDisplayArea()
 
         chart.getXValueRange(
             stockChart.getConfig().showStartIndex,
@@ -89,36 +89,36 @@ internal class ChildChartMatrixHelper<O : BaseChildChartConfig>(
         if (yValueRangeLen == 0f) {
             // 非正常情况，y轴逻辑区间无法算出（所有值相等），之前处于原始逻辑坐标，将需要显示的逻辑区域移动到显示区域左边垂直居中位置
             coordinateMatrix.postTranslate(
-                chartDisplayArea.left - xValueRangeFrom,
-                (chartDisplayArea.bottom - chartDisplayArea.top) / 2
+                chartMainDisplayArea.left - xValueRangeFrom,
+                (chartMainDisplayArea.bottom - chartMainDisplayArea.top) / 2
             )
         } else {
             // 正常情况，之前处于原始逻辑坐标，将需要显示的逻辑区域移动到显示区域左上角
             coordinateMatrix.postTranslate(
-                chartDisplayArea.left - xValueRangeFrom,
-                chartDisplayArea.top - yValueRangeFrom
+                chartMainDisplayArea.left - xValueRangeFrom,
+                chartMainDisplayArea.top - yValueRangeFrom
             )
         }
 
-        val sx = (chartDisplayArea.right - chartDisplayArea.left) / xValueRangeLen
+        val sx = (chartMainDisplayArea.right - chartMainDisplayArea.left) / xValueRangeLen
         val sy = if (yValueRangeLen == 0f) {
             // 非正常情况，y轴逻辑区间无法算出（所有值相等），直接保持原状不缩放
             1f
         } else {
             // 正常情况，y按照区间比缩放即可
-            (chartDisplayArea.bottom - chartDisplayArea.top) / yValueRangeLen
+            (chartMainDisplayArea.bottom - chartMainDisplayArea.top) / yValueRangeLen
         }
 
         // 缩放使得需要显示的内容刚好撑满显示区域，再向上翻转，使得y内容翻转在显示区域上方
         coordinateMatrix.postScale(
             sx,
             -sy,
-            chartDisplayArea.left,
-            chartDisplayArea.top
+            chartMainDisplayArea.left,
+            chartMainDisplayArea.top
         )
 
         // 正常情况，下移一个显示区域
-        coordinateMatrix.postTranslate(0f, chartDisplayArea.bottom - chartDisplayArea.top)
+        coordinateMatrix.postTranslate(0f, chartMainDisplayArea.bottom - chartMainDisplayArea.top)
     }
 
     /**
@@ -131,9 +131,9 @@ internal class ChildChartMatrixHelper<O : BaseChildChartConfig>(
 
             // "一格一格"地滑
 
-            val chartDisplayArea = chart.getChartMainDisplayArea()
+            val mainChartDisplayArea = chart.getChartMainDisplayArea()
 
-            tmp2FloatArray[0] = chartDisplayArea.left
+            tmp2FloatArray[0] = mainChartDisplayArea.left
             tmp2FloatArray[1] = 0f
             // 反算出会被移动到显示区域的第一个逻辑坐标值（数据下标）
             tmpMatrix.apply {
@@ -168,7 +168,7 @@ internal class ChildChartMatrixHelper<O : BaseChildChartConfig>(
             val lengthOfOneIndex = second - first
 
             if (lengthOfOneIndex != 0f) {
-                val unalignedDis = (first - chartDisplayArea.left) % lengthOfOneIndex
+                val unalignedDis = (first - mainChartDisplayArea.left) % lengthOfOneIndex
 
                 val dx = when {
                     // 右移
@@ -203,11 +203,11 @@ internal class ChildChartMatrixHelper<O : BaseChildChartConfig>(
     private fun setFixYMatrix() {
         fixYMatrix.reset()
 
-        val chartDisplayArea = chart.getChartMainDisplayArea()
+        val mainChartDisplayArea = chart.getChartMainDisplayArea()
 
-        tmp4FloatArray[0] = chartDisplayArea.left
+        tmp4FloatArray[0] = mainChartDisplayArea.left
         tmp4FloatArray[1] = 0f
-        tmp4FloatArray[2] = chartDisplayArea.right
+        tmp4FloatArray[2] = mainChartDisplayArea.right
         tmp4FloatArray[3] = 0f
         // 反算出哪个下标（逻辑坐标）范围会被移动到显示区域
         tmpMatrix.apply {
@@ -258,10 +258,10 @@ internal class ChildChartMatrixHelper<O : BaseChildChartConfig>(
 
         if (yMin != yMax) {
             // 先贴顶
-            fixYMatrix.postTranslate(0f, chartDisplayArea.top - yMin)
-            val sy = (chartDisplayArea.bottom - chartDisplayArea.top) / (yMax - yMin)
+            fixYMatrix.postTranslate(0f, mainChartDisplayArea.top - yMin)
+            val sy = (mainChartDisplayArea.bottom - mainChartDisplayArea.top) / (yMax - yMin)
             // 再缩放
-            fixYMatrix.postScale(1f, sy, 0f, chartDisplayArea.top)
+            fixYMatrix.postScale(1f, sy, 0f, mainChartDisplayArea.top)
         }
     }
 
