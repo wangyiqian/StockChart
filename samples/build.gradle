@@ -70,6 +70,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation 'com.google.android:flexbox:2.0.1'
 
-//    implementation project(':lib')
-    implementation 'com.github.wangyiqian:StockChart:1.1.10'
+    implementation project(':lib')
+//    implementation 'com.github.wangyiqian:StockChart:1.1.10'
 }

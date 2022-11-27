@@ -188,6 +188,8 @@ class KdjChart(stockChart: IStockChart, chartConfig: KdjChartConfig) :
                         stockChart.getConfig().highlightHorizontalLineColor
                     highlightHorizontalLinePaint.strokeWidth =
                         stockChart.getConfig().highlightHorizontalLineWidth
+                    highlightHorizontalLinePaint.pathEffect =
+                        stockChart.getConfig().highlightHorizontalLinePathEffect
 
                     var highlightHorizontalLineLeft = getChartDisplayArea().left
                     var highlightHorizontalLineRight = getChartDisplayArea().right
@@ -303,6 +305,8 @@ class KdjChart(stockChart: IStockChart, chartConfig: KdjChartConfig) :
                         stockChart.getConfig().highlightVerticalLineColor
                     highlightVerticalLinePaint.strokeWidth =
                         stockChart.getConfig().highlightVerticalLineWidth
+                    highlightVerticalLinePaint.pathEffect =
+                        stockChart.getConfig().highlightVerticalLinePathEffect
 
                     tmp2FloatArray[0] = highlight.getIdx() + 0.5f
                     tmp2FloatArray[1] = 0f
