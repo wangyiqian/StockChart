@@ -125,6 +125,11 @@ class StockChartConfig {
         DEFAULT_HIGHLIGHT_HORIZONTAL_LINE_COLOR
 
     /**
+     * 长按高亮线横线虚线配置
+     */
+    var highlightHorizontalLinePathEffect: PathEffect? = null
+
+    /**
      * 是否支持长按高亮竖线
      */
     var showHighlightVerticalLine =
@@ -141,6 +146,11 @@ class StockChartConfig {
      */
     var highlightVerticalLineColor =
         DEFAULT_HIGHLIGHT_VERTICAL_LINE_COLOR
+
+    /**
+     * 长按高亮线竖线虚线配置
+     */
+    var highlightVerticalLinePathEffect: PathEffect? = null
 
     /**
      * 涨色值
