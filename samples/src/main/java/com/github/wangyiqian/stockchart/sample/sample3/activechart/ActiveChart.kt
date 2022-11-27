@@ -191,9 +191,9 @@ class ActiveChart(stockChart: IStockChart, chartConfig: ActiveChartConfig) :
             tmp2FloatArray[1] = it
             mapPointsValue2Real(tmp2FloatArray)
             canvas.drawLine(
-                getChartDisplayArea().left,
+                getChartMainDisplayArea().left,
                 tmp2FloatArray[1],
-                getChartDisplayArea().right,
+                getChartMainDisplayArea().right,
                 tmp2FloatArray[1],
                 preCloseLinePaint
             )
@@ -209,7 +209,7 @@ class ActiveChart(stockChart: IStockChart, chartConfig: ActiveChartConfig) :
 
         if (chartConfig.fixTimeLeft != null) {
             chartConfig.fixTimeLeft?.let { text ->
-                val textX = getChartDisplayArea().left + chartConfig.timeTextMarginH
+                val textX = getChartMainDisplayArea().left + chartConfig.timeTextMarginH
                 canvas.drawText(text, textX, textY, timeTextPaint)
             }
         } else {
@@ -217,7 +217,7 @@ class ActiveChart(stockChart: IStockChart, chartConfig: ActiveChartConfig) :
                 val kEntity = getKEntities()[idx]
                 tmpDate.time = kEntity.getTime()
                 val text = timeTextFormat.format(tmpDate)
-                val textX = getChartDisplayArea().left + chartConfig.timeTextMarginH
+                val textX = getChartMainDisplayArea().left + chartConfig.timeTextMarginH
                 canvas.drawText(text, textX, textY, timeTextPaint)
             }
         }
@@ -225,7 +225,7 @@ class ActiveChart(stockChart: IStockChart, chartConfig: ActiveChartConfig) :
         if (chartConfig.fixTimeRight != null) {
             chartConfig.fixTimeRight?.let { text ->
                 val textWidth = timeTextPaint.measureText(text)
-                val textX = getChartDisplayArea().right - chartConfig.timeTextMarginH - textWidth
+                val textX = getChartMainDisplayArea().right - chartConfig.timeTextMarginH - textWidth
                 canvas.drawText(text, textX, textY, timeTextPaint)
             }
         } else {
@@ -234,7 +234,7 @@ class ActiveChart(stockChart: IStockChart, chartConfig: ActiveChartConfig) :
                 tmpDate.time = kEntity.getTime()
                 val text = timeTextFormat.format(tmpDate)
                 val textWidth = timeTextPaint.measureText(text)
-                val textX = getChartDisplayArea().right - chartConfig.timeTextMarginH - textWidth
+                val textX = getChartMainDisplayArea().right - chartConfig.timeTextMarginH - textWidth
                 canvas.drawText(text, textX, textY, timeTextPaint)
             }
         }
@@ -518,7 +518,7 @@ class ActiveChart(stockChart: IStockChart, chartConfig: ActiveChartConfig) :
     ) {
         activeRect.apply {
             left =
-                if (cx + rectWidth > getChartDisplayArea().right) cx - rectWidth else cx
+                if (cx + rectWidth > getChartMainDisplayArea().right) cx - rectWidth else cx
             right = left + rectWidth
             val initLineLength = getChartDisplayArea().height() * 2 / 5
             if (isAbove) {

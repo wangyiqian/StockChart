@@ -310,6 +310,14 @@ open class KChart(
                         highlightHorizontalLineRight -= bgWidth
                     }
 
+                    val saveCount = canvas.saveLayer(
+                        getChartMainDisplayArea().left,
+                        getChartDisplayArea().top,
+                        getChartMainDisplayArea().right,
+                        getChartDisplayArea().bottom,
+                        null
+                    )
+
                     // highlight horizontal line
                     canvas.drawLine(
                         highlightHorizontalLineLeft,
@@ -318,6 +326,9 @@ open class KChart(
                         highlight.y,
                         highlightHorizontalLinePaint
                     )
+
+                    canvas.restoreToCount(saveCount)
+
                 }
             }
 
@@ -419,6 +430,14 @@ open class KChart(
                         highlightHorizontalLineBottom -= bgHeight
                     }
 
+                    val saveCount = canvas.saveLayer(
+                        getChartMainDisplayArea().left,
+                        getChartDisplayArea().top,
+                        getChartMainDisplayArea().right,
+                        getChartDisplayArea().bottom,
+                        null
+                    )
+
                     // highlight vertical line
                     canvas.drawLine(
                         x,
@@ -427,6 +446,8 @@ open class KChart(
                         highlightHorizontalLineBottom,
                         highlightVerticalLinePaint
                     )
+
+                    canvas.restoreToCount(saveCount)
                 }
             }
         }
@@ -435,6 +456,13 @@ open class KChart(
     override fun drawAddition(canvas: Canvas) {}
 
     private fun drawCostPriceLine(canvas: Canvas) {
+        val saveCount = canvas.saveLayer(
+            getChartMainDisplayArea().left,
+            getChartDisplayArea().top,
+            getChartMainDisplayArea().right,
+            getChartDisplayArea().bottom,
+            null
+        )
         chartConfig.costPrice?.let {
             costPriceLinePaint.color = chartConfig.costPriceLineColor
             costPriceLinePaint.strokeWidth = chartConfig.costPriceLineWidth
@@ -449,9 +477,18 @@ open class KChart(
                 costPriceLinePaint
             )
         }
+        canvas.restoreToCount(saveCount)
     }
 
     private fun drawHighestAndLowestLabel(canvas: Canvas) {
+        val saveCount = canvas.saveLayer(
+            getChartMainDisplayArea().left,
+            getChartDisplayArea().top,
+            getChartMainDisplayArea().right,
+            getChartDisplayArea().bottom,
+            null
+        )
+
         chartConfig.kChartType.highestAndLowestLabelConfig?.let { config ->
             highestAndLowestLabelPaint.textSize = config.labelTextSize
             highestAndLowestLabelPaint.strokeWidth = config.lineStrokeWidth
@@ -503,6 +540,7 @@ open class KChart(
                 doDrawHighestAndLowestLabel(canvas, config, it, minPrice)
             }
         }
+        canvas.restoreToCount(saveCount)
     }
 
     private fun doDrawHighestAndLowestLabel(
@@ -540,6 +578,13 @@ open class KChart(
         if (chartConfig.index == null) {
             return
         }
+        val saveCount = canvas.saveLayer(
+            getChartMainDisplayArea().left,
+            getChartDisplayArea().top,
+            getChartMainDisplayArea().right,
+            getChartDisplayArea().bottom,
+            null
+        )
         indexPaint.strokeWidth = chartConfig.indexStrokeWidth
         indexList?.forEachIndexed { lineIdx, pointList ->
             chartConfig.indexColors?.let { indexColors ->
@@ -574,6 +619,7 @@ open class KChart(
                 }
             }
         }
+        canvas.restoreToCount(saveCount)
 
         // draw index text
         chartConfig.index?.let { index ->
@@ -607,7 +653,7 @@ open class KChart(
                             val text = index.textFormatter.invoke(lineIdx, value)
                             val textWidth = indexTextPaint.measureText(text)
 
-                            if(left + textWidth > getChartDisplayArea().width()){
+                            if (left + textWidth > getChartDisplayArea().width()) {
                                 // 需要换行
                                 isFirstLine = false
                                 left = index.textMarginLeft
@@ -615,7 +661,7 @@ open class KChart(
                                 drawnIndexTextHeight += textHeight
                             }
 
-                            if(isFirstLine){
+                            if (isFirstLine) {
                                 drawnIndexTextHeight = textHeight + index.textMarginTop
                             }
 
@@ -634,6 +680,14 @@ open class KChart(
     }
 
     private fun drawMountainKChart(canvas: Canvas) {
+        val saveCount = canvas.saveLayer(
+            getChartMainDisplayArea().left,
+            getChartDisplayArea().top,
+            getChartMainDisplayArea().right,
+            getChartDisplayArea().bottom,
+            null
+        )
+
         mountainKChartPaint.strokeWidth = chartConfig.mountainChartStrokeWidth
         mountainKChartPaint.color = chartConfig.mountainChartColor
 
@@ -715,6 +769,7 @@ open class KChart(
             )
             preIdx = idx
         }
+        canvas.restoreToCount(saveCount)
     }
 
     private fun needDrawAvgPriceLine() =
@@ -722,6 +777,14 @@ open class KChart(
 
     private fun drawAvgPriceLine(canvas: Canvas) {
         if (needDrawAvgPriceLine()) {
+
+            val saveCount = canvas.saveLayer(
+                getChartMainDisplayArea().left,
+                getChartDisplayArea().top,
+                getChartMainDisplayArea().right,
+                getChartDisplayArea().bottom,
+                null
+            )
 
             avgPriceLinePaint.strokeWidth = chartConfig.avgLineStrokeWidth
             avgPriceLinePaint.color = chartConfig.avgLineColor
@@ -752,10 +815,19 @@ open class KChart(
                 )
                 preAvgIdx = idx
             }
+            canvas.restoreToCount(saveCount)
         }
     }
 
     private fun drawBarKChart(canvas: Canvas) {
+        val saveCount = canvas.saveLayer(
+            getChartMainDisplayArea().left,
+            getChartDisplayArea().top,
+            getChartMainDisplayArea().right,
+            getChartDisplayArea().bottom,
+            null
+        )
+
         barKChartPaint.strokeWidth = chartConfig.barChartLineStrokeWidth
         val barWidth = 1 * (1 - chartConfig.barSpaceRatio)
         val spaceWidth = 1 * chartConfig.barSpaceRatio
@@ -786,9 +858,18 @@ open class KChart(
             }
             left += barWidth + spaceWidth
         }
+        canvas.restoreToCount(saveCount)
     }
 
     private fun drawHollowKChart(canvas: Canvas) {
+        val saveCount = canvas.saveLayer(
+            getChartMainDisplayArea().left,
+            getChartDisplayArea().top,
+            getChartMainDisplayArea().right,
+            getChartDisplayArea().bottom,
+            null
+        )
+
         hollowKChartPaint.strokeWidth = chartConfig.hollowChartLineStrokeWidth
         val barWidth = 1 * (1 - chartConfig.barSpaceRatio)
         val spaceWidth = 1 * chartConfig.barSpaceRatio
@@ -827,9 +908,18 @@ open class KChart(
             }
             left += barWidth + spaceWidth
         }
+        canvas.restoreToCount(saveCount)
     }
 
     private fun drawCandleKChart(canvas: Canvas) {
+        val saveCount = canvas.saveLayer(
+            getChartMainDisplayArea().left,
+            getChartDisplayArea().top,
+            getChartMainDisplayArea().right,
+            getChartDisplayArea().bottom,
+            null
+        )
+
         candleKChartPaint.strokeWidth = chartConfig.candleChartLineStrokeWidth
 
         val barWidth = 1 * (1 - chartConfig.barSpaceRatio)
@@ -857,9 +947,18 @@ open class KChart(
             }
             left += barWidth + spaceWidth
         }
+
+        canvas.restoreToCount(saveCount)
     }
 
     private fun drawLineKChart(canvas: Canvas) {
+        val saveCount = canvas.saveLayer(
+            getChartMainDisplayArea().left,
+            getChartDisplayArea().top,
+            getChartMainDisplayArea().right,
+            getChartDisplayArea().bottom,
+            null
+        )
         lineKChartLinePaint.strokeWidth = chartConfig.lineChartStrokeWidth
         lineKChartLinePaint.color = chartConfig.lineChartColor
         var preIdx = -1
@@ -888,6 +987,7 @@ open class KChart(
             )
             preIdx = idx
         }
+        canvas.restoreToCount(saveCount)
     }
 
     private fun drawLabels(canvas: Canvas) {

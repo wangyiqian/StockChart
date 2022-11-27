@@ -75,7 +75,7 @@ class CustomChart(
         if (!chartConfig.bigLabel.isNullOrEmpty()) {
             bigLabelPaint.getFontMetrics(tmpFontMetrics)
             val x =
-                (getChartDisplayArea().left + getChartDisplayArea().right) / 2 - bigLabelPaint.measureText(
+                (getChartMainDisplayArea().left + getChartMainDisplayArea().right) / 2 - bigLabelPaint.measureText(
                     chartConfig.bigLabel
                 ) / 2
             val y =
@@ -88,6 +88,13 @@ class CustomChart(
     }
 
     override fun drawData(canvas: Canvas) {
+        val saveCount = canvas.saveLayer(
+            getChartMainDisplayArea().left,
+            getChartDisplayArea().top,
+            getChartMainDisplayArea().right,
+            getChartDisplayArea().bottom,
+            null
+        )
         getKEntities().forEachIndexed { index, kEntity ->
             if (!kEntity.containFlag(FLAG_EMPTY)) {
                 tmp2FloatArray[0] = index + 0.5f
@@ -96,6 +103,7 @@ class CustomChart(
                 canvas.drawCircle(tmp2FloatArray[0], tmp2FloatArray[1], 10f, pointPaint)
             }
         }
+        canvas.restoreToCount(saveCount)
     }
 
     override fun preDrawHighlight(canvas: Canvas) {
@@ -103,7 +111,14 @@ class CustomChart(
 
     override fun drawHighlight(canvas: Canvas) {
         getHighlight()?.let { highlight ->
-            if (highlight.x >= getChartDisplayArea().left && highlight.x <= getChartDisplayArea().right) {
+            val saveCount = canvas.saveLayer(
+                getChartMainDisplayArea().left,
+                getChartDisplayArea().top,
+                getChartMainDisplayArea().right,
+                getChartDisplayArea().bottom,
+                null
+            )
+            if (highlight.x >= getChartMainDisplayArea().left && highlight.x <= getChartMainDisplayArea().right) {
 
                 val idx = highlight.getIdx()
 
@@ -124,6 +139,7 @@ class CustomChart(
                     )
                 }
             }
+            canvas.restoreToCount(saveCount)
         }
     }
 

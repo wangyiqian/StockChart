@@ -204,6 +204,16 @@ class StockChartConfig {
     var valueTendToZero = DEFAULT_VALUE_TEND_TO_ZERO
 
     /**
+     * 主数据显示区域的左内间距
+     */
+    var chartMainDisplayAreaPaddingLeft: Float = 0f
+
+    /**
+     * 主数据显示区域的右内间距
+     */
+    var chartMainDisplayAreaPaddingRight: Float = 0f
+
+    /**
      * 加载更多监听
      */
     var onLoadMoreListener: OnLoadMoreListener? = null

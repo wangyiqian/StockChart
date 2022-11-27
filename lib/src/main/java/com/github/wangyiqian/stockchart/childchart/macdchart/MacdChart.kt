@@ -90,29 +90,7 @@ class MacdChart(
         val deaIdx = 1
         val macdIdx = 2
 
-        // draw macd bar
-        val barWidth = 1 * (1 - chartConfig.barSpaceRatio)
-        val spaceWidth = 1 * chartConfig.barSpaceRatio
-        var barLeft = spaceWidth / 2
-        indexList?.get(macdIdx).let { valueList ->
-            valueList?.forEach { value ->
-                value?.let {
-                    barPaint.color =
-                        if (it >= 0f) stockChart.getConfig().riseColor else stockChart.getConfig().downColor
-
-                    tmpRectF.left = barLeft
-                    tmpRectF.top = it
-                    tmpRectF.right = barLeft + barWidth
-                    tmpRectF.bottom = 0f
-
-                    mapRectValue2Real(tmpRectF)
-
-                    canvas.drawRect(tmpRectF, barPaint)
-                }
-
-                barLeft += barWidth + spaceWidth
-            }
-        }
+        drawMacdBar(canvas, macdIdx)
 
         // draw dif line
         linePaint.strokeWidth = chartConfig.difLineStrokeWidth
@@ -170,7 +148,50 @@ class MacdChart(
         }
     }
 
+    private fun drawMacdBar(canvas: Canvas, macdIdx: Int){
+        val saveCount = canvas.saveLayer(
+            getChartMainDisplayArea().left,
+            getChartDisplayArea().top,
+            getChartMainDisplayArea().right,
+            getChartDisplayArea().bottom,
+            null
+        )
+
+        // draw macd bar
+        val barWidth = 1 * (1 - chartConfig.barSpaceRatio)
+        val spaceWidth = 1 * chartConfig.barSpaceRatio
+        var barLeft = spaceWidth / 2
+        indexList?.get(macdIdx).let { valueList ->
+            valueList?.forEach { value ->
+                value?.let {
+                    barPaint.color =
+                        if (it >= 0f) stockChart.getConfig().riseColor else stockChart.getConfig().downColor
+
+                    tmpRectF.left = barLeft
+                    tmpRectF.top = it
+                    tmpRectF.right = barLeft + barWidth
+                    tmpRectF.bottom = 0f
+
+                    mapRectValue2Real(tmpRectF)
+
+                    canvas.drawRect(tmpRectF, barPaint)
+                }
+
+                barLeft += barWidth + spaceWidth
+            }
+        }
+        canvas.restoreToCount(saveCount)
+    }
+
     private fun doDrawLine(canvas: Canvas, valueList: List<Float?>?) {
+        val saveCount = canvas.saveLayer(
+            getChartMainDisplayArea().left,
+            getChartDisplayArea().top,
+            getChartMainDisplayArea().right,
+            getChartDisplayArea().bottom,
+            null
+        )
+
         valueList?.forEachIndexed { valueIdx, value ->
             if (valueIdx == 0) {
                 return@forEachIndexed
@@ -188,6 +209,7 @@ class MacdChart(
                 }
             }
         }
+        canvas.restoreToCount(saveCount)
     }
 
     override fun preDrawHighlight(canvas: Canvas) {
@@ -289,6 +311,14 @@ class MacdChart(
                         highlightHorizontalLineRight -= bgWidth
                     }
 
+                    val saveCount = canvas.saveLayer(
+                        getChartMainDisplayArea().left,
+                        getChartDisplayArea().top,
+                        getChartMainDisplayArea().right,
+                        getChartDisplayArea().bottom,
+                        null
+                    )
+
                     // highlight horizontal line
                     canvas.drawLine(
                         highlightHorizontalLineLeft,
@@ -297,6 +327,8 @@ class MacdChart(
                         highlight.y,
                         highlightHorizontalLinePaint
                     )
+
+                    canvas.restoreToCount(saveCount)
                 }
             }
 
@@ -313,6 +345,14 @@ class MacdChart(
                     mapPointsValue2Real(tmp2FloatArray)
                     val x = tmp2FloatArray[0]
 
+                    val saveCount = canvas.saveLayer(
+                        getChartMainDisplayArea().left,
+                        getChartDisplayArea().top,
+                        getChartMainDisplayArea().right,
+                        getChartDisplayArea().bottom,
+                        null
+                    )
+
                     // highlight vertical line
                     canvas.drawLine(
                         x,
@@ -321,6 +361,8 @@ class MacdChart(
                         getChartDisplayArea().bottom,
                         highlightVerticalLinePaint
                     )
+
+                    canvas.restoreToCount(saveCount)
                 }
             }
         }
