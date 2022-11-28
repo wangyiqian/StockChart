@@ -61,21 +61,29 @@ internal class TouchHelper(private val stockChart: IStockChart, private val call
             MotionEvent.ACTION_MOVE -> {
                 if (isLongPressing && event.getPointerId(event.actionIndex) == inLongPressingPointerId) {
                     callBack.onLongPressMove(event.x, event.y)
+                    callBack.onLongPressing(event.x, event.y)
                 }
             }
             MotionEvent.ACTION_UP -> {
-                isLongPressing = false
+                if (isLongPressing) {
+                    isLongPressing = false
+                    callBack.onLongPressEnd(event.x, event.y)
+                }
                 isTouchScalePointersLeave = true
                 callBack.onTouchLeave()
             }
             MotionEvent.ACTION_CANCEL -> {
-                isLongPressing = false
+                if (isLongPressing) {
+                    isLongPressing = false
+                    callBack.onLongPressEnd(event.x, event.y)
+                }
                 isTouchScalePointersLeave = true
                 callBack.onTouchLeave()
             }
             MotionEvent.ACTION_POINTER_UP -> {
                 if (isLongPressing && event.getPointerId(event.actionIndex) == inLongPressingPointerId) {
                     isLongPressing = false
+                    callBack.onLongPressEnd(event.x, event.y)
                 }
             }
         }
@@ -97,7 +105,12 @@ internal class TouchHelper(private val stockChart: IStockChart, private val call
     }
 
     override fun onLongPress(e: MotionEvent) {
-        isLongPressing = true
+        if (!isLongPressing) {
+            isLongPressing = true
+            callBack.onLongPressBegin(e.x, e.y)
+        } else {
+            callBack.onLongPressing(e.x, e.y)
+        }
         inLongPressingPointerId = e.getPointerId(0)
         callBack.onLongPressMove(e.x, e.y)
         super.onLongPress(e)
@@ -190,5 +203,20 @@ internal class TouchHelper(private val stockChart: IStockChart, private val call
          * 点击
          */
         fun onTap(x: Float, y: Float)
+
+        /**
+         * 开始长按
+         */
+        fun onLongPressBegin(x: Float, y: Float) {}
+
+        /**
+         * 长按中
+         */
+        fun onLongPressing(x: Float, y: Float) {}
+
+        /**
+         * 结束长按
+         */
+        fun onLongPressEnd(x: Float, y: Float) {}
     }
 }

@@ -154,6 +154,7 @@ Data.loadDayData(this, 0) { kEntities: List<IKEntity> ->
 |gridLineStrokeWidth|背景网格线条宽度|
 |chartMainDisplayAreaPaddingLeft|主数据显示区域的左内间距，主数据一般指数据线|
 |chartMainDisplayAreaPaddingRight|主数据显示区域的右内间距，主数据一般指数据线|
+|onGestureListener|手势监听|
 
 
 ### K线图配置`KChartConfig`
@@ -183,7 +184,7 @@ Data.loadDayData(this, 0) { kEntities: List<IKEntity> ->
 |costPriceLineWidth|成本线宽度|
 |indexStrokeWidth|指标线条宽度|
 |barSpaceRatio|柱子之间的空间占比柱子宽度|
-|index|需要展示的指标类型|
+|index|需要展示的指标类型，目前只有MA、EMA、BOLL|
 |indexColors|指标线的颜色|
 |leftLabelConfig|左侧标签配置|
 |rightLabelConfig|右侧标签配置|
