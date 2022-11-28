@@ -36,13 +36,13 @@ class MacdChartConfig(
     // dif线颜色
     var difLineColor: Int = DEFAULT_MACD_DIF_LINE_COLOR,
     // dif线宽度
-    val difLineStrokeWidth: Float = DEFAULT_MACD_DIF_LINE_STROKE_WIDTH,
+    var difLineStrokeWidth: Float = DEFAULT_MACD_DIF_LINE_STROKE_WIDTH,
     // dea线颜色
     var deaLineColor: Int = DEFAULT_MACD_DEA_LINE_COLOR,
     // dea线宽度
-    val deaLineStrokeWidth: Float = DEFAULT_MACD_DEA_LINE_STROKE_WIDTH,
+    var deaLineStrokeWidth: Float = DEFAULT_MACD_DEA_LINE_STROKE_WIDTH,
     // macd文字颜色
-    val macdTextColor: Int = DEFAULT_MACD_TEXT_COLOR,
+    var macdTextColor: Int = DEFAULT_MACD_TEXT_COLOR,
     // 柱子之间的空间占比柱子宽度
     var barSpaceRatio: Float = DEFAULT_MACD_BAR_SPACE_RATIO,
     // 需要展示的指标配置

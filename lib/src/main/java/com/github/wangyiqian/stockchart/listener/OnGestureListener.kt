@@ -13,6 +13,8 @@
 
 package com.github.wangyiqian.stockchart.listener
 
+import com.github.wangyiqian.stockchart.entities.GestureEvent
+
 /**
  * @author wangyiqian E-mail: wangyiqian9891@gmail.com
  * @version 创建时间: 2021/11/29
@@ -20,7 +22,47 @@ package com.github.wangyiqian.stockchart.listener
 interface OnGestureListener {
 
     /**
-     * 是否正在缩放
+     * 滑动中
      */
-    fun onScaling(totalScaleX: Float){}
+    fun onHScrolling() {}
+
+    /**
+     * 开始fling
+     */
+    fun onFlingBegin() {}
+
+    /**
+     * 手指离开屏幕
+     */
+    fun onTouchLeave() {}
+
+    /**
+     * 开始缩放
+     */
+    fun onScaleBegin(focusX: Float) {}
+
+    /**
+     * 缩放中
+     */
+    fun onScaling(totalScaleX: Float) {}
+
+    /**
+     * 单击
+     */
+    fun onTap(x: Float, y: Float) {}
+
+    /**
+     * 开始长按
+     */
+    fun onLongPressBegin(x: Float, y: Float) {}
+
+    /**
+     * 长按中
+     */
+    fun onLongPressing(x: Float, y: Float) {}
+
+    /**
+     * 结束长按
+     */
+    fun onLongPressEnd(x: Float, y: Float) {}
 }

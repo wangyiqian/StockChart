@@ -282,7 +282,7 @@ class StockChart @JvmOverloads constructor(context: Context, attrs: AttributeSet
 
             for (i in 1..config.gridHorizontalLineCount) {
                 canvas.drawLine(
-                    config.horizontalGridLineLeftOffsetCalculator?.invoke(this)?:0f,
+                    config.horizontalGridLineLeftOffsetCalculator?.invoke(this) ?: 0f,
                     top,
                     width.toFloat(),
                     top,
@@ -312,6 +312,7 @@ class StockChart @JvmOverloads constructor(context: Context, attrs: AttributeSet
             if (getConfig().scaleAble) {
                 requestDisallowInterceptTouchEvent(true)
                 matrixHelper.handleTouchScaleBegin(focusX)
+                getConfig().getOnGestureListeners().forEach { it.onScaleBegin(focusX) }
             }
         }
 
@@ -327,11 +328,13 @@ class StockChart @JvmOverloads constructor(context: Context, attrs: AttributeSet
             if (getConfig().scrollAble) {
                 requestDisallowInterceptTouchEvent(true)
                 matrixHelper.handleTouchScroll(distanceX)
+                getConfig().getOnGestureListeners().forEach { it.onHScrolling() }
             }
         }
 
         override fun onTriggerFling(velocityX: Float, velocityY: Float) {
             matrixHelper.handleFlingStart(velocityX, velocityY)
+            getConfig().getOnGestureListeners().forEach { it.onFlingBegin() }
         }
 
         override fun onLongPressMove(x: Float, y: Float) {
@@ -369,9 +372,11 @@ class StockChart @JvmOverloads constructor(context: Context, attrs: AttributeSet
             highlightMap.keys.forEach {
                 it.getConfig().onHighlightListener?.onHighlightEnd()
             }
+            getConfig().getOnGestureListeners().forEach { it.onTouchLeave() }
             highlightMap.clear()
             notifyChanged()
             matrixHelper.checkScrollBack()
+
         }
 
         override fun onTap(x: Float, y: Float) {
@@ -386,6 +391,19 @@ class StockChart @JvmOverloads constructor(context: Context, attrs: AttributeSet
                 val gestureEvent = GestureEvent(childChartX, childChartY, valueX, valueY)
                 childChart.onTap(gestureEvent)
             }
+            getConfig().getOnGestureListeners().forEach { it.onTap(x, y) }
+        }
+
+        override fun onLongPressBegin(x: Float, y: Float) {
+            getConfig().getOnGestureListeners().forEach { it.onLongPressBegin(x, y) }
+        }
+
+        override fun onLongPressing(x: Float, y: Float) {
+            getConfig().getOnGestureListeners().forEach { it.onLongPressing(x, y) }
+        }
+
+        override fun onLongPressEnd(x: Float, y: Float) {
+            getConfig().getOnGestureListeners().forEach { it.onLongPressEnd(x, y) }
         }
 
     }
