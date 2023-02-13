@@ -169,6 +169,7 @@ abstract class BaseChildChart<C : BaseChildChartConfig> @JvmOverloads constructo
     abstract fun getYValueRange(startIndex: Int, endIndex: Int, result: FloatArray)
 
     override fun onDraw(canvas: Canvas) {
+//        canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
         if (stockChart.getConfig().getKEntitiesSize() <= 0) return
         childChartMatrixHelper?.setOnDraw()
         preDrawBackground(canvas)
