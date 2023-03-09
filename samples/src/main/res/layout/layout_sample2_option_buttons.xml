@@ -204,6 +204,13 @@
             android:text="KDJ" />
 
         <TextView
+            android:id="@+id/index_rsi"
+            style="@style/OptionButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="RSI" />
+
+        <TextView
             android:id="@+id/custom"
             style="@style/OptionButtonStyle"
             android:layout_width="wrap_content"

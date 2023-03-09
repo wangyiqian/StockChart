@@ -134,16 +134,21 @@ object DefaultIndexParams {
     const val BOLL = "20,2"
     const val MACD = "12,26,9"
     const val KDJ = "9,3,3"
+    const val RSI = "6,12,24"
 }
 
 object DefaultIndexTextFormatter {
     val MA: (idx: Int, value: Float?) -> String = { idx, value ->
-        "MA${DefaultIndexParams.MA.split(",")
-            .map { it.trim() }[idx]}:${value?.let { NumberFormatUtil.formatPrice(it) } ?: "——"}"
+        "MA${
+            DefaultIndexParams.MA.split(",")
+                .map { it.trim() }[idx]
+        }:${value?.let { NumberFormatUtil.formatPrice(it) } ?: "——"}"
     }
     val EMA: (idx: Int, value: Float?) -> String = { idx, value ->
-        "EMA${DefaultIndexParams.EMA.split(",")
-            .map { it.trim() }[idx]}:${value?.let { NumberFormatUtil.formatPrice(it) } ?: "——"}"
+        "EMA${
+            DefaultIndexParams.EMA.split(",")
+                .map { it.trim() }[idx]
+        }:${value?.let { NumberFormatUtil.formatPrice(it) } ?: "——"}"
     }
     val BOLL: (idx: Int, value: Float?) -> String = { idx, value ->
         val prefix = when (idx) {
@@ -172,6 +177,11 @@ object DefaultIndexTextFormatter {
             else -> ""
         }
         "$prefix${value?.let { NumberFormatUtil.formatPrice(it) } ?: "——"}"
+    }
+    val RSI: (idx: Int, value: Float?) -> String = { idx, value ->
+        "RSI${
+            DefaultIndexParams.RSI.split(",").map { it.trim() }[idx]
+        }:${value?.let { NumberFormatUtil.formatPrice(it) } ?: "——"}"
     }
 }
 

@@ -71,5 +71,5 @@ dependencies {
     implementation 'com.google.android:flexbox:2.0.1'
 
 //    implementation project(':lib')
-    implementation 'com.github.wangyiqian:StockChart:1.1.12'
+    implementation 'com.github.wangyiqian:StockChart:1.1.13'
 }
