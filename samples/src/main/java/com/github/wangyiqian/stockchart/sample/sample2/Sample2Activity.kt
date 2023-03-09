@@ -26,6 +26,8 @@ import com.github.wangyiqian.stockchart.childchart.kdjchart.KdjChartConfig
 import com.github.wangyiqian.stockchart.childchart.kdjchart.KdjChartFactory
 import com.github.wangyiqian.stockchart.childchart.macdchart.MacdChartConfig
 import com.github.wangyiqian.stockchart.childchart.macdchart.MacdChartFactory
+import com.github.wangyiqian.stockchart.childchart.rskchart.RsiChartConfig
+import com.github.wangyiqian.stockchart.childchart.rskchart.RsiChartFactory
 import com.github.wangyiqian.stockchart.childchart.timebar.TimeBarConfig
 import com.github.wangyiqian.stockchart.childchart.timebar.TimeBarFactory
 import com.github.wangyiqian.stockchart.childchart.volumechart.VolumeChartConfig
@@ -98,6 +100,10 @@ class Sample2Activity : AppCompatActivity() {
     private var kdjChartFactory: KdjChartFactory? = null
     private val kdjChartConfig = KdjChartConfig()
 
+    // rsi指标图工厂与配置
+    private var rsiChartFactory: RsiChartFactory? = null
+    private val rsiChartConfig = RsiChartConfig()
+
     // 自定义示例图与配置
     private var customChartFactory: CustomChartFactory? = null
     private var customChartConfig = CustomChartConfig()
@@ -132,6 +138,7 @@ class Sample2Activity : AppCompatActivity() {
         initTimeBar()
         initMacdChart()
         initKdjChart()
+        initRsiChart()
         initCustomChart()
 
         stockChartConfig.apply {
@@ -142,6 +149,7 @@ class Sample2Activity : AppCompatActivity() {
                 timeBarFactory!!,
                 macdChartFactory!!,
                 kdjChartFactory!!,
+                rsiChartFactory!!,
                 customChartFactory!!
             )
 
@@ -251,7 +259,7 @@ class Sample2Activity : AppCompatActivity() {
             }
 
             // 图高度
-            height = DimensionUtil.dp2px(this@Sample2Activity, 250f)
+            height = DimensionUtil.dp2px(this@Sample2Activity, 200f)
 
             // 左侧标签设置
             leftLabelConfig = KChartConfig.LabelConfig(
@@ -285,7 +293,7 @@ class Sample2Activity : AppCompatActivity() {
 
         volumeChartConfig.apply {
             // 图高度
-            height = DimensionUtil.dp2px(this@Sample2Activity, 60f)
+            height = DimensionUtil.dp2px(this@Sample2Activity, 40f)
 
 
             // 长按左侧标签配置
@@ -329,7 +337,7 @@ class Sample2Activity : AppCompatActivity() {
 
         macdChartConfig.apply {
             // 图高度
-            height = DimensionUtil.dp2px(this@Sample2Activity, 90f)
+            height = DimensionUtil.dp2px(this@Sample2Activity, 60f)
 
             // 长按左侧标签配置
             highlightLabelLeft = HighlightLabelConfig(
@@ -348,7 +356,7 @@ class Sample2Activity : AppCompatActivity() {
 
         kdjChartConfig.apply {
             // 图高度
-            height = DimensionUtil.dp2px(this@Sample2Activity, 90f)
+            height = DimensionUtil.dp2px(this@Sample2Activity, 60f)
 
             // 长按左侧标签配置
             highlightLabelLeft = HighlightLabelConfig(
@@ -357,7 +365,25 @@ class Sample2Activity : AppCompatActivity() {
                 padding = DimensionUtil.dp2px(this@Sample2Activity, 5f).toFloat()
             )
         }
+    }
 
+    /**
+     * rsi指标图初始化
+     */
+    private fun initRsiChart() {
+        rsiChartFactory = RsiChartFactory(stock_chart, rsiChartConfig)
+
+        rsiChartConfig.apply {
+            // 图高度
+            height = DimensionUtil.dp2px(this@Sample2Activity, 60f)
+
+            // 长按左侧标签配置
+            highlightLabelLeft = HighlightLabelConfig(
+                textSize = DimensionUtil.sp2px(this@Sample2Activity, 10f).toFloat(),
+                bgColor = Color.parseColor("#A3A3A3"),
+                padding = DimensionUtil.dp2px(this@Sample2Activity, 5f).toFloat()
+            )
+        }
     }
 
     /**
@@ -538,7 +564,8 @@ class Sample2Activity : AppCompatActivity() {
         this.kChartType = kChartType
         kChartConfig.kChartType = this.kChartType
         // 成交量图根据K线图类型决定是空心还是实心
-        volumeChartConfig.volumeChartType = if(this.kChartType is KChartConfig.KChartType.HOLLOW) VolumeChartConfig.VolumeChartType.HOLLOW() else VolumeChartConfig.VolumeChartType.CANDLE()
+        volumeChartConfig.volumeChartType =
+            if (this.kChartType is KChartConfig.KChartType.HOLLOW) VolumeChartConfig.VolumeChartType.HOLLOW() else VolumeChartConfig.VolumeChartType.CANDLE()
         stock_chart.notifyChanged()
         refreshOptionButtonsState()
     }
@@ -588,7 +615,8 @@ class Sample2Activity : AppCompatActivity() {
                 Pair(index_ema, Index.EMA()),
                 Pair(index_boll, Index.BOLL()),
                 Pair(index_macd, Index.MACD()),
-                Pair(index_kdj, Index.KDJ())
+                Pair(index_kdj, Index.KDJ()),
+                Pair(index_rsi, Index.RSI())
             )
         )
 
@@ -619,6 +647,13 @@ class Sample2Activity : AppCompatActivity() {
                             stockChartConfig.removeChildCharts(kdjChartFactory!!)
                         } else {
                             stockChartConfig.addChildCharts(kdjChartFactory!!)
+                        }
+                    }
+                    Index.RSI::class -> {
+                        if (stockChartConfig.childChartFactories.contains(rsiChartFactory!!)) {
+                            stockChartConfig.removeChildCharts(rsiChartFactory!!)
+                        } else {
+                            stockChartConfig.addChildCharts(rsiChartFactory!!)
                         }
                     }
                 }
@@ -663,6 +698,10 @@ class Sample2Activity : AppCompatActivity() {
                 Index.KDJ::class -> {
                     button.isSelected =
                         stockChartConfig.childChartFactories.contains(kdjChartFactory!!)
+                }
+                Index.RSI::class -> {
+                    button.isSelected =
+                        stockChartConfig.childChartFactories.contains(rsiChartFactory!!)
                 }
             }
         }

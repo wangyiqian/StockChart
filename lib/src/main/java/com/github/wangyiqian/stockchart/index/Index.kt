@@ -137,5 +137,27 @@ open abstract class Index(
     ) {
         override fun calculate(input: List<IKEntity>) = KDJCalculator.calculate(param, input)
     }
+
+    class RSI(
+        param: String = DefaultIndexParams.RSI,
+        startText: String = "RSI",
+        startTextColor: Int = DEFAULT_INDEX_START_TEXT_COLOR,
+        textFormatter: (idx: Int, value: Float?) -> String = DefaultIndexTextFormatter.RSI,
+        textMarginLeft: Float = DEFAULT_INDEX_TEXT_MARGIN_LEFT,
+        textMarginTopDp: Float = DEFAULT_INDEX_TEXT_MARGIN_TOP,
+        textSpace: Float = DEFAULT_INDEX_TEXT_SPACE,
+        textSize: Float = DEFAULT_INDEX_TEXT_SIZE
+    ) : Index(
+        param,
+        startText,
+        startTextColor,
+        textFormatter,
+        textMarginLeft,
+        textMarginTopDp,
+        textSpace,
+        textSize
+    ) {
+        override fun calculate(input: List<IKEntity>) = RSICalculator.calculate(param, input)
+    }
 }
 
