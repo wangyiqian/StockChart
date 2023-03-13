@@ -29,8 +29,6 @@
 - [请作者喝杯咖啡呗](#%E8%AF%B7%E4%BD%9C%E8%80%85%E5%96%9D%E6%9D%AF%E5%92%96%E5%95%A1%E5%91%97)
 - [Licenses](#licenses)
 
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 
 # 介绍
 
