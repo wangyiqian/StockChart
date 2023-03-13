@@ -1,7 +1,3 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
-
 - [介绍](#%E4%BB%8B%E7%BB%8D)
   - [特点](#%E7%89%B9%E7%82%B9)
 - [效果图](#%E6%95%88%E6%9E%9C%E5%9B%BE)
