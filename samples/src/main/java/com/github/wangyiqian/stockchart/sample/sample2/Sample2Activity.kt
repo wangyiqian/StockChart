@@ -259,7 +259,7 @@ class Sample2Activity : AppCompatActivity() {
             }
 
             // 图高度
-            height = DimensionUtil.dp2px(this@Sample2Activity, 200f)
+            height = DimensionUtil.dp2px(this@Sample2Activity, 170f)
 
             // 左侧标签设置
             leftLabelConfig = KChartConfig.LabelConfig(
@@ -293,7 +293,7 @@ class Sample2Activity : AppCompatActivity() {
 
         volumeChartConfig.apply {
             // 图高度
-            height = DimensionUtil.dp2px(this@Sample2Activity, 40f)
+            height = DimensionUtil.dp2px(this@Sample2Activity, 30f)
 
 
             // 长按左侧标签配置
@@ -337,7 +337,7 @@ class Sample2Activity : AppCompatActivity() {
 
         macdChartConfig.apply {
             // 图高度
-            height = DimensionUtil.dp2px(this@Sample2Activity, 60f)
+            height = DimensionUtil.dp2px(this@Sample2Activity, 80f)
 
             // 长按左侧标签配置
             highlightLabelLeft = HighlightLabelConfig(
@@ -356,7 +356,7 @@ class Sample2Activity : AppCompatActivity() {
 
         kdjChartConfig.apply {
             // 图高度
-            height = DimensionUtil.dp2px(this@Sample2Activity, 60f)
+            height = DimensionUtil.dp2px(this@Sample2Activity, 80f)
 
             // 长按左侧标签配置
             highlightLabelLeft = HighlightLabelConfig(
@@ -375,7 +375,7 @@ class Sample2Activity : AppCompatActivity() {
 
         rsiChartConfig.apply {
             // 图高度
-            height = DimensionUtil.dp2px(this@Sample2Activity, 60f)
+            height = DimensionUtil.dp2px(this@Sample2Activity, 80f)
 
             // 长按左侧标签配置
             highlightLabelLeft = HighlightLabelConfig(
@@ -392,7 +392,7 @@ class Sample2Activity : AppCompatActivity() {
     private fun initCustomChart() {
         customChartFactory = CustomChartFactory(stock_chart, customChartConfig)
         customChartConfig.apply {
-            height = DimensionUtil.dp2px(this@Sample2Activity, 70f)
+            height = DimensionUtil.dp2px(this@Sample2Activity, 50f)
             bigLabel = "这是自定义子图示例"
         }
     }
