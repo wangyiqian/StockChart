@@ -78,7 +78,7 @@ allprojects {
 
 ```groovy
 dependencies {
-    implementation 'com.github.wangyiqian:StockChart:1.1.13'
+    implementation 'com.github.wangyiqian:StockChart:1.1.14'
 }
 ```
 
