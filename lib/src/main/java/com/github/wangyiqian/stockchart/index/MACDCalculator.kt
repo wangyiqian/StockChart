@@ -26,9 +26,24 @@ object MACDCalculator : ICalculator {
 
     override fun calculate(param: String, input: List<IKEntity>): List<List<Float?>> {
         val paramList = param.split(",")
-        val shortPeriod = paramList[0].toInt()
-        val longPeriod = paramList[1].toInt()
-        val avgPeriod = paramList[2].toInt()
+        val shortPeriod = try {
+            paramList[0].toInt()
+        } catch (tr: Throwable) {
+            null
+        }
+        val longPeriod = try {
+            paramList[1].toInt()
+        } catch (tr: Throwable) {
+            null
+        }
+        val avgPeriod = try {
+            paramList[2].toInt()
+        } catch (tr: Throwable) {
+            null
+        }
+        if (shortPeriod == null || longPeriod == null || avgPeriod == null) {
+            return emptyList()
+        }
 
         val result = MutableList(3) { MutableList<Float?>(input.size) { 0f } }
         val difIdx = 0

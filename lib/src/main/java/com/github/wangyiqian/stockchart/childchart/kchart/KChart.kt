@@ -504,12 +504,6 @@ open class KChart(
             mapPointsReal2Value(tmp4FloatArray)
             val leftIdx = (tmp4FloatArray[0] + 0.5f).toInt()
             val rightIdx = (tmp4FloatArray[2] + 0.5f).toInt() - 1
-            getKEntities().filterIndexed { kEntityIdx, kEntity ->
-                kEntityIdx in leftIdx..rightIdx && !kEntity.containFlag(
-                    FLAG_EMPTY
-                )
-            }
-                .map { it.getHighPrice() }.max()
 
             var maxIdx: Int? = null
             var minIdx: Int? = null

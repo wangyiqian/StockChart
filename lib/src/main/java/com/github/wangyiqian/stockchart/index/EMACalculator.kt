@@ -26,7 +26,11 @@ object EMACalculator : ICalculator {
 
     override fun calculate(param: String, input: List<IKEntity>): List<List<Float?>> {
         val paramList = param.split(",")
-        val emaPeriodList = paramList.map { it.toInt() }
+        val emaPeriodList = try {
+            paramList.map { it.toInt() }
+        } catch (tr: Throwable) {
+            emptyList<Int>()
+        }
 
         val result = MutableList(emaPeriodList.size) { MutableList<Float?>(input.size) { 0f } }
         input.forEachIndexed { kEntityIdx, kEntity ->

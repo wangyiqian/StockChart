@@ -23,11 +23,15 @@ import com.github.wangyiqian.stockchart.entities.containFlag
  * @author wangyiqian E-mail: wangyiqian9891@gmail.com
  * @version 创建时间: 2021/2/14
  */
-object MACalculator: ICalculator {
+object MACalculator : ICalculator {
 
     override fun calculate(param: String, input: List<IKEntity>): List<List<Float?>> {
         val paramList = param.split(",")
-        val periodList = paramList.map { it.toInt() }
+        val periodList = try {
+            paramList.map { it.toInt() }
+        } catch (tr: Throwable) {
+            emptyList<Int>()
+        }
 
         val result = MutableList(periodList.size) { MutableList<Float?>(input.size) { 0f } }
         val pFromList = MutableList(periodList.size) { 0 }

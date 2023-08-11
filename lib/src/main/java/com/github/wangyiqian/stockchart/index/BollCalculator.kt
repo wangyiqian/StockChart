@@ -24,12 +24,24 @@ import kotlin.math.sqrt
  * @author wangyiqian E-mail: wangyiqian9891@gmail.com
  * @version 创建时间: 2021/2/16
  */
-object BollCalculator: ICalculator {
+object BollCalculator : ICalculator {
 
     override fun calculate(param: String, input: List<IKEntity>): List<List<Float?>> {
         val paramList = param.split(",")
-        val n = paramList[0].toInt()
-        val k = paramList[1].toInt()
+        val n = try {
+            paramList[0].toInt()
+        } catch (tr: Throwable) {
+            null
+        }
+        val k = try {
+            paramList[1].toInt()
+        } catch (tr: Throwable) {
+            null
+        }
+
+        if (n == null || k == null) {
+            return emptyList()
+        }
 
         // 1. MB 2.UP 3.DN
         val result = MutableList(3) { MutableList<Float?>(input.size) { 0f } }

@@ -13,7 +13,11 @@ import kotlin.math.min
 object RSICalculator : ICalculator {
     override fun calculate(param: String, input: List<IKEntity>): List<List<Float?>> {
         val paramList = param.split(",")
-        val periodList = paramList.map { it.toInt() }
+        val periodList = try {
+            paramList.map { it.toInt() }
+        } catch (tr: Throwable) {
+            emptyList<Int>()
+        }
         val result = MutableList(periodList.size) { MutableList<Float?>(input.size) { 0f } }
         val preAvgRiseList = MutableList(periodList.size) { 0f }
         val preAvgDownList = MutableList(periodList.size) { 0f }

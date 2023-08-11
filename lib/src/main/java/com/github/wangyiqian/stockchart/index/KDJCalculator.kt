@@ -24,13 +24,29 @@ import kotlin.math.min
  * @author wangyiqian E-mail: wangyiqian9891@gmail.com
  * @version 创建时间: 2021/2/18
  */
-object KDJCalculator: ICalculator {
+object KDJCalculator : ICalculator {
 
     override fun calculate(param: String, input: List<IKEntity>): List<List<Float?>> {
         val paramList = param.split(",")
-        val n = paramList[0].toInt()
-        val kn = paramList[1].toInt()
-        val dn = paramList[2].toInt()
+        val n = try {
+            paramList[0].toInt()
+        } catch (tr: Throwable) {
+            null
+        }
+        val kn = try {
+            paramList[1].toInt()
+        } catch (tr: Throwable) {
+            null
+        }
+        val dn = try {
+            paramList[2].toInt()
+        } catch (tr: Throwable) {
+            null
+        }
+
+        if (n == null || kn == null || dn == null) {
+            return emptyList()
+        }
 
         val result = MutableList(3) { MutableList<Float?>(input.size) { 0f } }
         val kIdx = 0
