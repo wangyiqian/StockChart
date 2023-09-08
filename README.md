@@ -48,10 +48,6 @@ StockChart 一款适用于Android的高扩展性、高性能股票图/K线图开
 <img src=img/active_chart_screen_shot.jpeg width=40% />
 (若图片未显示，可能需要科学上网。)
 
-# 插一条内推广告
-
-**阿里巴巴** 、**老虎集团（老虎证券）** 2022各岗位内推，可发简历到我邮箱:wangyiqian9891@gmail.com。
-
 # 用法
 
 ## 先明白几个概念
