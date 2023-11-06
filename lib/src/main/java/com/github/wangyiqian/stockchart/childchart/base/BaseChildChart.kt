@@ -36,7 +36,11 @@ abstract class BaseChildChart<C : BaseChildChartConfig> @JvmOverloads constructo
     OnKEntitiesChangedListener {
 
     // 管理matrix
-    private var childChartMatrixHelper: ChildChartMatrixHelper<C>? = null
+    private var childChartMatrixHelper =
+        ChildChartMatrixHelper(
+            stockChart,
+            this
+        )
 
     // 显示区域
     private val chartDisplayArea = RectF()
@@ -73,11 +77,6 @@ abstract class BaseChildChart<C : BaseChildChartConfig> @JvmOverloads constructo
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
         stockChart.addOnKEntitiesChangedListener(this)
-        childChartMatrixHelper =
-            ChildChartMatrixHelper(
-                stockChart,
-                this
-            )
     }
 
     override fun onDetachedFromWindow() {
