@@ -42,9 +42,12 @@ StockChart 一款适用于Android的高扩展性、高性能股票图/K线图开
   这种设计可以避免基于源码修改，满足开闭原则**。
 
 # 效果图
-
-<img src=img/sample.gif width=40% />
-<img src=img/active_chart_screen_shot.jpeg width=40% />
+1. 示例截图：
+<img src=img/sample.png width=30% />
+2. gif演示：
+<img src=img/sample.gif width=30% />
+3. 自定义子图实现案例：
+<img src=img/active_chart_screen_shot.jpg width=30% />
 (若图片未显示，可能需要科学上网。)
 
 # 用法
