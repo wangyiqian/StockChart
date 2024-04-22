@@ -54,6 +54,13 @@ internal class MatrixHelper(private val stockChart: IStockChart) {
     }
 
     /**
+     * 处理开始触摸
+     */
+    fun handleTouchDown(){
+        scroller.forceFinished(true)
+    }
+
+    /**
      * 处理开始双指缩放
      */
     fun handleTouchScaleBegin(focusX: Float) {

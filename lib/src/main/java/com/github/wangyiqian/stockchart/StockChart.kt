@@ -308,6 +308,10 @@ class StockChart @JvmOverloads constructor(context: Context, attrs: AttributeSet
     inner class TouchHelperCallBack :
         TouchHelper.CallBack {
 
+        override fun onTouchDown() {
+            matrixHelper.handleTouchDown()
+        }
+
         override fun onTouchScaleBegin(focusX: Float) {
             if (getConfig().scaleAble) {
                 requestDisallowInterceptTouchEvent(true)

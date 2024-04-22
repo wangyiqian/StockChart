@@ -57,6 +57,7 @@ internal class TouchHelper(private val stockChart: IStockChart, private val call
                     // 不在允许的触摸范围
                     return false
                 }
+                callBack.onTouchDown()
             }
             MotionEvent.ACTION_MOVE -> {
                 if (isLongPressing && event.getPointerId(event.actionIndex) == inLongPressingPointerId) {
@@ -168,6 +169,11 @@ internal class TouchHelper(private val stockChart: IStockChart, private val call
     }
 
     interface CallBack {
+
+        /**
+         * 触摸开始
+         */
+        fun onTouchDown()
 
         /**
          * 开始双指缩放
